@@ -89,9 +89,9 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import FieldElt from '@/components/base/FieldElt';
-import CardElt from '@/components/main/CardElt';
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
+import CardElt from "@/components/main/CardElt"
 import { checkString, rewriteString, postData } from "@/script/services";
 
 export default {

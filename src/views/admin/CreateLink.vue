@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import FieldElt from '@/components/base/FieldElt';
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
 import { checkString, rewriteString, postData } from "@/script/services";
 
 export default {

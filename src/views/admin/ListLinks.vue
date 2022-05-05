@@ -78,9 +78,9 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import FieldElt from '@/components/base/FieldElt';
-import TableElt from "@/components/data/TableElt.vue";
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
+import TableElt from "@/components/data/TableElt"
 import { checkString, rewriteString, putData, deleteData } from "@/script/services";
 
 export default {

@@ -84,11 +84,9 @@
 
 <script>
 import { getData } from "@/script/services";
-
-import CreateLink from "@/views/admin/CreateLink.vue";
-import CreateUser from "@/views/admin/CreateUser.vue";
-import ListLinks from "@/views/admin/ListLinks.vue";
-import ListUsers from "@/views/admin/ListUsers.vue";
+import CreateUser from "@/views/admin/CreateUser"
+import ListLinks from "@/views/admin/ListLinks"
+import ListUsers from "@/views/admin/ListUsers"
 
 export default {
   name: "AdminView",
