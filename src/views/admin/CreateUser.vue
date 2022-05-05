@@ -61,7 +61,6 @@
 <script>
 import BtnElt from "@/components/base/BtnElt"
 import FieldElt from "@/components/base/FieldElt"
-import { checkString, rewriteString, postData } from "@/script/services";
 
 export default {
   name: "CreateUser",
@@ -85,13 +84,13 @@ export default {
         pass: this.pass
       };
 
-      if (checkString(user.name, "name") === true && 
-        checkString(user.email, "email") === true && 
-        checkString(user.pass, "pass") === true) {
-        user.name   = rewriteString(user.name, "name");
-        user.email  = rewriteString(user.email, "email");
+      if (this.$serve.checkString(user.name, "name") === true && 
+        this.$serve.checkString(user.email, "email") === true && 
+        this.$serve.checkString(user.pass, "pass") === true) {
+        user.name   = this.$serve.rewriteString(user.name, "name");
+        user.email  = this.$serve.rewriteString(user.email, "email");
 
-        postData("/api/users", user)
+        this.$serve.postData("/api/users", user)
           .then(() => {
             alert(user.name + " créé !");
             this.$router.go();

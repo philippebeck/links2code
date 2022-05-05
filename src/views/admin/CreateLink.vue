@@ -63,7 +63,6 @@
 <script>
 import BtnElt from "@/components/base/BtnElt"
 import FieldElt from "@/components/base/FieldElt"
-import { checkString, rewriteString, postData } from "@/script/services";
 
 export default {
   name: "CreateLink",
@@ -87,18 +86,16 @@ export default {
         cat: this.cat
       };
 
-      if (checkString(link.name, "name") === true 
-        && checkString(link.url, "url") === true) {
+      if (this.$serve.checkString(link.name, "name") === true 
+        && this.$serve.checkString(link.url, "url") === true) {
         if (link.cat === "") {
           alert("Choisissez la catégorie");
           
         } else {
-          link.name = rewriteString(link.name, "name");
-          link.url  = rewriteString(link.url, "url");
+          link.name = this.$serve.rewriteString(link.name, "name");
+          link.url  = this.$serve.rewriteString(link.url, "url");
 
-          console.log(link);
-
-          postData("/api/links", link)
+          this.$serve.postData("/api/links", link)
             .then(() => {
               alert(link.name + " créé !");
               this.$router.go();

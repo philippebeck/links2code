@@ -71,7 +71,6 @@
 import BtnElt from "@/components/base/BtnElt"
 import FieldElt from "@/components/base/FieldElt"
 import TableElt from "@/components/data/TableElt"
-import { checkString, rewriteString, putData, deleteData } from "@/script/services";
 
 export default {
   name: "ListUsers",
@@ -105,13 +104,14 @@ export default {
           }
         }
       }
-      if (checkString(user.name, "name") === true && 
-        checkString(user.email, "email") === true &&
-        checkString(user.pass, "pass") === true) {
-        user.name   = rewriteString(user.name, "name");
-        user.email  = rewriteString(user.email, "email");
+      if (this.$serve.checkString(user.name, "name") === true && 
+        this.$serve.checkString(user.email, "email") === true &&
+        this.$serve.checkString(user.pass, "pass") === true) {
 
-          putData(`/api/users/${id}`, user)
+        user.name   = this.$serve.rewriteString(user.name, "name");
+        user.email  = this.$serve.rewriteString(user.email, "email");
+
+          this.$serve.putData(`/api/users/${id}`, user)
             .then(() => {
               alert(user.name + " mis à jour !");
               this.$router.go();
@@ -129,7 +129,7 @@ export default {
       }
       
       if (confirm(`Supprimer ${userName} ?`) === true) {
-        deleteData(`/api/users/${id}`)
+        this.$serve.deleteData(`/api/users/${id}`)
           .then(() => {
             alert(userName + " supprimé !");
             this.$router.go();

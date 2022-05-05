@@ -92,7 +92,6 @@
 import BtnElt from "@/components/base/BtnElt"
 import FieldElt from "@/components/base/FieldElt"
 import CardElt from "@/components/main/CardElt"
-import { checkString, rewriteString, postData } from "@/script/services";
 
 export default {
   name: "ContactView",
@@ -119,13 +118,13 @@ export default {
         message: this.message
       };
 
-      if (checkString(message.name, "name") === true 
-        && checkString(message.email, "email") === true) {
+      if (this.$serve.checkString(message.name, "name") === true 
+        && this.$serve.checkString(message.email, "email") === true) {
 
-        message.name  = rewriteString(message.name, "name");
-        message.email = rewriteString(message.email, "email");
+        message.name  = this.$serve.rewriteString(message.name, "name");
+        message.email = this.$serve.rewriteString(message.email, "email");
 
-        postData("/api/users/send", message)
+        this.$serve.postData("/api/users/send", message)
           .then(() => {
             alert(message.title + " envoyé !");
             this.$router.push("/");
