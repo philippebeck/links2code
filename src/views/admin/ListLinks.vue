@@ -78,10 +78,9 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import FieldElt from '@/components/base/FieldElt';
-import TableElt from "@/components/data/TableElt.vue";
-import { checkString, rewriteString, putData, deleteData } from "@/script/services";
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
+import TableElt from "@/components/data/TableElt"
 
 export default {
   name: "ListLinks",
@@ -121,16 +120,17 @@ export default {
         }
       }
 
-      if (checkString(link.name, "name") === true 
-        && checkString(link.url, "url") === true) {
+      if (this.$serve.checkString(link.name, "name") === true 
+        && this.$serve.checkString(link.url, "url") === true) {
+
         if (link.cat === "") {
           alert("Choisissez la catégorie");
 
         } else {
-          link.name = rewriteString(link.name, "name");
-          link.url  = rewriteString(link.url, "url");
+          link.name = this.$serve.rewriteString(link.name, "name");
+          link.url  = this.$serve.rewriteString(link.url, "url");
 
-          putData(`/api/links/${id}`, link)
+          this.$serve.putData(`/api/links/${id}`, link)
             .then(() => {
               alert(link.name + " modifié !");
               this.$router.go();
@@ -149,7 +149,7 @@ export default {
       }
 
       if (confirm(`Supprimer ${linkName} ?`) === true) {
-        deleteData(`/api/links/${id}`)
+        this.$serve.deleteData(`/api/links/${id}`)
           .then(() => {
             alert(linkName + " supprimé !");
             this.$router.go();

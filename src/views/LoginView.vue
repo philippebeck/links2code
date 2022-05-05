@@ -58,9 +58,8 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import FieldElt from '@/components/base/FieldElt';
-import { postData } from "@/script/services";
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
 
 export default {
   name: "LoginView",
@@ -88,7 +87,7 @@ export default {
           pass: this.pass
       };
 
-      postData("/api/users/login", auth)
+      this.$serve.postData("/api/users/login", auth)
         .then((res) => {
           let token   = JSON.stringify(res.token);
           let userId  = JSON.stringify(res.userId);

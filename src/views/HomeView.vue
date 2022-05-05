@@ -62,9 +62,8 @@
 </template>
 
 <script>
-import BtnElt from '@/components/base/BtnElt';
-import ListElt from "@/components/data/ListElt";
-import { getData } from "@/script/services";
+import BtnElt from "@/components/base/BtnElt"
+import ListElt from "@/components/data/ListElt"
 
 export default {
   name: "HomeView",
@@ -104,7 +103,7 @@ export default {
   },
   
   mounted () {
-    getData("/api/links").then(
+    this.$serve.getData("/api/links").then(
       response => {
         this.links = response;
       }

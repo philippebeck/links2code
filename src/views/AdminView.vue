@@ -83,12 +83,10 @@
 </template>
 
 <script>
-import { getData } from "@/script/services";
-
-import CreateLink from "@/views/admin/CreateLink.vue";
-import CreateUser from "@/views/admin/CreateUser.vue";
-import ListLinks from "@/views/admin/ListLinks.vue";
-import ListUsers from "@/views/admin/ListUsers.vue";
+import CreateLink from "@/views/admin/CreateLink"
+import CreateUser from "@/views/admin/CreateUser"
+import ListLinks from "@/views/admin/ListLinks"
+import ListUsers from "@/views/admin/ListUsers"
 
 export default {
   name: "AdminView",
@@ -116,11 +114,11 @@ export default {
   beforeMount () {
     if (localStorage.userId) {
 
-      getData("/api/links")
+      this.$serve.getData("/api/links")
         .then(res => { this.links = res;})
         .catch(err => { console.log(err); });
 
-      getData("/api/users")
+      this.$serve.getData("/api/users")
         .then(res => { this.users = res; })
         .catch(err => { console.log(err); });
 

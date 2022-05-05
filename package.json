@@ -1,6 +1,6 @@
 {
   "name": "links2code",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue - Sass",
   "keywords": [
     "vue",
@@ -18,7 +18,7 @@
   "dependencies": {
     "animadio": "^5.0.0",
     "core-js": "^3.8.3",
-    "servidio": "^0.1.2",
+    "servidio": "^0.1.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

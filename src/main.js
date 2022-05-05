@@ -1,10 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-
-import router from './router'
-
-import services from "servidio/dist/services"
-
+import { createApp } from "vue"
+import App from "./App.vue"
+import router from "./router"
+import serve from "servidio"
 import "./style/style.css"
 
-createApp(App).use(router).use(services).mount('#app')
+const app = createApp(App)
+app.config.globalProperties.$serve = serve
+app.use(router).mount("#app")
