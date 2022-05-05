@@ -1,0 +1,12 @@
+:root {
+  --sans-serif: 'Geo', sans-serif;
+  --serif: 'Rozha One', serif;
+  --monospace: 'Syne Mono', monospace;
+
+  --primary: rgb(119, 123, 179);
+  --primary-dark: rgba(119, 123, 179, var(--opacity-dark));
+  --primary-light: rgba(119, 123, 179, var(--opacity-light));
+  --secondary: rgb(50, 51, 48);
+  --secondary-dark: rgba(50, 51, 48, var(--opacity-dark));
+  --secondary-light: rgba(50, 51, 48, var(--opacity-light));
+}
