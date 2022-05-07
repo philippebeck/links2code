@@ -1,12 +1,17 @@
 <template>
-  <picture>
-    <source 
-      :srcset="src" 
-      :media="media">
-    <img 
-      :src="url"
-      :alt="info">
-  </picture>
+  <figure>
+    <picture>
+      <source 
+        :srcset="src" 
+        :media="media">
+      <img 
+        :src="url"
+        :alt="info">
+    </picture>
+    <figcaption>
+      <slot></slot>
+    </figcaption>
+  </figure>
 </template>
 
 <script>
