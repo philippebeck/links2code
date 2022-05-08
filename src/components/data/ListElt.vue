@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 ul {
-  margin: 0;
+  margin: 5vh 5vw 10vh;
   padding: 0;
   list-style: none;
 }
