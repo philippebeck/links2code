@@ -83,10 +83,10 @@
 </template>
 
 <script>
-import CreateLink from "@/views/admin/CreateLink"
-import CreateUser from "@/views/admin/CreateUser"
-import ListLinks from "@/views/admin/ListLinks"
-import ListUsers from "@/views/admin/ListUsers"
+import CreateLink from "@/components/CreateLink"
+import CreateUser from "@/components/CreateUser"
+import ListLinks from "@/components/ListLinks"
+import ListUsers from "@/components/ListUsers"
 
 export default {
   name: "AdminView",
