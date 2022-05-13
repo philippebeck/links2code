@@ -16,10 +16,11 @@
   "repository": "github:philippebeck/links2code",
   "bugs": "https://github.com/philippebeck/links2code/issues",
   "dependencies": {
-    "animadio": "^5.0.0",
+    "animadio": "^5.0.5",
     "core-js": "^3.8.3",
     "servidio": "^0.1.7",
     "vue": "^3.2.13",
+    "vue-elt": "^0.1.0",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {

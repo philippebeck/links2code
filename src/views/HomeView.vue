@@ -1,5 +1,5 @@
 <template>
-  <main id="links">
+  <main id="links" class="container-90md-80xl">
 
     <nav class="sidebar">
       <input 
@@ -44,7 +44,7 @@
     <ListElt :items="itemsByCat(links)">
       <template #items="slotProps">
         <i 
-          :class="`fa-brands fa-${slotProps.index} fa-6x primary shatex-blur-md anima-grow`"
+          :class="`fa-brands fa-${slotProps.index} fa-6x primary shatex-blur-md anima-grow mar-lg`"
           :id="slotProps.index">
           </i>
       </template>
