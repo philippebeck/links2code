@@ -62,13 +62,11 @@
 
 <script>
 import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
 
 export default {
   name: "CreateLink",
   components: {
-    BtnElt,
-    FieldElt
+    BtnElt
   },
   data() {
     return {

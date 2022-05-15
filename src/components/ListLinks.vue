@@ -79,16 +79,12 @@
 
 <script>
 import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
-import TableElt from "@/components/data/TableElt"
 
 export default {
   name: "ListLinks",
   props: ["links"],
   components: {
-    BtnElt,
-    FieldElt,
-    TableElt
+    BtnElt
   },
 
   methods: {
