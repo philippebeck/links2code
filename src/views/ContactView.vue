@@ -90,15 +90,13 @@
 
 <script>
 import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
 import CardElt from "@/components/main/CardElt"
 
 export default {
   name: "ContactView",
   components: {
     BtnElt,
-    CardElt,
-    FieldElt
+    CardElt
   },
   data() {
     return {

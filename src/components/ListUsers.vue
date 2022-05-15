@@ -69,16 +69,12 @@
 
 <script>
 import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
-import TableElt from "@/components/data/TableElt"
 
 export default {
   name: "ListUsers",
   props: ["users"],
   components: {
-    BtnElt,
-    FieldElt,
-    TableElt
+    BtnElt
   },
 
   data() {
