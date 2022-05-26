@@ -46,7 +46,7 @@
         <BtnElt
           type="button"
           @click="updateUser(users[slotProps.index]._id)" 
-          class="btn-blue"
+          class="blue"
           title="Modifier">
           <template #button>
             <i class="fa-solid fa-edit"></i>
@@ -56,7 +56,7 @@
         <BtnElt
           type="button"
           @click="deleteUser(users[slotProps.index]._id)" 
-          class="btn-red"
+          class="red"
           title="Supprimer">
           <template #button>
             <i class="fa-solid fa-trash-alt"></i>
@@ -68,15 +68,9 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "ListUsers",
   props: ["users"],
-  components: {
-    BtnElt
-  },
-
   data() {
     return {
       pass: ""

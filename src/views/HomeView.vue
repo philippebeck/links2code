@@ -54,7 +54,7 @@
           :content="slotProps.value.name"
           :href="`https://${slotProps.value.url}`" 
           :title="slotProps.value.url"
-          class="button-primary"/>
+          class="blue"/>
       </template>
     </ListElt>
 
@@ -62,13 +62,8 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "HomeView",
-  components: {
-    BtnElt
-  },
 
   data() {
     return {

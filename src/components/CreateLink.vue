@@ -56,18 +56,13 @@
       type="button"
       content="Créer"
       @click="createLink()" 
-      class="btn-green"/>
+      class="green"/>
   </form>
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "CreateLink",
-  components: {
-    BtnElt
-  },
   data() {
     return {
       name: "",

@@ -54,18 +54,13 @@
       type="button"
       content="Créer"
       @click="createUser()" 
-      class="btn-green"/>
+      class="green"/>
   </form>
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "CreateUser",
-  components: {
-    BtnElt
-  },
   data() {
     return {
       name: "",
