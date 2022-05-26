@@ -1,5 +1,5 @@
 <template>
-  <form class="form width-lg container-60lg-50wd">
+  <form class="container-60lg-50wd">
     <ul>
       <li>
         <FieldElt
@@ -56,18 +56,13 @@
       type="button"
       content="Créer"
       @click="createLink()" 
-      class="btn-green"/>
+      class="green"/>
   </form>
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "CreateLink",
-  components: {
-    BtnElt
-  },
   data() {
     return {
       name: "",

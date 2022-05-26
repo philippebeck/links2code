@@ -50,7 +50,7 @@
             type="button"
             content="Connexion"
             @click="login()" 
-            class="btn-green"/>
+            class="green"/>
         </li>
       </ul>
     </form>
@@ -58,13 +58,9 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
 
 export default {
   name: "LoginView",
-  components: {
-    BtnElt    
-  },
   data() {
     return {
       email: "",

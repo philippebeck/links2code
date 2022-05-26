@@ -80,7 +80,7 @@
               type="button"
               content="Envoyer"
               @click="send()" 
-              class="btn-green"/>
+              class="green"/>
           </li>
         </ul>
       </form>
@@ -89,13 +89,11 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
 import CardElt from "@/components/main/CardElt"
 
 export default {
   name: "ContactView",
   components: {
-    BtnElt,
     CardElt
   },
   data() {

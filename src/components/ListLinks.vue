@@ -55,7 +55,7 @@
         <BtnElt
           type="button"
           @click="updateLink(table[slotProps.index]._id)" 
-          class="btn-blue"
+          class="blue"
           title="Modifier">
           <template #button>
             <i class="fa-solid fa-edit"></i>
@@ -65,7 +65,7 @@
         <BtnElt
           type="button"
           @click="deleteLink(table[slotProps.index]._id)" 
-          class="btn-red"
+          class="red"
           title="Supprimer">
           <template #button>
             <i class="fa-solid fa-trash-alt"></i>
@@ -78,14 +78,9 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: "ListLinks",
   props: ["links"],
-  components: {
-    BtnElt
-  },
 
   methods: {
     itemsByCat(items) {
