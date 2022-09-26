@@ -33,7 +33,7 @@
 
     <header>
       <h1 class="violet shatex-blur-sm anima-slideB">
-      <i class="fa-solid fa-link fa-2x"></i>
+        <i class="fa-solid fa-link fa-2x"></i>
         Links2Code
       </h1>
       <strong class="gray">
@@ -46,7 +46,7 @@
         <i 
           :class="`fa-brands fa-${slotProps.index} fa-6x primary shatex-blur-md anima-grow mar-lg`"
           :id="slotProps.index">
-          </i>
+        </i>
       </template>
 
       <template #nested="slotProps">
