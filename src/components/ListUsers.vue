@@ -18,7 +18,7 @@
         <FieldElt
           id="name"
           v-model:value="getUsers()[slotProps.index].name"
-          info="Indiquer le nom de l'utilisateur"
+          info="Modifier le nom de l'utilisateur"
           required>
         </FieldElt>
       </template>
@@ -27,7 +27,7 @@
         <FieldElt
           id="email"
           v-model:value="getUsers()[slotProps.index].email"
-          info="Indiquer l'email de l'utilisateur"
+          info="Modifier l'email de l'utilisateur"
           type="email"
           required>
         </FieldElt>
@@ -53,7 +53,7 @@
         <FieldElt
           id="pass"
           v-model:value="pass"
-          info="********"
+          info="Modifier le password de l'utilisateur"
           type="password"
           min="8"
           required>
