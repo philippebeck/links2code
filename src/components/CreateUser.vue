@@ -83,28 +83,32 @@ export default {
   data() {
     return {
       name: "",
+      image:"",
       email: "",
-      pass: "",
+      pass: ""
     }
   },
 
   methods: {
     createUser() {
-      let user = {
-        name: this.name,
-        email: this.email,
-        pass: this.pass
-      };
+      let user  = new FormData();
+      let image = document.getElementById('image').files[0];
 
-      if (this.$serve.checkString(user.name, "name") === true && 
-        this.$serve.checkString(user.email, "email") === true && 
-        this.$serve.checkString(user.pass, "pass") === true) {
-        user.name   = this.$serve.rewriteString(user.name, "name");
-        user.email  = this.$serve.rewriteString(user.email, "email");
+      user.append("name", this.name);
+      user.append("email", this.email);
+      user.append("image", image);
+      user.append("pass", this.pass);
+
+      if (this.$serve.checkString(user.get("name"), "name") === true && 
+        this.$serve.checkString(user.get("email"), "email") === true && 
+        this.$serve.checkString(user.get("pass"), "pass") === true) {
+
+        user.set("name", this.$serve.rewriteString(this.name, "name"));
+        user.set("email", this.$serve.rewriteString(this.email, "email"));
 
         this.$serve.postData("/api/users", user)
           .then(() => {
-            alert(user.name + " créé !");
+            alert(user.get("name") + " créé !");
             this.$router.go();
           });
       }
