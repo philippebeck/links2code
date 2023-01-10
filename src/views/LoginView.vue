@@ -40,8 +40,8 @@
       <ul>
         <li>
           <div 
-            id="recaptcha" 
-            class="g-recaptcha" 
+            id="recaptcha"
+            class="g-recaptcha"
             data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
           </div>
         </li>
@@ -49,7 +49,7 @@
           <BtnElt
             type="button"
             content="Connexion"
-            @click="login()" 
+            @click="login()"
             class="green"/>
         </li>
       </ul>

@@ -3,13 +3,13 @@
     <NavElt>
       <template #brand>
         <a 
-          class="anima-slideB-this" 
-          href="/" 
+          class="anima-slideB-this"
+          href="/"
           title="Accueil">
           <img 
-            src="logo.svg" 
-            alt="Logo Phi" 
-            width="30" 
+            src="logo.svg"
+            alt="Logo Phi"
+            width="30"
             height="30">
         </a>
       </template>
@@ -17,14 +17,14 @@
       <template #nav>
         <ul>
           <li>
-            <a 
+            <a
               href="/">
               <i class="fa-solid fa-link fa-fw"></i>
               <strong>Liens</strong>
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="/contact">
               <i class="fa-brands fa-at fa-fw"></i>
               <strong>Contact</strong>
@@ -36,25 +36,25 @@
       <template #admin>
         <ul v-if="!userId">
           <li>
-            <a 
-              class="onto-color-cyan" 
-              href="https://paypal.me/philippebeck" 
+            <a
+              class="onto-color-cyan"
+              href="https://paypal.me/philippebeck"
               title="Donation">
               <i class="fa-brands fa-paypal fa-lg fa-fw"></i>
             </a>
           </li>
           <li>
-            <a 
-              class="onto-color-pink" 
-              href="https://github.com/sponsors/philippebeck" 
+            <a
+              class="onto-color-pink"
+              href="https://github.com/sponsors/philippebeck"
               title="Sponsor">
               <i class="far fa-heart fa-lg fa-fw"></i>
             </a>
           </li>
           <li>
-            <a 
-              class="onto-color-red" 
-              href="/login" 
+            <a
+              class="onto-color-red"
+              href="/login"
               title="Login">
               <i class="fa-solid fa-sign-in-alt fa-lg fa-fw"></i>
             </a>
@@ -64,15 +64,15 @@
         <ul v-else>
           <li>
             <a 
-              class="onto-color-red" 
-              href="/admin" 
+              class="onto-color-red"
+              href="/admin"
               title="Admin">
               <i class="fa-solid fa-user-ninja fa-lg fa-fw"></i>
             </a>
           </li>
           <li>
             <button 
-              class="onto-color-red" 
+              class="onto-color-red"
               type="button"
               @click="logout()"
               title="Logout">
@@ -89,21 +89,21 @@
       <template #foot1>
         <ul>
           <li>
-            <a 
+            <a
               href="https://animadio.org"
               title="Animadio CSS Framework">
               Animadio
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://links2code.philippebeck.net"
               title="Des Liens pour Coder">
               Links2Code
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://pam.philippebeck.net"
               title="PHP Adaptive Microframework">
               Pam
@@ -115,21 +115,21 @@
       <template #foot2>
         <ul>
           <li>
-            <a 
+            <a
               href="https://asperger.philippebeck.net"
               title="Tests pour le Syndrome d'Asperger">
               Asperger
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://astronomy.philippebeck.net"
               title="NASA & CDS APIs">
               Astronomy
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://philippebeck.net"
               title="Portail">
               Philippe Beck
@@ -141,28 +141,28 @@
       <template #foot>
         <ul>
           <li>
-            <a 
+            <a
               href="https://github.com/philippebeck"
               title="Philippe Beck @GitHub">
               <i class="fa-brands fa-github fa-2x fa-fw gh"></i>
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://twitter.com/ph_beck"
               title="Philippe Beck @Twitter">
               <i class="fa-brands fa-twitter fa-2x fa-fw tw"></i>
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://www.linkedin.com/in/philippebeck"
               title="Philippe Beck @LinkedIn">
               <i class="fa-brands fa-linkedin-in fa-2x fa-fw in"></i>
             </a>
           </li>
           <li>
-            <a 
+            <a
               href="https://codepen.io/philippebeck"
               title="Philippe Beck @CodePen">
               <i class="fa-brands fa-codepen fa-2x fa-fw black"></i>

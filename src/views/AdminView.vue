@@ -2,47 +2,47 @@
   <main id="admin">
 
     <nav class="sidebar">
-      <input 
+      <input
         id="sidebar-class"
-        class="sidebar-check" 
+        class="sidebar-check"
         type="checkbox">
-      <label 
+      <label
         for="sidebar-class"
-        class="sidebar-open" 
+        class="sidebar-open"
         title="Afficher">
         <i class="far fa-eye fa-fw"></i>
       </label>
-      <label 
+      <label
         for="sidebar-class"
         title="Cacher">
         <i class="far fa-eye-slash fa-fw color-violet"></i>
       </label>
-      <a 
-        href="#link" 
+      <a
+        href="#link"
         title="Créer un lien">
         <i class="fas fa-link fa-fw color-violet"></i>
       </a>
 
-      <a 
-        v-for="(cat, index) in cats" 
+      <a
+        v-for="(cat, index) in cats"
         :key="index"
-        :href="`#${cat}`" 
+        :href="`#${cat}`"
         :title="`Gérer les liens ${cat}`">
         <i :class="`fa-brands fa-${cat} fa-fw color-violet`"></i>
       </a>
       
-      <a 
-        href="#user" 
+      <a
+        href="#user"
         title="Créer un utilisateur">
         <i class="fas fa-user fa-fw color-violet"></i>
       </a>
-      <a 
-        href="#users" 
+      <a
+        href="#users"
         title="Gérer les utilisateurs">
         <i class="fas fa-users fa-fw color-violet"></i>
       </a>
-      <a 
-        href="#admin" 
+      <a
+        href="#admin"
         title="Haut de page">
         <i class="fas fa-chevron-circle-up fa-fw color-violet"></i>
       </a>
@@ -61,8 +61,8 @@
 
       <CreateLink />
 
-      <ListLinks 
-        v-if="links.length > 0" 
+      <ListLinks
+        v-if="links.length > 0"
         :links="links"/>
     </section>
 
@@ -74,8 +74,8 @@
 
       <CreateUser />
 
-      <ListUsers 
-        v-if="users.length > 0" 
+      <ListUsers
+        v-if="users.length > 0"
         :users="users"/>
     </section>
 
@@ -108,7 +108,7 @@ export default {
       const cats = new Set();
       this.links.forEach(link => cats.add(link.cat));
 
-      return Array.from(cats); 
+      return Array.from(cats);
     }
   },
   beforeMount () {

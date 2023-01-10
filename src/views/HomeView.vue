@@ -2,30 +2,30 @@
   <main id="links" class="container-90md-80xl">
 
     <nav class="sidebar">
-      <input 
+      <input
         id="sidebar-class"
-        class="sidebar-check" 
+        class="sidebar-check"
         type="checkbox">
-      <label 
+      <label
         for="sidebar-class"
-        class="sidebar-open" 
+        class="sidebar-open"
         title="Afficher">
         <i class="far fa-eye fa-fw"></i>
       </label>
-      <label 
+      <label
         for="sidebar-class"
         title="Cacher">
         <i class="far fa-eye-slash fa-fw violet"></i>
       </label>
-      <a 
-        v-for="(cat, index) in cats" 
+      <a
+        v-for="(cat, index) in cats"
         :key="index"
-        :href="`#${cat}`" 
+        :href="`#${cat}`"
         :title="cat">
         <i :class="`fa-brands fa-${cat} fa-fw violet`"></i>
       </a>
-      <a 
-        href="#links" 
+      <a
+        href="#links"
         title="Haut de page">
         <i class="fas fa-chevron-circle-up fa-fw violet"></i>
       </a>
@@ -44,7 +44,7 @@
     <ListElt :items="itemsByCat(links)">
       <template #items="slotProps">
         <i 
-          :class="`fa-brands fa-${slotProps.index} fa-6x primary shatex-blur-md anima-grow mar-lg`"
+          :class="`fa-brands fa-${slotProps.index} fa-6x sky shatex-blur-md anima-grow mar-lg`"
           :id="slotProps.index">
         </i>
       </template>
