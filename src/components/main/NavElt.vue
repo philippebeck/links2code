@@ -1,28 +1,28 @@
 <template>
   <nav class="navbar">
-    <input 
-      id="navbar-close" 
-      class="navbar-close" 
-      type="radio" 
-      name="navbar" 
+    <input
+      id="navbar-close"
+      class="navbar-close"
+      type="radio"
+      name="navbar"
       checked>
-    <input 
-      id="navbar-open" 
-      class="navbar-open" 
-      type="radio" 
+    <input
+      id="navbar-open"
+      class="navbar-open"
+      type="radio"
       name="navbar">
 
     <slot name="brand"></slot>
     <slot name="nav"></slot>
     <slot name="admin"></slot>
     
-    <label 
-      for="navbar-close" 
+    <label
+      for="navbar-close"
       title="Close the Navigation Menu">
       <i class="fa-solid fa-angle-double-up fa-lg"></i>
     </label>
-    <label 
-      for="navbar-open" 
+    <label
+      for="navbar-open"
       title="Open the Navigation Menu">
       <i class="fa-solid fa-angle-double-down fa-lg"></i>
     </label>
@@ -31,7 +31,8 @@
 
 <script>
 export default {
-  name: "NavElt"
+  name: "NavElt",
+  
 }
 </script>
 
