@@ -1,5 +1,7 @@
 <template>
-  <form>
+  <form
+    method="post"
+    enctype="multipart/form-data">
     <TableElt 
       :items="getUsers()"
       id="users">
