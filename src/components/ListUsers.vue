@@ -39,7 +39,6 @@
           :alt="'Photo de ' + getUsers()[slotProps.index].name"
           :title="getUsers()[slotProps.index].image"
           width="50">
-        <output></output>
         <FieldElt
           id="image"
           v-model:value="image"
