@@ -34,6 +34,22 @@
           </template>
         </FieldElt>
       </li>
+      
+      <li>
+        <FieldElt
+          id="image"
+          v-model:value="image"
+          info="Fournissez l'image de l'utilisateur"
+          type="file"
+          required>
+          <template #legend>
+            Image
+          </template>
+          <template #label>
+            Un fichier image svp !
+          </template>
+        </FieldElt>
+      </li>
 
       <li>
         <FieldElt
