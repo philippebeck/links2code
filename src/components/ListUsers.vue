@@ -31,6 +31,22 @@
         </FieldElt>
       </template>
 
+      <template #cell-image="slotProps">
+        <img
+          :src="'http://localhost:3000/img/' + getUsers()[slotProps.index].image"
+          :alt="'Photo de ' + getUsers()[slotProps.index].name"
+          :title="getUsers()[slotProps.index].image"
+          width="50">
+        <output></output>
+        <FieldElt
+          id="image"
+          v-model:value="image"
+          info="Modifier l'image de l'utilisateur"
+          type="file"
+          required>
+        </FieldElt>
+      </template>
+
       <template #cell-pass>
         <FieldElt
           id="pass"
