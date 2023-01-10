@@ -1,5 +1,8 @@
 <template>
-  <form class="form width-lg container-60lg-50wd">
+  <form 
+    method="post"
+    enctype="multipart/form-data"
+    class="form width-lg container-60lg-50wd">
     <ul>
       <li>
         <FieldElt
