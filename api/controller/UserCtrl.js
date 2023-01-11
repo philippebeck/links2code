@@ -5,9 +5,13 @@ const formidable  = require('formidable');
 const fs          = require("fs");
 const nem         = require("nemjs");
 const UserModel   = require("../model/UserModel");
-const form        = formidable({ uploadDir: "../public/img", keepExtensions: true });
 
 require("dotenv").config();
+
+const form = formidable({ 
+  uploadDir: "../public/" + process.env.IMG, 
+  keepExtensions: true 
+});
 
 /**
  * LIST USERS
