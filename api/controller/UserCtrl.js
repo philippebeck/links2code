@@ -46,17 +46,20 @@ exports.login = (req, res) => {
  * @param {function} next 
  */
 exports.create = (req, res, next) => {
-  //nem.checkUser(req, res);
-
   form.parse(req, (err, fields, files) => {
+
     if (err) {
       next(err);
       return;
     }
-    
+
+    nem.checkEmail(fields.email, res);
+    nem.checkPass(fields.pass, res);
+
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
+
         let user = new UserModel({
           name: fields.name,
           email: fields.email,
@@ -77,15 +80,18 @@ exports.create = (req, res, next) => {
  * UPDATE USER
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.update = (req, res) => {
-  //nem.checkUser(req, res);
-
+exports.update = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
+
     if (err) {
       next(err);
       return;
     }
+
+    nem.checkEmail(fields.email, res);
+    nem.checkPass(fields.pass, res);
 
     let image = fields.image;
 
