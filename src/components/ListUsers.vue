@@ -40,7 +40,7 @@
           :title="getUsers()[slotProps.index].image"
           width="50">
         <FieldElt
-          id="image"
+          :id="'image-' + slotProps.index"
           v-model:value="image"
           info="Modifier l'image de l'utilisateur"
           type="file"
@@ -107,13 +107,11 @@ export default {
       for (let i = 0; i < this.users.length; i++ ) {
         if (this.users[i]._id === id) {
 
-          if (document.getElementById('image').files[0]) {
-            image = document.getElementById('image').files[0];
-          } else {
+          image = document.getElementById('image-' + [i]).files[0];
+
+          if (typeof image === "undefined") {
             image = this.users[i].image;
           }
-
-          console.log(image);
 
           user.append("id", id);
           user.append("name", this.users[i].name);
@@ -129,8 +127,6 @@ export default {
 
         user.set("name", this.$serve.rewriteString(user.get("name"), "name"));
         user.set("email", this.$serve.rewriteString(user.get("email"), "email"));
-
-        console.log(user);
 
           this.$serve.putData(`/api/users/${id}`, user)
             .then(() => {
