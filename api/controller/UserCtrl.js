@@ -85,13 +85,16 @@ exports.update = (req, res) => {
 
     let image = fields.image;
 
-    console.log("fields => ", image);
-
-    console.log(files);
-
     if (Object.keys(files).length !== 0) {
       image = files.image.newFilename;
-      console.log("files => ", image);
+
+      UserModel
+        .findOne({ _id: req.params.id })
+        .then((user) => 
+          fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
+            console.log(user.image + " supprimée !");
+          })
+        )
     }
 
     bcrypt
@@ -103,8 +106,6 @@ exports.update = (req, res) => {
           image: image,
           pass: hash
         };
-
-        console.log(user);
 
         UserModel
           .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
