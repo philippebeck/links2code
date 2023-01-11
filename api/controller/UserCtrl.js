@@ -5,6 +5,7 @@ const formidable  = require('formidable');
 const fs          = require("fs");
 const nem         = require("nemjs");
 const UserModel   = require("../model/UserModel");
+const form        = formidable({ uploadDir: "../public/img", keepExtensions: true });
 
 require("dotenv").config();
 
@@ -43,11 +44,6 @@ exports.login = (req, res) => {
 exports.create = (req, res, next) => {
   //nem.checkUser(req, res);
 
-  const form = formidable({ 
-    uploadDir: "../public/img",
-    keepExtensions: true
-  });
-
   form.parse(req, (err, fields, files) => {
     if (err) {
       next(err);
@@ -80,11 +76,6 @@ exports.create = (req, res, next) => {
  */
 exports.update = (req, res) => {
   //nem.checkUser(req, res);
-
-  const form = formidable({ 
-    uploadDir: "../public/img",
-    keepExtensions: true
-  });
 
   form.parse(req, (err, fields, files) => {
     if (err) {
