@@ -132,9 +132,7 @@ exports.delete = (req, res) => {
   UserModel
     .findOne({ _id: req.params.id })
     .then(user => {
-      const filename = user.image.split(`/${process.env.IMG}/`)[1];
-
-      fs.unlink(`${process.env.IMG}/${filename}`, () => {
+      fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
         UserModel
           .deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: process.env.USER_DELETED }))
