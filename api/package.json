@@ -1,6 +1,6 @@
 {
   "name": "links2code-api",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Node - Express - Mongo - Links - Code",
   "keywords": [
     "node",
