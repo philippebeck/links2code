@@ -1,2 +1,5 @@
+api/.env
+api/node_modules/
 dist/
 node_modules/
+public/img/
