@@ -35,7 +35,7 @@
 
       <template #cell-image="slotProps">
         <img
-          :src="'http://localhost:3000/img/' + getUsers()[slotProps.index].image"
+          :src="'/img/' + getUsers()[slotProps.index].image"
           :alt="'Photo de ' + getUsers()[slotProps.index].name"
           :title="getUsers()[slotProps.index].image"
           width="50">
@@ -96,6 +96,7 @@ export default {
 
   methods: {
     getUsers() {
+
       return this.users;
     },
 
