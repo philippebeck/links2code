@@ -3,7 +3,7 @@
     <NavElt>
       <template #brand>
         <a 
-          class="anima-slideB-this"
+          class="anima-slideB"
           href="/"
           title="Accueil">
           <img 
@@ -37,7 +37,7 @@
         <ul v-if="!userId">
           <li>
             <a
-              class="onto-color-cyan"
+              class="sky-on"
               href="https://paypal.me/philippebeck"
               title="Donation">
               <i class="fa-brands fa-paypal fa-lg fa-fw"></i>
@@ -45,7 +45,7 @@
           </li>
           <li>
             <a
-              class="onto-color-pink"
+              class="pink-on"
               href="https://github.com/sponsors/philippebeck"
               title="Sponsor">
               <i class="far fa-heart fa-lg fa-fw"></i>
@@ -53,7 +53,7 @@
           </li>
           <li>
             <a
-              class="onto-color-red"
+              class="red-on"
               href="/login"
               title="Login">
               <i class="fa-solid fa-sign-in-alt fa-lg fa-fw"></i>
@@ -64,7 +64,7 @@
         <ul v-else>
           <li>
             <a 
-              class="onto-color-red"
+              class="red-on"
               href="/admin"
               title="Admin">
               <i class="fa-solid fa-user-ninja fa-lg fa-fw"></i>
@@ -72,7 +72,7 @@
           </li>
           <li>
             <button 
-              class="onto-color-red"
+              class="red-on"
               type="button"
               @click="logout()"
               title="Logout">
