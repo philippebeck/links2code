@@ -101,13 +101,14 @@ exports.update = (req, res, next) => {
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = files.image.newFilename;
+      image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      nem.createImage(files.image.newFilename, image);
 
       UserModel
         .findOne({ _id: req.params.id })
         .then((user) => 
           fs.unlink(process.env.IMG_URL + user.image, () => {
-            console.log(user.image + " supprimée !");
+            console.log("Image initiale supprimée !");
           })
         )
     }
@@ -122,9 +123,11 @@ exports.update = (req, res, next) => {
           pass: hash
         };
 
-        UserModel
-          .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
-          .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
+        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+          UserModel
+            .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
+            .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
+        })
       })
       .catch((error) => res.status(400).json({ error }));
   });
