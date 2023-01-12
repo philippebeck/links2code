@@ -53,8 +53,11 @@ exports.create = (req, res, next) => {
       return;
     }
 
+    let image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+
     nem.checkEmail(fields.email, res);
     nem.checkPass(fields.pass, res);
+    nem.createImage(files.image.newFilename, image);
 
     bcrypt
       .hash(fields.pass, 10)
@@ -63,14 +66,16 @@ exports.create = (req, res, next) => {
         let user = new UserModel({
           name: fields.name,
           email: fields.email,
-          image: files.image.newFilename,
+          image: image,
           pass: hash
         });
 
-        user
-          .save()
-          .then(() => res.status(201).json({ message: process.env.USER_CREATED }))
-          .catch((error) => res.status(400).json({ error }));
+        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+          user
+            .save()
+            .then(() => res.status(201).json({ message: process.env.USER_CREATED }))
+            .catch((error) => res.status(400).json({ error }));
+        });
       })
       .catch((error) => res.status(500).json({ error }));
   });
