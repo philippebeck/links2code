@@ -48,6 +48,6 @@ app.use(process.env.ROUTE_USER, userRoute, limiter);
 /**
  * IMAGES
  */
-app.use(`/${process.env.IMG}`, express.static(path.join(__dirname, process.env.IMG)));
+app.use(process.env.IMG_URL, express.static(path.join(__dirname, process.env.IMG_URL)));
 
 module.exports = app;
