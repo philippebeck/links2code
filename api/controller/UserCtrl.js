@@ -5,9 +5,13 @@ const formidable  = require('formidable');
 const fs          = require("fs");
 const nem         = require("nemjs");
 const UserModel   = require("../model/UserModel");
-const form        = formidable({ uploadDir: "../public/img", keepExtensions: true });
 
 require("dotenv").config();
+
+const form = formidable({ 
+  uploadDir: process.env.IMG_URL, 
+  keepExtensions: true 
+});
 
 /**
  * LIST USERS
@@ -29,7 +33,7 @@ exports.list = (req, res) => {
 exports.login = (req, res) => {
   UserModel
     .findOne({ email: req.body.email })
-    .then((user) => { nem.checkLogin(req, res, user) })
+    .then((user) => { nem.checkLogin(req.body.pass, user, res) })
     .catch((error) => res.status(500).json({ error }));
 }
 
@@ -42,28 +46,36 @@ exports.login = (req, res) => {
  * @param {function} next 
  */
 exports.create = (req, res, next) => {
-  //nem.checkUser(req, res);
-
   form.parse(req, (err, fields, files) => {
+
     if (err) {
       next(err);
       return;
     }
-    
+
+    let image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+
+    nem.checkEmail(fields.email, res);
+    nem.checkPass(fields.pass, res);
+    nem.createImage(files.image.newFilename, image);
+
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
+
         let user = new UserModel({
           name: fields.name,
           email: fields.email,
-          image: files.image.newFilename,
+          image: image,
           pass: hash
         });
 
-        user
-          .save()
-          .then(() => res.status(201).json({ message: process.env.USER_CREATED }))
-          .catch((error) => res.status(400).json({ error }));
+        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+          user
+            .save()
+            .then(() => res.status(201).json({ message: process.env.USER_CREATED }))
+            .catch((error) => res.status(400).json({ error }));
+        });
       })
       .catch((error) => res.status(500).json({ error }));
   });
@@ -73,26 +85,30 @@ exports.create = (req, res, next) => {
  * UPDATE USER
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.update = (req, res) => {
-  //nem.checkUser(req, res);
-
+exports.update = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
+
     if (err) {
       next(err);
       return;
     }
 
+    nem.checkEmail(fields.email, res);
+    nem.checkPass(fields.pass, res);
+
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = files.image.newFilename;
+      image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      nem.createImage(files.image.newFilename, image);
 
       UserModel
         .findOne({ _id: req.params.id })
         .then((user) => 
-          fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
-            console.log(user.image + " supprimée !");
+          fs.unlink(process.env.IMG_URL + user.image, () => {
+            console.log("Image initiale supprimée !");
           })
         )
     }
@@ -107,9 +123,11 @@ exports.update = (req, res) => {
           pass: hash
         };
 
-        UserModel
-          .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
-          .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
+        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+          UserModel
+            .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
+            .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
+        })
       })
       .catch((error) => res.status(400).json({ error }));
   });
@@ -124,7 +142,7 @@ exports.delete = (req, res) => {
   UserModel
     .findOne({ _id: req.params.id })
     .then(user => {
-      fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
+      fs.unlink(process.env.IMG_URL + user.image, () => {
         UserModel
           .deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: process.env.USER_DELETED }))
