@@ -1,6 +1,6 @@
 {
   "name": "links2code-api",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Node - Express - Mongo - Links - Code",
   "keywords": [
     "node",
@@ -14,8 +14,8 @@
   },
   "license": "Apache-2.0 License",
   "main": "server.js",
-  "repository": "github:philippebeck/links2code-api",
-  "bugs": "https://github.com/philippebeck/links2code-api/issues",
+  "repository": "github:philippebeck/links2code",
+  "bugs": "https://github.com/philippebeck/links2code/issues",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
@@ -27,8 +27,7 @@
     "helmet": "^5.0.2",
     "mongoose": "^6.2.1",
     "mongoose-unique-validator": "^3.0.0",
-    "nemjs": "^0.1.2",
-    "sharp": "^0.31.3"
+    "nemjs": "^0.3.0"
   },
   "author": {
     "name": "Philippe Beck",
