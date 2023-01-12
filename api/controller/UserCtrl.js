@@ -9,7 +9,7 @@ const UserModel   = require("../model/UserModel");
 require("dotenv").config();
 
 const form = formidable({ 
-  uploadDir: "../public/" + process.env.IMG, 
+  uploadDir: process.env.IMG_URL, 
   keepExtensions: true 
 });
 
@@ -101,7 +101,7 @@ exports.update = (req, res, next) => {
       UserModel
         .findOne({ _id: req.params.id })
         .then((user) => 
-          fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
+          fs.unlink(process.env.IMG_URL + user.image, () => {
             console.log(user.image + " supprimée !");
           })
         )
@@ -134,7 +134,7 @@ exports.delete = (req, res) => {
   UserModel
     .findOne({ _id: req.params.id })
     .then(user => {
-      fs.unlink(`../public/${process.env.IMG}/${user.image}`, () => {
+      fs.unlink(process.env.IMG_URL + user.image, () => {
         UserModel
           .deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: process.env.USER_DELETED }))
