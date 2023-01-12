@@ -33,7 +33,7 @@ exports.list = (req, res) => {
 exports.login = (req, res) => {
   UserModel
     .findOne({ email: req.body.email })
-    .then((user) => { nem.checkLogin(req, res, user) })
+    .then((user) => { nem.checkLogin(req.body.pass, user, res) })
     .catch((error) => res.status(500).json({ error }));
 }
 
