@@ -56,8 +56,14 @@ exports.create = (req, res, next) => {
 
     let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
 
-    nem.checkEmail(fields.email, res);
-    nem.checkPass(fields.pass, res);
+    if (!nem.checkEmail(fields.email)) {
+      return res.status(401).json({ message: process.env.USER_EMAIL });
+    };
+
+    if (!nem.checkPass(fields.pass)) {
+      return res.status(401).json({ message: process.env.USER_PASS });
+    }
+
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -96,8 +102,13 @@ exports.update = (req, res, next) => {
       return;
     }
 
-    nem.checkEmail(fields.email, res);
-    nem.checkPass(fields.pass, res);
+    if (!nem.checkEmail(fields.email)) {
+      return res.status(401).json({ message: process.env.USER_EMAIL });
+    };
+
+    if (!nem.checkPass(fields.pass)) {
+      return res.status(401).json({ message: process.env.USER_PASS });
+    }
 
     let image = fields.image;
 
