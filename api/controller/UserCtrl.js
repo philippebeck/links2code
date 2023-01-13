@@ -1,9 +1,10 @@
 "use strict";
 
 const bcrypt      = require("bcrypt");
-const formidable  = require('formidable');
+const formidable  = require("formidable");
 const fs          = require("fs");
 const nem         = require("nemjs");
+const accents     = require("remove-accents");
 const UserModel   = require("../model/UserModel");
 
 require("dotenv").config();
@@ -53,7 +54,7 @@ exports.create = (req, res, next) => {
       return;
     }
 
-    let image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+    let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
 
     nem.checkEmail(fields.email, res);
     nem.checkPass(fields.pass, res);
@@ -101,7 +102,7 @@ exports.update = (req, res, next) => {
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
       nem.createImage(files.image.newFilename, image);
 
       UserModel
