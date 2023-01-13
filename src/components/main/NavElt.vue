@@ -40,6 +40,11 @@ export default {
 :root {
   --navbar-height: 80px;
 }
+
+[id="app"] {
+  margin-top: calc(var(--navbar-height) + 20px);
+}
+
 .navbar {
   --navbar-place-content: center;
   --navbar-place-items: center;
