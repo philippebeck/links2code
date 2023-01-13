@@ -90,32 +90,6 @@
         <ul>
           <li>
             <a
-              href="https://animadio.org"
-              title="Animadio CSS Framework">
-              Animadio
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://links2code.philippebeck.net"
-              title="Des Liens pour Coder">
-              Links2Code
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://pam.philippebeck.net"
-              title="PHP Adaptive Microframework">
-              Pam
-            </a>
-          </li>
-        </ul>
-      </template>
-
-      <template #foot2>
-        <ul>
-          <li>
-            <a
               href="https://asperger.philippebeck.net"
               title="Tests pour le Syndrome d'Asperger">
               Asperger
@@ -128,11 +102,43 @@
               Astronomy
             </a>
           </li>
+        </ul>
+      </template>
+
+      <template #foot2>
+        <ul>
+
           <li>
             <a
               href="https://philippebeck.net"
               title="Portail">
               Philippe Beck
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://links2code.philippebeck.net"
+              title="Des Liens pour Coder">
+              Links2Code
+            </a>
+          </li>
+        </ul>
+      </template>
+
+      <template #foot3>
+        <ul>
+          <li>
+            <a
+              href="https://animadio.org"
+              title="Animadio CSS Framework">
+              Animadio
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://pam.philippebeck.net"
+              title="PHP Adaptive Microframework">
+              Pam
             </a>
           </li>
         </ul>
