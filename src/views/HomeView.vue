@@ -1,22 +1,7 @@
 <template>
-  <main id="links" class="container-90md-80xl">
+  <main id="links" class="container-80tn-70md-60xl-50wd">
 
     <nav class="sidebar">
-      <input
-        id="sidebar-class"
-        class="sidebar-check"
-        type="checkbox">
-      <label
-        for="sidebar-class"
-        class="sidebar-open"
-        title="Afficher">
-        <i class="far fa-eye fa-fw"></i>
-      </label>
-      <label
-        for="sidebar-class"
-        title="Cacher">
-        <i class="far fa-eye-slash fa-fw violet"></i>
-      </label>
       <a
         v-for="(cat, index) in cats"
         :key="index"
