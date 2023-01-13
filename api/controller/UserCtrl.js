@@ -162,17 +162,10 @@ exports.delete = (req, res) => {
  */
 exports.send = (req, res) => {
   const mailer = nem.createMailer();
-  const host = req.get("host");
 
   (async function(){
     try {
-      let message = { 
-        from: process.env.MAIL_USER, 
-        to: req.body.email, 
-        bcc: process.env.MAIL_USER,
-        subject: `Message (${host}) : ${req.body.title}`, 
-        text: req.body.message
-      };
+      let message = nem.createMessage(req);
 
       await mailer.sendMail(message, function() {
         res.status(200).json({ message: process.env.USER_MESSAGE });
