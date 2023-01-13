@@ -11,15 +11,5 @@ module.exports = {
         changeOrigin: true
       },
     }
-  },
-  css: {
-    loaderOptions: {
-      sass: {
-        additionalData: `
-          @import "./node_modules/animadio/src/main.scss";
-        `
-      }
-    }
   }
 }
-
