@@ -109,7 +109,9 @@ exports.update = (req, res, next) => {
         .findOne({ _id: req.params.id })
         .then((user) => 
           fs.unlink(process.env.IMG_URL + user.image, () => {
-            console.log("Image initiale supprimée !");
+            fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+              console.log("Image ok !");
+            })
           })
         )
     }
@@ -124,11 +126,9 @@ exports.update = (req, res, next) => {
           pass: hash
         };
 
-        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
-          UserModel
-            .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
-            .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
-        })
+        UserModel
+          .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
+          .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
       })
       .catch((error) => res.status(400).json({ error }));
   });
