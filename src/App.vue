@@ -37,7 +37,7 @@
         <ul v-if="!userId">
           <li>
             <a
-              class="sky-on"
+              class="blue-on"
               href="https://paypal.me/philippebeck"
               title="Donation">
               <i class="fa-brands fa-paypal fa-lg fa-fw"></i>
@@ -53,7 +53,7 @@
           </li>
           <li>
             <a
-              class="red-on"
+              class="green-on"
               href="/login"
               title="Login">
               <i class="fa-solid fa-sign-in-alt fa-lg fa-fw"></i>
@@ -64,7 +64,7 @@
         <ul v-else>
           <li>
             <a 
-              class="red-on"
+              class="violet-on"
               href="/admin"
               title="Admin">
               <i class="fa-solid fa-user-ninja fa-lg fa-fw"></i>
@@ -144,21 +144,21 @@
             <a
               href="https://github.com/philippebeck"
               title="Philippe Beck @GitHub">
-              <i class="fa-brands fa-github fa-2x fa-fw gh"></i>
+              <i class="fa-brands fa-github fa-2x fa-fw black"></i>
             </a>
           </li>
           <li>
             <a
               href="https://twitter.com/ph_beck"
               title="Philippe Beck @Twitter">
-              <i class="fa-brands fa-twitter fa-2x fa-fw tw"></i>
+              <i class="fa-brands fa-twitter fa-2x fa-fw sky"></i>
             </a>
           </li>
           <li>
             <a
               href="https://www.linkedin.com/in/philippebeck"
               title="Philippe Beck @LinkedIn">
-              <i class="fa-brands fa-linkedin-in fa-2x fa-fw in"></i>
+              <i class="fa-brands fa-linkedin-in fa-2x fa-fw blue"></i>
             </a>
           </li>
           <li>
