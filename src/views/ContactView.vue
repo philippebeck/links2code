@@ -1,8 +1,8 @@
 <template>
   <CardElt>
     <template #head>
-      <h1 class="violet anima-slideB">
-        <i class="fa-solid fa-at fa-2x"></i>
+      <i class="blue fa-solid fa-at fa-2x"></i>
+      <h1 class="blue anima-slideB">
         Contact
       </h1>
     </template>

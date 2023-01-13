@@ -73,8 +73,6 @@ export default {
 
 <style scoped>
 table {
-  --table-box-shadow: 5px 5px 5px 5px var(--silver);
-
   display: table;
   border-collapse: collapse;
   border-spacing: 10px;
@@ -82,7 +80,6 @@ table {
   width: auto;
   max-width: 100%;
   font-size: 1rem;
-  box-shadow: var(--table-box-shadow);
 }
 
 caption {
@@ -115,7 +112,7 @@ td {
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--silver);
+  background-color: var(--gray-light);
   color: var(--black);
 }
 
@@ -126,8 +123,8 @@ tbody tr:nth-child(odd) {
 
 tbody tr:hover,
 tbody tr:focus {
-  background-color: var(--cyan);
-  color: var(--navy);
+  background-color: var(--silver);
+  color: var(--black);
 }
 
 @media (min-width: 576px) {

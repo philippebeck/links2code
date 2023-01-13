@@ -55,7 +55,7 @@
         <BtnElt
           type="button"
           @click="updateLink(table[slotProps.index]._id)" 
-          class="blue"
+          class="sky"
           title="Modifier">
           <template #btn>
             <i class="fa-solid fa-edit"></i>

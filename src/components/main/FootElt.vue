@@ -79,18 +79,23 @@ footer > ul {
   place-items: center;
   gap: 20px;
   padding: 20px;
-  background-color: var(--violet);
+  background-color: var(--sky);
 }
 
 h3 {
   margin-bottom: 5px;
   font-size: 1.5rem;
   font-family: monospace;
-  color: var(--white);
+  color: var(--yellow);
 }
 
 section :deep(a) {
-  color: var(--lime);
+  color: var(--white);
+}
+
+section :deep(a):hover,
+section :deep(a):focus {
+  color: var(--gray);
 }
 
 /********************* SECOND PART *********************/

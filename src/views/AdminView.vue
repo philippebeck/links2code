@@ -48,8 +48,8 @@
       </a>
     </nav>
 
-    <h1 class="violet anima-slideB">
-      <i class="fa-solid fa-cogs fa-2x"></i>
+    <i class="blue fa-solid fa-cogs fa-2x"></i>
+    <h1 class="blue anima-slideB">
       Admin
     </h1>
 

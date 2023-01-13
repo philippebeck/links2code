@@ -201,7 +201,7 @@ label {
   visibility: hidden;
   font-size: 0.8rem;
   font-style: italic;
-  color: var(--teal);
+  color: var(--blue);
 }
 
 input,
@@ -225,9 +225,9 @@ fieldset:hover > textarea,
 input:focus,
 select:focus,
 textarea:focus {
-  border: medium solid var(--lime);
+  border: medium solid var(--sky);
   border-radius: 0;
-  background-color: var(--silver);
+  background-color: var(--gray-light);
   transition: all 1s;
 }
 

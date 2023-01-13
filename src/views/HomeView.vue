@@ -22,18 +22,18 @@
         :key="index"
         :href="`#${cat}`"
         :title="cat">
-        <i :class="`fa-brands fa-${cat} fa-fw violet`"></i>
+        <i :class="`fa-brands fa-${cat} fa-fw`"></i>
       </a>
       <a
         href="#links"
         title="Haut de page">
-        <i class="fas fa-chevron-circle-up fa-fw violet"></i>
+        <i class="fas fa-chevron-circle-up fa-fw"></i>
       </a>
     </nav>
 
     <header>
-      <h1 class="violet shatex-blur-sm anima-slideB">
-        <i class="fa-solid fa-link fa-2x"></i>
+      <i class="blue fa-solid fa-link fa-2x"></i>
+      <h1 class="blue shatex-blur-sm anima-slideB">
         Links2Code
       </h1>
       <strong class="gray">
