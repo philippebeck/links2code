@@ -62,8 +62,15 @@
 </template>
 
 <script>
+import BtnElt from "@/components/base/BtnElt"
+import ListElt from "@/components/data/ListElt"
+
 export default {
   name: "HomeView",
+  components: {
+    BtnElt,
+    ListElt
+  },
 
   data() {
     return {
