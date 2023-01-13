@@ -84,7 +84,7 @@ footer > ul {
 
 h3 {
   margin-bottom: 5px;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: monospace;
   color: var(--yellow);
 }
