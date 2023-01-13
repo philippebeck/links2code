@@ -8,7 +8,7 @@
       :id="table[0].cat">
 
       <template #title>
-        <i :class="`fa-brands fa-${table[0].cat} fa-5x primary anima-grow`"></i>
+        <i :class="`fa-brands fa-${table[0].cat} fa-5x sky anima-grow`"></i>
       </template>
 
       <template #head>
@@ -55,9 +55,9 @@
         <BtnElt
           type="button"
           @click="updateLink(table[slotProps.index]._id)" 
-          class="blue"
+          class="sky"
           title="Modifier">
-          <template #button>
+          <template #btn>
             <i class="fa-solid fa-edit"></i>
           </template>
         </BtnElt>
@@ -67,7 +67,7 @@
           @click="deleteLink(table[slotProps.index]._id)" 
           class="red"
           title="Supprimer">
-          <template #button>
+          <template #btn>
             <i class="fa-solid fa-trash-alt"></i>
           </template>
         </BtnElt>
@@ -78,8 +78,17 @@
 </template>
 
 <script>
+import TableElt from "@/components/data/TableElt"
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
+
 export default {
   name: "ListLinks",
+  components: {
+    TableElt,
+    BtnElt,
+    FieldElt
+  },
   props: ["links"],
 
   methods: {

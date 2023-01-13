@@ -1,13 +1,14 @@
 {
   "name": "links2code-api",
-  "version": "0.4.0",
-  "description": "Node - Express - Mongo - Links - Code",
+  "description": "Some Links for Coding !",
   "keywords": [
+    "vue",
+    "sfc",
+    "sass",
+    "scss",
     "node",
     "express",
-    "mongo",
-    "links",
-    "code"
+    "mongo"
   ],
   "scripts": {
     "start": "nodemon server"
@@ -27,7 +28,8 @@
     "helmet": "^5.0.2",
     "mongoose": "^6.2.1",
     "mongoose-unique-validator": "^3.0.0",
-    "nemjs": "^0.3.0"
+    "nemjs": "^0.3.0",
+    "remove-accents": "^0.4.4"
   },
   "author": {
     "name": "Philippe Beck",

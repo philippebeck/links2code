@@ -1,8 +1,8 @@
 <template>
   <CardElt>
     <template #head>
-      <h1 class="violet anima-slideB">
-        <i class="fa-solid fa-at fa-2x"></i>
+      <i class="blue fa-solid fa-at fa-2x"></i>
+      <h1 class="blue anima-slideB">
         Contact
       </h1>
     </template>
@@ -90,11 +90,15 @@
 
 <script>
 import CardElt from "@/components/main/CardElt"
+import BtnElt from "@/components/base/BtnElt"
+import FieldElt from "@/components/base/FieldElt"
 
 export default {
   name: "ContactView",
   components: {
-    CardElt
+    CardElt,
+    BtnElt,
+    FieldElt
   },
   data() {
     return {

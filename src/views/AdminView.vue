@@ -1,22 +1,6 @@
 <template>
   <main id="admin">
-
     <nav class="sidebar">
-      <input
-        id="sidebar-class"
-        class="sidebar-check"
-        type="checkbox">
-      <label
-        for="sidebar-class"
-        class="sidebar-open"
-        title="Afficher">
-        <i class="far fa-eye fa-fw"></i>
-      </label>
-      <label
-        for="sidebar-class"
-        title="Cacher">
-        <i class="far fa-eye-slash fa-fw color-violet"></i>
-      </label>
       <a
         href="#link"
         title="Créer un lien">
@@ -48,8 +32,8 @@
       </a>
     </nav>
 
-    <h1 class="violet anima-slideB">
-      <i class="fa-solid fa-cogs fa-2x"></i>
+    <i class="blue fa-solid fa-cogs fa-2x"></i>
+    <h1 class="blue anima-slideB">
       Admin
     </h1>
 

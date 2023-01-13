@@ -67,9 +67,8 @@ section {
   padding: 10px;
   height: initial;
   max-width: var(--card-max-width);
-  box-shadow: 3px 5px 10px 5px var(--black);
-  background-color: var(--violet-light);
-  color: var(--card-black);
+  background-color: var(--blue-light);
+  color: var(--black);
 
   &:hover,
   &:focus {

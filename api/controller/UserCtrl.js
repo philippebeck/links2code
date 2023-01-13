@@ -1,9 +1,10 @@
 "use strict";
 
 const bcrypt      = require("bcrypt");
-const formidable  = require('formidable');
+const formidable  = require("formidable");
 const fs          = require("fs");
 const nem         = require("nemjs");
+const accents     = require("remove-accents");
 const UserModel   = require("../model/UserModel");
 
 require("dotenv").config();
@@ -53,10 +54,16 @@ exports.create = (req, res, next) => {
       return;
     }
 
-    let image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+    let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
 
-    nem.checkEmail(fields.email, res);
-    nem.checkPass(fields.pass, res);
+    if (!nem.checkEmail(fields.email)) {
+      return res.status(401).json({ message: process.env.USER_EMAIL });
+    };
+
+    if (!nem.checkPass(fields.pass)) {
+      return res.status(401).json({ message: process.env.USER_PASS });
+    }
+
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -95,20 +102,27 @@ exports.update = (req, res, next) => {
       return;
     }
 
-    nem.checkEmail(fields.email, res);
-    nem.checkPass(fields.pass, res);
+    if (!nem.checkEmail(fields.email)) {
+      return res.status(401).json({ message: process.env.USER_EMAIL });
+    };
+
+    if (!nem.checkPass(fields.pass)) {
+      return res.status(401).json({ message: process.env.USER_PASS });
+    }
 
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = fields.name.toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
       nem.createImage(files.image.newFilename, image);
 
       UserModel
         .findOne({ _id: req.params.id })
         .then((user) => 
           fs.unlink(process.env.IMG_URL + user.image, () => {
-            console.log("Image initiale supprimée !");
+            fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
+              console.log("Image ok !");
+            })
           })
         )
     }
@@ -123,11 +137,9 @@ exports.update = (req, res, next) => {
           pass: hash
         };
 
-        fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
-          UserModel
-            .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
-            .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
-        })
+        UserModel
+          .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
+          .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
       })
       .catch((error) => res.status(400).json({ error }));
   });
@@ -161,17 +173,10 @@ exports.delete = (req, res) => {
  */
 exports.send = (req, res) => {
   const mailer = nem.createMailer();
-  const host = req.get("host");
 
   (async function(){
     try {
-      let message = { 
-        from: process.env.MAIL_USER, 
-        to: req.body.email, 
-        bcc: process.env.MAIL_USER,
-        subject: `Message (${host}) : ${req.body.title}`, 
-        text: req.body.message
-      };
+      let message = nem.createMessage(req);
 
       await mailer.sendMail(message, function() {
         res.status(200).json({ message: process.env.USER_MESSAGE });

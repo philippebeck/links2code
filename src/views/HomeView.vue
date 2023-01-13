@@ -1,39 +1,24 @@
 <template>
-  <main id="links" class="container-90md-80xl">
+  <main id="links" class="container-80tn-70md-60xl-50wd">
 
     <nav class="sidebar">
-      <input
-        id="sidebar-class"
-        class="sidebar-check"
-        type="checkbox">
-      <label
-        for="sidebar-class"
-        class="sidebar-open"
-        title="Afficher">
-        <i class="far fa-eye fa-fw"></i>
-      </label>
-      <label
-        for="sidebar-class"
-        title="Cacher">
-        <i class="far fa-eye-slash fa-fw violet"></i>
-      </label>
       <a
         v-for="(cat, index) in cats"
         :key="index"
         :href="`#${cat}`"
         :title="cat">
-        <i :class="`fa-brands fa-${cat} fa-fw violet`"></i>
+        <i :class="`fa-brands fa-${cat} fa-fw`"></i>
       </a>
       <a
         href="#links"
         title="Haut de page">
-        <i class="fas fa-chevron-circle-up fa-fw violet"></i>
+        <i class="fas fa-chevron-circle-up fa-fw"></i>
       </a>
     </nav>
 
     <header>
-      <h1 class="violet shatex-blur-sm anima-slideB">
-        <i class="fa-solid fa-link fa-2x"></i>
+      <i class="blue fa-solid fa-link fa-2x"></i>
+      <h1 class="blue shatex-blur-sm anima-slideB">
         Links2Code
       </h1>
       <strong class="gray">
@@ -62,8 +47,15 @@
 </template>
 
 <script>
+import BtnElt from "@/components/base/BtnElt"
+import ListElt from "@/components/data/ListElt"
+
 export default {
   name: "HomeView",
+  components: {
+    BtnElt,
+    ListElt
+  },
 
   data() {
     return {

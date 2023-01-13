@@ -40,6 +40,11 @@ export default {
 :root {
   --navbar-height: 80px;
 }
+
+[id="app"] {
+  margin-top: calc(var(--navbar-height) + 20px);
+}
+
 .navbar {
   --navbar-place-content: center;
   --navbar-place-items: center;
@@ -49,7 +54,7 @@ export default {
   --navbar-bottom: unset;
   --navbar-left: 0;
   --navbar-z-index: 1000;
-  --navbar-background-color: var(--primary-dark);
+  --navbar-background-color: var(--blue-dark);
   --navbar-color: var(--white);
   --navbar-link-padding: 20px 10px;
   --navbar-link-color: var(--white);
@@ -60,7 +65,7 @@ export default {
   --navbar-list-padding: 0;
   --navbar-list-list-style: none;
   --navbar-list-link-flex-direction: column;
-  --navbar-link-hover-color: var(--secondary);
+  --navbar-link-hover-color: var(--yellow);
   --navbar-first-list-link-hover-scale: 0.9;
   --navbar-last-list-img-margin: 5px;
   --navbar-last-list-height: 50px;
@@ -68,7 +73,7 @@ export default {
   --navbar-brand-link-left: 0;
   --navbar-brand-link-img-height: 40px;
   --navbar-label-right: 10px;
-  --navbar-label-hover-color: var(--secondary);
+  --navbar-label-hover-color: var(--gray);
   --navbar-first-list-span-font-size: 2rem;
   --navbar-first-list-span-text-align: center;
 
@@ -242,15 +247,15 @@ export default {
   --sidebar-child-padding: 10px;
   --sidebar-child-width: 100%;
   --sidebar-child-background-color: var(--white-dark);
-  --sidebar-child-color: var(--primary-dark);
+  --sidebar-child-color: var(--blue-dark);
   --sidebar-child-cursor: crosshair;
   --sidebar-child-hover-border-radius: 10px;
-  --sidebar-child-hover-background-color: var(--primary-dark);
+  --sidebar-child-hover-background-color: var(--blue-dark);
   --sidebar-child-hover-color: var(--white-dark);
   --sidebar-child-hover-transform: scale(1.1);
   --sidebar-child-hover-transition: all 1s;
   --sidebar-checked-child-font-weight: bold;
-  --sidebar-checked-child-background-color: var(--primary);
+  --sidebar-checked-child-background-color: var(--blue);
   --sidebar-checked-child-color: var(--white);
 
   display: flex;
