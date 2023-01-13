@@ -57,7 +57,7 @@
           @click="updateLink(table[slotProps.index]._id)" 
           class="blue"
           title="Modifier">
-          <template #button>
+          <template #btn>
             <i class="fa-solid fa-edit"></i>
           </template>
         </BtnElt>
@@ -67,7 +67,7 @@
           @click="deleteLink(table[slotProps.index]._id)" 
           class="red"
           title="Supprimer">
-          <template #button>
+          <template #btn>
             <i class="fa-solid fa-trash-alt"></i>
           </template>
         </BtnElt>
