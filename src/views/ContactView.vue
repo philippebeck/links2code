@@ -97,16 +97,15 @@ export default {
   methods: {
     send() {
       if (this.$serve.checkEmail(this.email)) {
+        let message = new FormData();
 
-        let message = {
-          email: this.email,
-          subject: this.subject,
-          text: this.text
-        };
+        message.append("email", this.email);
+        message.append("subject", this.subject);
+        message.append("text", this.text);
 
         this.$serve.postData("/api/users/send", message)
           .then(() => {
-            alert(message.subject + " envoyé !");
+            alert(message.get("subject") + " envoyé !");
             this.$router.push("/");
           });
       }
