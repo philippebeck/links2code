@@ -11,12 +11,19 @@
       </template>
 
       <template #cell-_id="slotProps">
+        <img
+          :src="'/img/' + users[slotProps.index].image"
+          :alt="'Photo de ' + users[slotProps.index].name"
+          :title="users[slotProps.index].image"
+          width="40"
+          class="bord bord-sm bord-blue bord-round">
+        <br>
         {{ slotProps.index + 1 }}
       </template>
 
       <template #cell-name="slotProps">
         <FieldElt
-          id="name"
+          :id="'name-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].name"
           info="Modifier le nom de l'utilisateur"
           required>
@@ -25,7 +32,7 @@
 
       <template #cell-email="slotProps">
         <FieldElt
-          id="email"
+          :id="'email-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].email"
           info="Modifier l'email de l'utilisateur"
           type="email"
@@ -34,13 +41,8 @@
       </template>
 
       <template #cell-image="slotProps">
-        <img
-          :src="'/img/' + getUsers()[slotProps.index].image"
-          :alt="'Photo de ' + getUsers()[slotProps.index].name"
-          :title="getUsers()[slotProps.index].image"
-          width="50">
         <FieldElt
-          :id="'image-' + slotProps.index"
+          :id="'image-' + users[slotProps.index]._id"
           v-model:value="image"
           info="Modifier l'image de l'utilisateur"
           type="file"
@@ -48,13 +50,14 @@
         </FieldElt>
       </template>
 
-      <template #cell-pass>
+      <template #cell-pass="slotProps">
         <FieldElt
-          id="pass"
+          :id="'pass-' + users[slotProps.index]._id"
           v-model:value="pass"
           info="Modifier le password de l'utilisateur"
           type="password"
           min="8"
+          max="50"
           required>
         </FieldElt>
       </template>
