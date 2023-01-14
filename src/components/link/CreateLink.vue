@@ -82,22 +82,19 @@ export default {
   methods: {
     createLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
+        let link = new FormData();
 
         if (this.cat === "") {
           this.cat = "HTML5";
         }
 
-        let link = {
-          name: this.name,
-          url: this.url,
-          cat: this.cat
-        };
-
-        console.log(link);
+        link.append("name", this.name);
+        link.append("url", this.url);
+        link.append("cat", this.cat);
 
         this.$serve.postData("/api/links", link)
           .then(() => {
-            alert(link.name + " créé !");
+            alert(link.get("name") + " créé !");
             this.$router.go();
           });
       }
