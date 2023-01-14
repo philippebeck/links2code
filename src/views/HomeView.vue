@@ -1,5 +1,5 @@
 <template>
-  <main id="links" class="container-80tn-70md-60xl-50wd">
+  <main id="links" class="container-80tn-70md-60xl">
 
     <nav class="sidebar">
       <a

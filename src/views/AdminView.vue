@@ -1,5 +1,5 @@
 <template>
-  <main id="admin">
+  <main id="admin" class="container-80tn-70md-60xl">
     <nav class="sidebar">
       <a
         href="#link"
