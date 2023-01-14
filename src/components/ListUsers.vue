@@ -119,32 +119,27 @@ export default {
       for (let i = 0; i < this.users.length; i++ ) {
         if (this.users[i]._id === id) {
 
-          image = document.getElementById('image-' + [i]).files[0];
+          if (this.$serve.checkEmail(this.users[i].email) && this.$serve.checkPass(this.pass)) {
 
-          if (typeof image === "undefined") {
-            image = this.users[i].image;
+            image = document.getElementById('image-' + this.users[i]._id).files[0];
+
+            if (typeof image === "undefined") {
+              image = this.users[i].image;
+            }
+
+            user.append("id", id);
+            user.append("name", this.users[i].name);
+            user.append("email", this.users[i].email);
+            user.append("image", image);
+            user.append("pass", this.pass);
+
+            this.$serve.putData(`/api/users/${id}`, user)
+              .then(() => {
+                alert(user.get("name") + " mis à jour !");
+                this.$router.go();
+              });
           }
-
-          user.append("id", id);
-          user.append("name", this.users[i].name);
-          user.append("email", this.users[i].email);
-          user.append("image", image);
-          user.append("pass", this.pass);
         }
-      }
-
-      if (this.$serve.checkString(user.get("name"), "name") === true && 
-        this.$serve.checkString(user.get("email"), "email") === true &&
-        this.$serve.checkString(user.get("pass"), "pass") === true) {
-
-        user.set("name", this.$serve.rewriteString(user.get("name"), "name"));
-        user.set("email", this.$serve.rewriteString(user.get("email"), "email"));
-
-          this.$serve.putData(`/api/users/${id}`, user)
-            .then(() => {
-              alert(user.get("name") + " mis à jour !");
-              this.$router.go();
-            });
       }
     },
 
