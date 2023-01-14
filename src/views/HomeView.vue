@@ -7,7 +7,7 @@
         :key="index"
         :href="`#${cat}`"
         :title="cat">
-        <i :class="`fa-brands fa-${cat} fa-fw`"></i>
+        <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
       </a>
       <a
         href="#links"
