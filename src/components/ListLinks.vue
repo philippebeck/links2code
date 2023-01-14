@@ -89,6 +89,7 @@ export default {
     BtnElt,
     FieldElt
   },
+
   props: ["links"],
 
   methods: {

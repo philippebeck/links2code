@@ -99,7 +99,9 @@ export default {
     BtnElt,
     FieldElt
   },
+
   props: ["users"],
+
   data() {
     return {
       pass: ""
@@ -108,7 +110,6 @@ export default {
 
   methods: {
     getUsers() {
-
       return this.users;
     },
 
