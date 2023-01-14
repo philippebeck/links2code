@@ -8,7 +8,7 @@
       :id="table[0].cat">
 
       <template #title>
-        <i :class="`fa-brands fa-${table[0].cat} fa-5x sky anima-grow`"></i>
+        <i :class="`fa-brands fa-${table[0].cat.toLowerCase()} fa-5x sky anima-grow`"></i>
       </template>
 
       <template #head>
@@ -21,7 +21,7 @@
 
       <template #cell-name="slotProps">
         <FieldElt
-          id="name"
+          :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
           info="Indiquer le nom du lien"
           required>
@@ -30,7 +30,7 @@
 
       <template #cell-url="slotProps">
         <FieldElt
-          id="url"
+          :id="'url-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].url"
           info="Indiquer l'URL du lien"
           type="url"
@@ -41,11 +41,11 @@
 
       <template #cell-cat="slotProps">
         <FieldElt
-          id="cat"
+          :id="'cat-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].cat"
           info="Choisissez une Catégorie"
           type="list"
-          :list="['html5', 'css3', 'js', 'php', 'python', 'git', 'dev']"
+          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
           required>
           {{ value }}
         </FieldElt>
@@ -89,6 +89,7 @@ export default {
     BtnElt,
     FieldElt
   },
+
   props: ["links"],
 
   methods: {
@@ -111,31 +112,22 @@ export default {
 
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
-          link = {
-            id: this.links[i]._id,
-            name: this.links[i].name,
-            url: this.links[i].url,
-            cat: this.links[i].cat
+
+          if (this.$serve.checkUrl(`https://${this.links[i].url}`)) {
+            link = {
+              id: this.links[i]._id,
+              name: this.links[i].name,
+              url: this.links[i].url,
+              cat: this.links[i].cat
+            }
           }
         }
-      }
 
-      if (this.$serve.checkString(link.name, "name") === true 
-        && this.$serve.checkString(link.url, "url") === true) {
-
-        if (link.cat === "") {
-          alert("Choisissez la catégorie");
-
-        } else {
-          link.name = this.$serve.rewriteString(link.name, "name");
-          link.url  = this.$serve.rewriteString(link.url, "url");
-
-          this.$serve.putData(`/api/links/${id}`, link)
-            .then(() => {
-              alert(link.name + " modifié !");
-              this.$router.go();
-            });
-        }
+        this.$serve.putData(`/api/links/${id}`, link)
+          .then(() => {
+            alert(link.name + " modifié !");
+            this.$router.go();
+          });
       }
     },
 

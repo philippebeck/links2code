@@ -1,5 +1,5 @@
 <template>
-  <main id="admin">
+  <main id="admin" class="container-80tn-70md-60xl">
     <nav class="sidebar">
       <a
         href="#link"
@@ -11,8 +11,8 @@
         v-for="(cat, index) in cats"
         :key="index"
         :href="`#${cat}`"
-        :title="`Gérer les liens ${cat}`">
-        <i :class="`fa-brands fa-${cat} fa-fw color-violet`"></i>
+        :title="cat">
+        <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw color-violet`"></i>
       </a>
       
       <a

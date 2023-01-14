@@ -7,3 +7,7 @@
   --serif: 'Rozha One', serif;
   --monospace: 'Syne Mono', monospace;
 }
+
+body {
+  background-color: var(--silver-light);
+}

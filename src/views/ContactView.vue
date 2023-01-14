@@ -111,18 +111,14 @@ export default {
 
   methods: {
     send() {
-      let message = {
-        name: this.name,
-        email: this.email,
-        title: this.title,
-        message: this.message
-      };
+      if (this.$serve.checkEmail(this.email)) {
 
-      if (this.$serve.checkString(message.name, "name") === true 
-        && this.$serve.checkString(message.email, "email") === true) {
-
-        message.name  = this.$serve.rewriteString(message.name, "name");
-        message.email = this.$serve.rewriteString(message.email, "email");
+        let message = {
+          name: this.name,
+          email: this.email,
+          title: this.title,
+          message: this.message
+        };
 
         this.$serve.postData("/api/users/send", message)
           .then(() => {

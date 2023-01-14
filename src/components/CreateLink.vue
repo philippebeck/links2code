@@ -39,13 +39,13 @@
           v-model:value="cat"
           info="Choisissez une Catégorie"
           type="list"
-          :list="['html5', 'css3', 'js', 'php', 'python', 'git', 'dev']"
+          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
           required>
           <template #legend>
             Catégorie
           </template>
           <template #label>
-            Une catégorie pertinente svp !
+            Choisissez une Catégorie
           </template>
         </FieldElt>
 
@@ -70,6 +70,7 @@ export default {
     BtnElt,
     FieldElt
   },
+
   data() {
     return {
       name: "",
@@ -80,27 +81,21 @@ export default {
 
   methods: {
     createLink() {
-      let link = {
-        name: this.name,
-        url: this.url,
-        cat: this.cat
-      };
+      if (this.$serve.checkUrl(`https://${this.url}`)) {
 
-      if (this.$serve.checkString(link.name, "name") === true 
-        && this.$serve.checkString(link.url, "url") === true) {
-        if (link.cat === "") {
-          alert("Choisissez la catégorie");
-          
-        } else {
-          link.name = this.$serve.rewriteString(link.name, "name");
-          link.url  = this.$serve.rewriteString(link.url, "url");
+        let link = {
+          name: this.name,
+          url: this.url,
+          cat: this.cat
+        };
 
-          this.$serve.postData("/api/links", link)
-            .then(() => {
-              alert(link.name + " créé !");
-              this.$router.go();
-            });
-        }
+        console.log(link);
+
+        this.$serve.postData("/api/links", link)
+          .then(() => {
+            alert(link.name + " créé !");
+            this.$router.go();
+          });
       }
     }
   }

@@ -244,7 +244,7 @@ export default {
   --sidebar-child-place-items: center;
   --sidebar-child-margin: 5px;
   --sidebar-child-border-radius: 20px;
-  --sidebar-child-padding: 10px;
+  --sidebar-child-padding: 5px;
   --sidebar-child-width: 100%;
   --sidebar-child-background-color: var(--white-dark);
   --sidebar-child-color: var(--blue-dark);

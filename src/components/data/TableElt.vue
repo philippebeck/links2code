@@ -74,16 +74,18 @@ export default {
 <style scoped>
 table {
   display: table;
+  overflow: hidden;
+  margin: 50px auto;
   border-collapse: collapse;
-  border-spacing: 10px;
-  margin: 20px auto;
+  border-radius: 10px;
   width: auto;
   max-width: 100%;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 caption {
   caption-side: top;
+  margin-bottom: 20px;
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--gray);
@@ -92,8 +94,9 @@ caption {
 
 th {
   display: table-column;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-style: italic;
+  text-transform: uppercase;
   background-color: var(--blue);
   color: var(--white);
 }
@@ -131,15 +134,15 @@ tbody tr:focus {
   table {
     max-width: 95%;
   }
+  th,
+  td {
+    display: table-cell;
+  }
 }
 
 @media (min-width: 768px) {
   table {
     max-width: 90%;
-  }
-  th,
-  td {
-    display: table-cell;
   }
 }
 

@@ -3,7 +3,7 @@
     method="post"
     enctype="multipart/form-data">
     <TableElt 
-      :items="getUsers()"
+      :items="users"
       id="users">
 
       <template #head>
@@ -11,12 +11,19 @@
       </template>
 
       <template #cell-_id="slotProps">
+        <img
+          :src="'/img/' + users[slotProps.index].image"
+          :alt="'Photo de ' + users[slotProps.index].name"
+          :title="users[slotProps.index].image"
+          width="40"
+          class="bord bord-sm bord-blue bord-round">
+        <br>
         {{ slotProps.index + 1 }}
       </template>
 
       <template #cell-name="slotProps">
         <FieldElt
-          id="name"
+          :id="'name-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].name"
           info="Modifier le nom de l'utilisateur"
           required>
@@ -25,7 +32,7 @@
 
       <template #cell-email="slotProps">
         <FieldElt
-          id="email"
+          :id="'email-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].email"
           info="Modifier l'email de l'utilisateur"
           type="email"
@@ -34,13 +41,8 @@
       </template>
 
       <template #cell-image="slotProps">
-        <img
-          :src="'/img/' + getUsers()[slotProps.index].image"
-          :alt="'Photo de ' + getUsers()[slotProps.index].name"
-          :title="getUsers()[slotProps.index].image"
-          width="50">
         <FieldElt
-          :id="'image-' + slotProps.index"
+          :id="'image-' + users[slotProps.index]._id"
           v-model:value="image"
           info="Modifier l'image de l'utilisateur"
           type="file"
@@ -48,13 +50,14 @@
         </FieldElt>
       </template>
 
-      <template #cell-pass>
+      <template #cell-pass="slotProps">
         <FieldElt
-          id="pass"
+          :id="'pass-' + users[slotProps.index]._id"
           v-model:value="pass"
           info="Modifier le password de l'utilisateur"
           type="password"
           min="8"
+          max="50"
           required>
         </FieldElt>
       </template>
@@ -96,7 +99,9 @@ export default {
     BtnElt,
     FieldElt
   },
+
   props: ["users"],
+
   data() {
     return {
       pass: ""
@@ -105,7 +110,6 @@ export default {
 
   methods: {
     getUsers() {
-
       return this.users;
     },
 
@@ -116,32 +120,27 @@ export default {
       for (let i = 0; i < this.users.length; i++ ) {
         if (this.users[i]._id === id) {
 
-          image = document.getElementById('image-' + [i]).files[0];
+          if (this.$serve.checkEmail(this.users[i].email) && this.$serve.checkPass(this.pass)) {
 
-          if (typeof image === "undefined") {
-            image = this.users[i].image;
+            image = document.getElementById('image-' + this.users[i]._id).files[0];
+
+            if (typeof image === "undefined") {
+              image = this.users[i].image;
+            }
+
+            user.append("id", id);
+            user.append("name", this.users[i].name);
+            user.append("email", this.users[i].email);
+            user.append("image", image);
+            user.append("pass", this.pass);
+
+            this.$serve.putData(`/api/users/${id}`, user)
+              .then(() => {
+                alert(user.get("name") + " mis à jour !");
+                this.$router.go();
+              });
           }
-
-          user.append("id", id);
-          user.append("name", this.users[i].name);
-          user.append("email", this.users[i].email);
-          user.append("image", image);
-          user.append("pass", this.pass);
         }
-      }
-
-      if (this.$serve.checkString(user.get("name"), "name") === true && 
-        this.$serve.checkString(user.get("email"), "email") === true &&
-        this.$serve.checkString(user.get("pass"), "pass") === true) {
-
-        user.set("name", this.$serve.rewriteString(user.get("name"), "name"));
-        user.set("email", this.$serve.rewriteString(user.get("email"), "email"));
-
-          this.$serve.putData(`/api/users/${id}`, user)
-            .then(() => {
-              alert(user.get("name") + " mis à jour !");
-              this.$router.go();
-            });
       }
     },
 

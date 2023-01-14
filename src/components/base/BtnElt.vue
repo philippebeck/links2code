@@ -76,7 +76,7 @@ a,
 button {
   display: inline-block;
   margin: 10px;
-  border: solid medium var(--black);
+  border: solid 2px var(--black);
   border-radius: 10px;
   padding: 5px 10px;
   font-family: var(--monospace);
@@ -94,7 +94,7 @@ button {
     background-color: var(--white);
     color: var(--black);
     box-shadow: inset 0 0 5px 2px;
-    transition: all 1s;
+    transition: all 200ms;
   }
 
   & > * {

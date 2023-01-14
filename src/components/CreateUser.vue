@@ -87,6 +87,7 @@ export default {
     BtnElt,
     FieldElt
   },
+
   data() {
     return {
       name: "",
@@ -98,20 +99,15 @@ export default {
 
   methods: {
     createUser() {
-      let user  = new FormData();
-      let image = document.getElementById('image').files[0];
+      if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
 
-      user.append("name", this.name);
-      user.append("email", this.email);
-      user.append("image", image);
-      user.append("pass", this.pass);
+        let user  = new FormData();
+        let image = document.getElementById('image').files[0];
 
-      if (this.$serve.checkString(user.get("name"), "name") === true && 
-        this.$serve.checkString(user.get("email"), "email") === true && 
-        this.$serve.checkString(user.get("pass"), "pass") === true) {
-
-        user.set("name", this.$serve.rewriteString(this.name, "name"));
-        user.set("email", this.$serve.rewriteString(this.email, "email"));
+        user.append("name", this.name);
+        user.append("email", this.email);
+        user.append("image", image);
+        user.append("pass", this.pass);
 
         this.$serve.postData("/api/users", user)
           .then(() => {
