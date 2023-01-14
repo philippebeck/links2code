@@ -125,7 +125,7 @@ export default {
             alert(message.title + " envoyé !");
             this.$router.push("/");
           });
-        }
+      }
     }
   }
 }
