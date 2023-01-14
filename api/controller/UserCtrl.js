@@ -172,16 +172,24 @@ exports.delete = (req, res) => {
  * @param {object} res 
  */
 exports.send = (req, res) => {
-  const mailer = nem.createMailer();
+  form.parse(req, (err, fields, files) => {
 
-  (async function(){
-    try {
-      let message = nem.createMessage(req);
+    if (err) {
+      next(err);
+      return;
+    }
 
-      await mailer.sendMail(message, function() {
-        res.status(200).json({ message: process.env.USER_MESSAGE });
-      });
+    const mailer  = nem.createMailer();
 
-    } catch(e){ console.error(e); }
-  })();
+    (async function(){
+      try {
+        let mail = nem.createMessage(fields);
+
+        await mailer.sendMail(mail, function() {
+          res.status(200).json({ message: process.env.USER_MESSAGE });
+        });
+
+      } catch(e){ console.error(e); }
+    })();
+  })
 }
