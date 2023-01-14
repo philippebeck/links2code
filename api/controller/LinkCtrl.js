@@ -1,8 +1,11 @@
 "use strict";
 
-const LinkModel = require("../model/LinkModel");
+const formidable  = require("formidable");
+const LinkModel   = require("../model/LinkModel");
 
 require("dotenv").config();
+
+const form = formidable();
 
 /**
  * LIST LINK
@@ -24,12 +27,20 @@ exports.list = (req, res) => {
  * @param {object} res 
  */
 exports.create = (req, res) => {
-  let link = new LinkModel(req.body);
+  form.parse(req, (err, fields, files) => {
 
-  link
-    .save()
-    .then(() => res.status(201).json({ message: process.env.LINK_CREATED }))
-    .catch((error) => res.status(400).json({ error }));
+    if (err) {
+      next(err);
+      return;
+    }
+
+    let link = new LinkModel(fields);
+
+    link
+      .save()
+      .then(() => res.status(201).json({ message: process.env.LINK_CREATED }))
+      .catch((error) => res.status(400).json({ error }));
+  })
 };
 
 /**
@@ -38,12 +49,18 @@ exports.create = (req, res) => {
  * @param {object} res 
  */
 exports.update = (req, res) => {
-  let link = req.body;
+  form.parse(req, (err, fields, files) => {
 
-  LinkModel
-    .updateOne({ _id: req.params.id }, { ...link, _id: req.params.id })
-    .then(() => res.status(200).json({ message: process.env.LINK_UPDATED }))
-    .catch((error) => res.status(400).json({ error }));
+    if (err) {
+      next(err);
+      return;
+    }
+
+    LinkModel
+      .updateOne({ _id: req.params.id }, { ...fields, _id: req.params.id })
+      .then(() => res.status(200).json({ message: process.env.LINK_UPDATED }))
+      .catch((error) => res.status(400).json({ error }));
+  })
 };
 
 /**
