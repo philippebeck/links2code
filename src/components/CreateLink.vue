@@ -70,6 +70,7 @@ export default {
     BtnElt,
     FieldElt
   },
+
   data() {
     return {
       name: "",
@@ -80,27 +81,21 @@ export default {
 
   methods: {
     createLink() {
-      let link = {
-        name: this.name,
-        url: this.url,
-        cat: this.cat
-      };
+      if (this.$serve.checkUrl(`https://${this.url}`)) {
 
-      if (this.$serve.checkString(link.name, "name") === true 
-        && this.$serve.checkString(link.url, "url") === true) {
-        if (link.cat === "") {
-          alert("Choisissez la catégorie");
-          
-        } else {
-          link.name = this.$serve.rewriteString(link.name, "name");
-          link.url  = this.$serve.rewriteString(link.url, "url");
+        let link = {
+          name: this.name,
+          url: this.url,
+          cat: this.cat
+        };
 
-          this.$serve.postData("/api/links", link)
-            .then(() => {
-              alert(link.name + " créé !");
-              this.$router.go();
-            });
-        }
+        console.log(link);
+
+        this.$serve.postData("/api/links", link)
+          .then(() => {
+            alert(link.name + " créé !");
+            this.$router.go();
+          });
       }
     }
   }
