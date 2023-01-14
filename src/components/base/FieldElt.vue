@@ -171,7 +171,7 @@ export default {
 
 <style scoped>
 fieldset {
-  --field-max-width: 400px;
+  --field-max-width: 350px;
 
   display: flex;
   flex-wrap: wrap;
@@ -207,7 +207,7 @@ label {
 input,
 select,
 textarea {
-  border: medium solid var(--blue);
+  border: 1px solid var(--blue);
   border-radius: 10px;
   outline: none;
   width: 100%;
@@ -225,10 +225,10 @@ fieldset:hover > textarea,
 input:focus,
 select:focus,
 textarea:focus {
-  border: medium solid var(--sky);
+  border: 1px solid var(--sky);
   border-radius: 0;
-  background-color: var(--gray-light);
-  transition: all 1s;
+  background-color: var(--white);
+  transition: all 500ms;
 }
 
 fieldset:hover > label,
