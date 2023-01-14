@@ -100,6 +100,7 @@ export default {
         if (!itemsByCat[item.cat]) {
           itemsByCat[item.cat] = [];
         }
+
         itemsByCat[item.cat].push(item);
         itemsByCat[item.cat].sort((a, b) => (a.name > b.name) ? 1 : -1);
       });
@@ -108,27 +109,25 @@ export default {
     },
 
     updateLink(id) {
-      let link = {};
+      let link = new FormData();
 
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
 
           if (this.$serve.checkUrl(`https://${this.links[i].url}`)) {
-            link = {
-              id: this.links[i]._id,
-              name: this.links[i].name,
-              url: this.links[i].url,
-              cat: this.links[i].cat
-            }
+
+            link.append("id", id);
+            link.append("name", this.links[i].name);
+            link.append("url", this.links[i].url);
+            link.append("cat", this.links[i].cat);
           }
         }
-
-        this.$serve.putData(`/api/links/${id}`, link)
+      }
+      this.$serve.putData(`/api/links/${id}`, link)
           .then(() => {
-            alert(link.name + " modifié !");
+            alert(link.get("name") + " modifié !");
             this.$router.go();
           });
-      }
     },
 
     deleteLink(id) {

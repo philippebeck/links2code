@@ -12,59 +12,45 @@
         <ul>
           <li>
             <FieldElt
-              id="name"
-              v-model:value="name"
-              info="Indiquer votre nom"
-              required>
-              <template #legend>
-                Nom
-              </template>
-              <template #label>
-                Nom et prénom
-              </template>
-            </FieldElt>
-          </li>
-          <li>
-            <FieldElt
               id="email"
               v-model:value="email"
-              info="Indiquer votre email"
+              info="Votre email ?"
               type="email"
               required>
               <template #legend>
                 Email
               </template>
               <template #label>
-                Un email valide svp !
+                Un email fonctionnel svp !
               </template>
             </FieldElt>
           </li>
           <li>
             <FieldElt
-              id="title"
-              v-model:value="title"
-              info="Indiquer le titre"
+              id="subject"
+              v-model:value="subject"
+              info="Le sujet de votre message ?"
               required>
               <template #legend>
-                Titre
-              </template>
-              <template #label>
-                La raison de ce message ?
-              </template>
-            </FieldElt>
-          </li>
-          <li>
-            <FieldElt
-              id="message"
-              v-model:value="message"
-              info="Indiquer votre message"
-              type="area"
-              required>
-              <template #legend>
-                Message
+                Sujet
               </template>
               <template #label>
                 Soyez bref et précis !
+              </template>
+            </FieldElt>
+          </li>
+          <li>
+            <FieldElt
+              id="text"
+              v-model:value="text"
+              info="Votre message ?"
+              type="area"
+              required>
+              <template #legend>
+                Texte
+              </template>
+              <template #label>
+                Que puis-je faire pour vous ?
               </template>
             </FieldElt>
           </li>
@@ -102,30 +88,27 @@ export default {
   },
   data() {
     return {
-      name: "",
       email: "",
-      title: "",
-      message: ""
+      subject: "",
+      text: ""
     }
   },
 
   methods: {
     send() {
       if (this.$serve.checkEmail(this.email)) {
+        let message = new FormData();
 
-        let message = {
-          name: this.name,
-          email: this.email,
-          title: this.title,
-          message: this.message
-        };
+        message.append("email", this.email);
+        message.append("subject", this.subject);
+        message.append("text", this.text);
 
         this.$serve.postData("/api/users/send", message)
           .then(() => {
-            alert(message.title + " envoyé !");
+            alert(message.get("subject") + " envoyé !");
             this.$router.push("/");
           });
-        }
+      }
     }
   }
 }
