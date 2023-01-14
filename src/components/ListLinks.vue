@@ -111,31 +111,22 @@ export default {
 
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
-          link = {
-            id: this.links[i]._id,
-            name: this.links[i].name,
-            url: this.links[i].url,
-            cat: this.links[i].cat
+
+          if (this.$serve.checkUrl(`https://${this.links[i].url}`)) {
+            link = {
+              id: this.links[i]._id,
+              name: this.links[i].name,
+              url: this.links[i].url,
+              cat: this.links[i].cat
+            }
           }
         }
-      }
 
-      if (this.$serve.checkString(link.name, "name") === true 
-        && this.$serve.checkString(link.url, "url") === true) {
-
-        if (link.cat === "") {
-          alert("Choisissez la catégorie");
-
-        } else {
-          link.name = this.$serve.rewriteString(link.name, "name");
-          link.url  = this.$serve.rewriteString(link.url, "url");
-
-          this.$serve.putData(`/api/links/${id}`, link)
-            .then(() => {
-              alert(link.name + " modifié !");
-              this.$router.go();
-            });
-        }
+        this.$serve.putData(`/api/links/${id}`, link)
+          .then(() => {
+            alert(link.name + " modifié !");
+            this.$router.go();
+          });
       }
     },
 
