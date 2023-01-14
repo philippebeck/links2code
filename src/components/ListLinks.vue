@@ -21,7 +21,7 @@
 
       <template #cell-name="slotProps">
         <FieldElt
-          id="name"
+          :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
           info="Indiquer le nom du lien"
           required>
@@ -30,7 +30,7 @@
 
       <template #cell-url="slotProps">
         <FieldElt
-          id="url"
+          :id="'url-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].url"
           info="Indiquer l'URL du lien"
           type="url"
@@ -41,7 +41,7 @@
 
       <template #cell-cat="slotProps">
         <FieldElt
-          id="cat"
+          :id="'cat-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].cat"
           info="Choisissez une Catégorie"
           type="list"
