@@ -3,7 +3,7 @@
     method="post"
     enctype="multipart/form-data">
     <TableElt 
-      :items="getUsers()"
+      :items="users"
       id="users">
 
       <template #head>
