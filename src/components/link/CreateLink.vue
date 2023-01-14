@@ -83,6 +83,10 @@ export default {
     createLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
 
+        if (this.cat === "") {
+          this.cat = "HTML5";
+        }
+
         let link = {
           name: this.name,
           url: this.url,
