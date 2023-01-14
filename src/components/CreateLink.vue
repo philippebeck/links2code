@@ -39,13 +39,13 @@
           v-model:value="cat"
           info="Choisissez une Catégorie"
           type="list"
-          :list="['html5', 'css3', 'js', 'php', 'python', 'git', 'dev']"
+          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
           required>
           <template #legend>
             Catégorie
           </template>
           <template #label>
-            Une catégorie pertinente svp !
+            Choisissez une Catégorie
           </template>
         </FieldElt>
 
