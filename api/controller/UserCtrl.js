@@ -32,10 +32,18 @@ exports.list = (req, res) => {
  * @param {object} res 
  */
 exports.login = (req, res) => {
-  UserModel
-    .findOne({ email: req.body.email })
-    .then((user) => { nem.checkLogin(req.body.pass, user, res) })
-    .catch((error) => res.status(500).json({ error }));
+  form.parse(req, (err, fields, files) => {
+
+    if (err) {
+      next(err);
+      return;
+    }
+
+    UserModel
+      .findOne({ email: fields.email })
+      .then((user) => { nem.checkLogin(fields.pass, user, res) })
+      .catch((error) => res.status(500).json({ error }));
+  })
 }
 
 //! ****************************** CRUD ******************************
