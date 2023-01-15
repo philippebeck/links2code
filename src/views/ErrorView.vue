@@ -4,7 +4,7 @@
 
     <figure>
       <img 
-      src="img/errors/error-404.webp" 
+      src="/img/errors/error-404.webp" 
       alt="Error 404">
     </figure>
 
