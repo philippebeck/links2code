@@ -24,6 +24,8 @@
           :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
           info="Indiquer le nom du lien"
+          @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
+          max="50"
           required>
         </FieldElt>
       </template>
@@ -33,6 +35,7 @@
           :id="'url-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].url"
           info="Indiquer l'URL du lien"
+          @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
           type="url"
           max="100"
           required>
@@ -44,6 +47,7 @@
           :id="'cat-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].cat"
           info="Choisissez une Catégorie"
+          @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
           type="list"
           :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
           required>
