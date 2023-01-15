@@ -87,6 +87,7 @@ export default {
       users: []
     }
   },
+
   computed: {
     cats() {
       const cats = new Set();
@@ -95,6 +96,7 @@ export default {
       return Array.from(cats);
     }
   },
+
   beforeMount () {
     if (localStorage.userId) {
 
