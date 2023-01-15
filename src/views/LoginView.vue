@@ -81,11 +81,14 @@ export default {
   },
 
   methods: {
+    /**
+     * USER LOGIN
+     */
     login() {
-      let auth = {
-          email: this.email,
-          pass: this.pass
-      };
+      let auth = new FormData();
+
+      auth.append("email", this.email);
+      auth.append("pass", this.pass);
 
       this.$serve.postData("/api/users/login", auth)
         .then((res) => {

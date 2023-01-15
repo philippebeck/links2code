@@ -95,6 +95,9 @@ export default {
   },
 
   methods: {
+    /**
+     * SEND A CONTACT MESSAGE
+     */
     send() {
       if (this.$serve.checkEmail(this.email)) {
         let message = new FormData();

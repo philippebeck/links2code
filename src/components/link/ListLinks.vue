@@ -54,7 +54,7 @@
       <template #body="slotProps">
         <BtnElt
           type="button"
-          @click="updateLink(table[slotProps.index]._id)" 
+          @click="validateUpdatedLink(table[slotProps.index]._id)" 
           class="sky"
           title="Modifier">
           <template #btn>
@@ -93,6 +93,10 @@ export default {
   props: ["links"],
 
   methods: {
+    /**
+     * RETURN AN ARRAY OF ITEMS BY CATEGORY
+     * @param {object} items 
+     */
     itemsByCat(items) {
       const itemsByCat = {};
 
@@ -108,28 +112,77 @@ export default {
       return itemsByCat;
     },
 
-    updateLink(id) {
-      let link = new FormData();
-
+    /**
+     * VALIDATE UPDATED LINK IF URL IS VALID
+     * @param {string} id 
+     */
+    validateUpdatedLink(id) {
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
 
           if (this.$serve.checkUrl(`https://${this.links[i].url}`)) {
 
-            link.append("id", id);
-            link.append("name", this.links[i].name);
-            link.append("url", this.links[i].url);
-            link.append("cat", this.links[i].cat);
+            this.checkUpdatedLink(i);
           }
         }
       }
-      this.$serve.putData(`/api/links/${id}`, link)
+    },
+
+    /**
+     * CHECK UPDATED LINK IF NAME | URL ARE REFERENCED
+     * @param {number} i 
+     */
+    checkUpdatedLink(i) {
+      this.$serve.getData("/api/links")
+        .then((links) => {
+          let isReferenced = false;
+
+          for (let j = 0; j < links.length; j++) {
+            if (links[j]._id === this.links[i]._id) {
+              links.splice(j, 1);
+            }
+
+            if (links[j] && links[j].name === this.links[i].name) {
+              alert(this.links[i].name + " n'est pas disponible !");
+              isReferenced = true;
+            }
+
+            if (links[j] && links[j].url === this.links[i].url) {
+              alert(this.links[i].url+ " est déjà référencé !");
+              isReferenced = true;
+            }
+          }
+
+          this.updateLink(isReferenced, i);
+        });
+    },
+
+    /**
+     * UPDATE LINK IF NO INFO IS REFERENCED
+     * @param {boolean} isReferenced 
+     * @param {number} i 
+     */
+    updateLink(isReferenced, i) {
+      if (!isReferenced) {
+        let link = new FormData();
+
+        link.append("id", this.links[i]._id);
+        link.append("name", this.links[i].name);
+        link.append("url", this.links[i].url);
+        link.append("cat", this.links[i].cat);
+
+        this.$serve.putData(`/api/links/${link.get("id")}`, link)
           .then(() => {
             alert(link.get("name") + " modifié !");
             this.$router.go();
           });
+      }
     },
 
+    /**
+     * DELETE LINK
+     * @param {string} id 
+     */
     deleteLink(id) {
       let linkName = "";
       

@@ -72,7 +72,7 @@
     <BtnElt
       type="button"
       content="Créer"
-      @click="createUser()" 
+      @click="validateNewUser()" 
       class="green"/>
   </form>
 </template>
@@ -98,9 +98,47 @@ export default {
   },
 
   methods: {
-    createUser() {
+    /**
+     * VALIDATE NEW USER IF EMAIL & PASS ARE VALID
+     */
+    validateNewUser() {
       if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
 
+        this.checkNewUser();
+      }
+    },
+
+    /**
+     * CHECK NEW USER IF NAME | EMAIL ARE REFERENCED
+     */
+    checkNewUser() {
+      this.$serve.getData("/api/users")
+        .then((users) => {
+          let isReferenced = false;
+
+          for (let i = 0; i < users.length; i++) {
+
+            if (users[i].name === this.name) {
+              alert(this.name + " n'est pas disponible !");
+              isReferenced = true;
+            }
+
+            if (users[i].email === this.email) {
+              alert(this.email + " est déjà référencé !");
+              isReferenced = true;
+            }
+          }
+
+          this.createUser(isReferenced);
+        });
+    },
+
+    /**
+     * CREATE USER IF NO INFO IS REFERENCED
+     * @param {boolean} isReferenced 
+     */
+    createUser(isReferenced) {
+      if (!isReferenced) {
         let user  = new FormData();
         let image = document.getElementById('image').files[0];
 

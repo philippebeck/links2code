@@ -72,6 +72,10 @@ export default {
   },
 
   methods: {
+    /**
+     * RETURN AN ARRAY OF ITEMS BY CATEGORY
+     * @param {object} items 
+     */
     itemsByCat(items) {
       const itemsByCat = {};
 
@@ -88,11 +92,10 @@ export default {
   },
   
   mounted () {
-    this.$serve.getData("/api/links").then(
-      response => {
+    this.$serve.getData("/api/links")
+      .then(response => {
         this.links = response;
-      }
-    )
+      })
   }
 }
 </script>
