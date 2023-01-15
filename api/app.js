@@ -3,7 +3,6 @@
 const express   = require("express");
 const mongoose  = require("mongoose");
 const helmet    = require("helmet");
-const path      = require("path");
 const sanitize  = require("express-mongo-sanitize");
 const rateLimit = require("express-rate-limit");
 const cors      = require("cors");
@@ -44,10 +43,5 @@ const limiter = rateLimit({
  */
 app.use(process.env.ROUTE_LINK, linkRoute);
 app.use(process.env.ROUTE_USER, userRoute, limiter);
-
-/**
- * IMAGES
- */
-app.use(process.env.IMG_URL, express.static(path.join(__dirname, process.env.IMG_URL)));
 
 module.exports = app;
