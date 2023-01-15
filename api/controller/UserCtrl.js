@@ -30,8 +30,9 @@ exports.list = (req, res) => {
  * LOGIN USER
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -66,7 +67,7 @@ exports.create = (req, res, next) => {
 
     if (!nem.checkEmail(fields.email)) {
       return res.status(401).json({ message: process.env.USER_EMAIL });
-    };
+    }
 
     if (!nem.checkPass(fields.pass)) {
       return res.status(401).json({ message: process.env.USER_PASS });

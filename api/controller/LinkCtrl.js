@@ -25,8 +25,9 @@ exports.list = (req, res) => {
  * CREATE LINK
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.create = (req, res) => {
+exports.create = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {

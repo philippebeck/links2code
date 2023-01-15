@@ -9,6 +9,7 @@
           id="name"
           v-model:value="name"
           info="Indiquer le nom de l'utilisateur"
+          @keyup.enter="validateNewUser()"
           required>
           <template #legend>
             Nom
@@ -24,6 +25,7 @@
           id="email"
           v-model:value="email"
           info="Indiquer l'email de l'utilisateur"
+          @keyup.enter="validateNewUser()"
           type="email"
           required>
           <template #legend>
@@ -56,6 +58,7 @@
           id="pass"
           v-model:value="pass"
           info="Indiquer le mot de passe de l'utilisateur"
+          @keyup.enter="validateNewUser()"
           type="password"
           min="8"
           required>

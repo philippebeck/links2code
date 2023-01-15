@@ -7,7 +7,7 @@
           href="/"
           title="Accueil">
           <img 
-            src="logo.svg"
+            src="/img/logo.svg"
             alt="Logo Phi"
             width="30"
             height="30">
@@ -200,7 +200,7 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      this.$router.push("/");
+      this.$router.go();
     }
   },
 

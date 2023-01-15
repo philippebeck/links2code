@@ -11,6 +11,7 @@
             id="email"
             v-model:value="email"
             info="Indiquer votre identifiant"
+            @keyup.enter="login()"
             type="email"
             required>
             <template #legend>
@@ -26,6 +27,7 @@
             id="pass"
             v-model:value="pass"
             info="Indiquer votre mot de passe"
+            @keyup.enter="login()"
             type="password"
             required>
             <template #legend>

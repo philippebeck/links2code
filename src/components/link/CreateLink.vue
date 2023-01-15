@@ -6,6 +6,8 @@
           id="name"
           v-model:value="name"
           info="Indiquer le nom du lien"
+          @keyup.enter="validateNewLink()"
+          max="50"
           required>
           <template #legend>
             Nom
@@ -21,6 +23,7 @@
           id="url"
           v-model:value="url"
           info="Indiquer l'URL du lien"
+          @keyup.enter="validateNewLink()"
           type="url"
           max="100"
           required>
@@ -38,6 +41,7 @@
           id="cat"
           v-model:value="cat"
           info="Choisissez une Catégorie"
+          @keyup.enter="validateNewLink()"
           type="list"
           :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
           required>
