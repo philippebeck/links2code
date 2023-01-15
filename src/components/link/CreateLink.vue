@@ -80,13 +80,52 @@ export default {
   },
 
   methods: {
+    /**
+     * CREATE NEW LINK IF URL IS VALID
+     */
     createLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
-        let link = new FormData();
 
         if (this.cat === "") {
           this.cat = "HTML5";
         }
+
+        this.checkCreatedLink();
+      }
+    },
+
+    /**
+     * CHECK CREATED LINK IF NAME|URL IS ALREADY REFERENCED
+     */
+    checkCreatedLink() {
+      this.$serve.getData("/api/links")
+        .then((links) => {
+          let isReferenced = false;
+
+          for (let i = 0; i < links.length; i++) {
+
+            if (links[i].name === this.name) {
+              alert(this.name + " n'est pas disponible !");
+              isReferenced = true;
+            }
+
+            if (links[i].url === this.url) {
+              alert(this.url + " est déjà référencée !");
+              isReferenced = true;
+            }
+          }
+
+          this.postCreatedLink(isReferenced);
+        });
+    },
+
+    /**
+     * POST CREATED LINK IF NO INFO IS REFERENCED
+     * @param {boolean} isReferenced 
+     */
+    postCreatedLink(isReferenced) {
+      if (!isReferenced) {
+        let link = new FormData();
 
         link.append("name", this.name);
         link.append("url", this.url);
@@ -96,7 +135,7 @@ export default {
           .then(() => {
             alert(link.get("name") + " créé !");
             this.$router.go();
-          });
+        });
       }
     }
   }
