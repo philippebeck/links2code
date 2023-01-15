@@ -72,6 +72,10 @@ export default {
   },
 
   methods: {
+    /**
+     * RETURN AN ARRAY OF ITEMS BY CATEGORY
+     * @param {object} items 
+     */
     itemsByCat(items) {
       const itemsByCat = {};
 
