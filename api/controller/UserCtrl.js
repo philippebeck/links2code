@@ -30,8 +30,9 @@ exports.list = (req, res) => {
  * LOGIN USER
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
