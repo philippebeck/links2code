@@ -12,7 +12,7 @@
 
       <template #cell-_id="slotProps">
         <img
-          :src="'/img/' + users[slotProps.index].image"
+          :src="'/img/users/' + users[slotProps.index].image"
           :alt="'Photo de ' + users[slotProps.index].name"
           :title="users[slotProps.index].image"
           width="40"
