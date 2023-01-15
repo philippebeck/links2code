@@ -65,7 +65,7 @@
       <template #body="slotProps">
         <BtnElt
           type="button"
-          @click="updateUser(users[slotProps.index]._id)" 
+          @click="validateUpdatedUser(users[slotProps.index]._id)" 
           class="sky"
           title="Modifier">
           <template #btn>
@@ -109,41 +109,87 @@ export default {
   },
 
   methods: {
+    /**
+     * GET ALL USERS
+     */
     getUsers() {
       return this.users;
     },
 
-    updateUser(id) {
-      let user  = new FormData();
-      let image = "";
-
+    validateUpdatedUser(id) {
       for (let i = 0; i < this.users.length; i++ ) {
         if (this.users[i]._id === id) {
 
           if (this.$serve.checkEmail(this.users[i].email) && this.$serve.checkPass(this.pass)) {
 
-            image = document.getElementById('image-' + this.users[i]._id).files[0];
-
-            if (typeof image === "undefined") {
-              image = this.users[i].image;
-            }
-
-            user.append("id", id);
-            user.append("name", this.users[i].name);
-            user.append("email", this.users[i].email);
-            user.append("image", image);
-            user.append("pass", this.pass);
-
-            this.$serve.putData(`/api/users/${id}`, user)
-              .then(() => {
-                alert(user.get("name") + " mis à jour !");
-                this.$router.go();
-              });
+            this.checkUpdatedUser(i);
           }
         }
       }
     },
 
+    /**
+     * CHECK UPDATED USER IF NAME | EMAIL ARE REFERENCED
+     * @param {number} i 
+     */
+    checkUpdatedUser(i) {
+      this.$serve.getData("/api/users")
+        .then((users) => {
+          let isReferenced = false;
+
+          for (let j = 0; j < users.length; j++) {
+            if (users[j]._id === this.users[i]._id) {
+              users.splice(j, 1);
+            }
+
+            if (users[j] && users[j].name === this.users[i].name) {
+              alert(this.users[i].name + " n'est pas disponible !");
+              isReferenced = true;
+            }
+
+            if (users[j] && users[j].email === this.users[i].email) {
+              alert(this.users[i].email+ " est déjà référencé !");
+              isReferenced = true;
+            }
+          }
+
+          this.updateUser(isReferenced, i);
+        });
+    },
+
+    /**
+     * UPDATE USER IF NO INFO IS REFERENCED
+     * @param {boolean} isReferenced 
+     * @param {number} i 
+     */
+    updateUser(isReferenced, i) {
+      if (!isReferenced) {
+
+        let user  = new FormData();
+        let image = document.getElementById('image-' + this.users[i]._id).files[0];
+
+        if (typeof image === "undefined") {
+          image = this.users[i].image;
+        }
+
+        user.append("id", this.users[i]._id);
+        user.append("name", this.users[i].name);
+        user.append("email", this.users[i].email);
+        user.append("image", image);
+        user.append("pass", this.pass);
+
+        this.$serve.putData(`/api/users/${user.get("id")}`, user)
+          .then(() => {
+            alert(user.get("name") + " mis à jour !");
+            this.$router.go();
+          });
+      }
+    },
+
+    /**
+     * DELETE USER
+     * @param {string} id 
+     */
     deleteUser(id) {
       let userName = "";
 
