@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView"
 import ContactView from "../views/ContactView"
 import LoginView from "../views/LoginView"
 import AdminView from "../views/AdminView"
+import ErrorView from "../views/ErrorView"
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: "admin",
     component: AdminView,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'error',
+    component: ErrorView
   }
 ]
 
