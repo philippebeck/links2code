@@ -55,7 +55,7 @@
     <BtnElt
       type="button"
       content="Créer"
-      @click="createLink()" 
+      @click="validateNewLink()" 
       class="green"/>
   </form>
 </template>
@@ -81,23 +81,23 @@ export default {
 
   methods: {
     /**
-     * CREATE NEW LINK IF URL IS VALID
+     * VALIDATE NEW LINK IF URL IS VALID
      */
-    createLink() {
+    validateNewLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
 
         if (this.cat === "") {
           this.cat = "HTML5";
         }
 
-        this.checkCreatedLink();
+        this.checkNewLink();
       }
     },
 
     /**
-     * CHECK CREATED LINK IF NAME|URL IS ALREADY REFERENCED
+     * CHECK NEW LINK IF NAME | URL ARE REFERENCED
      */
-    checkCreatedLink() {
+    checkNewLink() {
       this.$serve.getData("/api/links")
         .then((links) => {
           let isReferenced = false;
@@ -110,20 +110,20 @@ export default {
             }
 
             if (links[i].url === this.url) {
-              alert(this.url + " est déjà référencée !");
+              alert(this.url + " est déjà référencé !");
               isReferenced = true;
             }
           }
 
-          this.postCreatedLink(isReferenced);
+          this.createLink(isReferenced);
         });
     },
 
     /**
-     * POST CREATED LINK IF NO INFO IS REFERENCED
+     * CREATE LINK IF NO INFO IS REFERENCED
      * @param {boolean} isReferenced 
      */
-    postCreatedLink(isReferenced) {
+    createLink(isReferenced) {
       if (!isReferenced) {
         let link = new FormData();
 
