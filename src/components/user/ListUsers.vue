@@ -26,6 +26,7 @@
           :id="'name-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].name"
           info="Modifier le nom de l'utilisateur"
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
           required>
         </FieldElt>
       </template>
@@ -35,6 +36,7 @@
           :id="'email-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].email"
           info="Modifier l'email de l'utilisateur"
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
           type="email"
           required>
         </FieldElt>
@@ -55,6 +57,7 @@
           :id="'pass-' + users[slotProps.index]._id"
           v-model:value="pass"
           info="Modifier le password de l'utilisateur"
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
           type="password"
           min="8"
           max="50"
