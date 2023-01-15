@@ -88,11 +88,10 @@ export default {
   },
   
   mounted () {
-    this.$serve.getData("/api/links").then(
-      response => {
+    this.$serve.getData("/api/links")
+      .then(response => {
         this.links = response;
-      }
-    )
+      })
   }
 }
 </script>
