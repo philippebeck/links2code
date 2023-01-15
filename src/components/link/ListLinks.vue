@@ -54,7 +54,7 @@
       <template #body="slotProps">
         <BtnElt
           type="button"
-          @click="updateLink(table[slotProps.index]._id)" 
+          @click="validateUpdatedLink(table[slotProps.index]._id)" 
           class="sky"
           title="Modifier">
           <template #btn>
@@ -113,10 +113,10 @@ export default {
     },
 
     /**
-     * UPDATE LINK
+     * VALIDATE UPDATED LINK IF URL IS VALID
      * @param {string} id 
      */
-    updateLink(id) {
+    validateUpdatedLink(id) {
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
 
@@ -129,7 +129,7 @@ export default {
     },
 
     /**
-     * CHECK UPDATED LINK IF NAME|URL IS ALREADY REFERENCED
+     * CHECK UPDATED LINK IF NAME | URL ARE REFERENCED
      * @param {number} i 
      */
     checkUpdatedLink(i) {
@@ -153,16 +153,16 @@ export default {
             }
           }
 
-          this.putUpdatedLink(isReferenced, i);
+          this.updateLink(isReferenced, i);
         });
     },
 
     /**
-     * PUT UPDATED LINK IF NO INFO IS REFERENCED
+     * UPDATE LINK IF NO INFO IS REFERENCED
      * @param {boolean} isReferenced 
      * @param {number} i 
      */
-    putUpdatedLink(isReferenced, i) {
+    updateLink(isReferenced, i) {
       if (!isReferenced) {
         let link = new FormData();
 
