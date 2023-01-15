@@ -14,7 +14,7 @@
             <FieldElt
               id="email"
               v-model:value="email"
-              info="Votre email ?"
+              info="Un email pour vous répondre ?"
               type="email"
               required>
               <template #legend>
@@ -43,7 +43,7 @@
             <FieldElt
               id="text"
               v-model:value="text"
-              info="Votre message ?"
+              info="Le texte de votre message ?"
               type="area"
               required>
               <template #legend>
