@@ -15,6 +15,7 @@
               id="email"
               v-model:value="email"
               info="Un email pour vous répondre ?"
+              @keyup.enter="send()"
               type="email"
               required>
               <template #legend>
@@ -30,6 +31,7 @@
               id="subject"
               v-model:value="subject"
               info="Le sujet de votre message ?"
+              @keyup.enter="send()"
               required>
               <template #legend>
                 Sujet
@@ -44,6 +46,7 @@
               id="text"
               v-model:value="text"
               info="Le texte de votre message ?"
+              @keyup.enter="send()"
               type="area"
               required>
               <template #legend>
