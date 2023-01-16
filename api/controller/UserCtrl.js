@@ -64,7 +64,8 @@ exports.forgot = (req, res, next) => {
     UserModel
       .findOne({ email: fields.email })
       .then((user) => { 
-        let pass = nem.generatePass();
+        let pass    = nem.generatePass();
+        fields.text = fields.text + pass;
 
         bcrypt
           .hash(pass, 10)
@@ -78,7 +79,19 @@ exports.forgot = (req, res, next) => {
 
             UserModel
               .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
-              .then(() => res.status(200).json(pass))
+              .then(() => {
+                const mailer  = nem.createMailer();
+
+                (async function(){
+                  try {
+                    let mail = nem.createMessage(fields);
+
+                    await mailer.sendMail(mail, function() {
+                      res.status(200).json({ message: process.env.USER_MESSAGE });
+                    });
+                  } catch(e){ console.error(e); }
+                })();
+              })
           })
           .catch((error) => res.status(400).json({ error }));
       })
