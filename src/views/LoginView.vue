@@ -1,24 +1,25 @@
 <template>
-  <main>
-    <h1 class="violet anima-grow">
+  <main v-if="isLogin">
+    <header class="violet anima-grow">
       <i class="fa-solid fa-sign-in-alt fa-2x"></i>
-      Login
-    </h1>
+      <h1 class="mar-none">Login</h1>
+    </header>
+
     <form class="form">
       <ul>
         <li>
           <FieldElt
             id="email"
             v-model:value="email"
-            info="Indiquer votre identifiant"
+            info="Indicate your Email"
             @keyup.enter="login()"
             type="email"
             required>
             <template #legend>
-              Identifiant
+              Email
             </template>
             <template #label>
-              Vous n'avez rien à faire ici !
+              This email must have been registered before
             </template>
           </FieldElt>
         </li>
@@ -26,15 +27,15 @@
           <FieldElt
             id="pass"
             v-model:value="pass"
-            info="Indiquer votre mot de passe"
+            info="Indicate your Password"
             @keyup.enter="login()"
             type="password"
             required>
             <template #legend>
-              Mot de Passe
+              Password
             </template>
             <template #label>
-              Vous ne passerez pas !
+              You can use the Forgot Password feature if needed
             </template>
           </FieldElt>
         </li>
@@ -50,8 +51,58 @@
         <li>
           <BtnElt
             type="button"
-            content="Connexion"
+            content="Login"
             @click="login()"
+            class="green"/>
+          <BtnElt
+            type="button"
+            content="Forgot Password"
+            @click="toggleFormType()"
+            class="orange"/>
+        </li>
+      </ul>
+    </form>
+  </main>
+
+  <main v-else>
+    <header class="violet anima-grow">
+      <i class="fa-solid fa-key fa-2x"></i>
+      <h1 class="mar-none">Forgot Password</h1>
+    </header>
+
+    <form>
+      <FieldElt
+        id="email"
+        v-model:value="email"
+        info="Indicate your Email"
+        @keyup.enter="forgotPass()"
+        type="email"
+        required>
+        <template #legend>
+          Email
+        </template>
+        <template #label>
+          This email must have been registered before
+        </template>
+      </FieldElt>
+      <ul>
+        <li>
+          <div 
+            id="recaptcha"
+            class="g-recaptcha"
+            data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
+          </div>
+        </li>
+        <li>
+          <BtnElt
+            type="button"
+            content="Send"
+            @click="forgotPass()"
+            class="orange"/>
+          <BtnElt
+            type="button"
+            content="Login"
+            @click="toggleFormType()"
             class="green"/>
         </li>
       </ul>
@@ -60,8 +111,10 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
+import BtnElt from "@/components/base/BtnElt";
+import FieldElt from "@/components/base/FieldElt";
+
+import constants from "/constants";
 
 export default {
   name: "LoginView",
@@ -73,6 +126,7 @@ export default {
     return {
       email: "",
       pass: "",
+      isLogin: true
     }
   },
 
@@ -84,24 +138,58 @@ export default {
 
   methods: {
     /**
+     * TOGGLE FORM TYPE
+     */
+    toggleFormType() {
+      if (this.isLogin) {
+        this.isLogin = false;
+      } else {
+        this.isLogin = true;
+      }
+    },
+
+    /**
      * USER LOGIN
      */
     login() {
-      let auth = new FormData();
+      if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
+        let auth = new FormData();
 
-      auth.append("email", this.email);
-      auth.append("pass", this.pass);
+        auth.append("email", this.email);
+        auth.append("pass", this.pass);
 
-      this.$serve.postData("/api/users/login", auth)
-        .then((res) => {
-          let token   = JSON.stringify(res.token);
-          let userId  = JSON.stringify(res.userId);
+        this.$serve.postData("/api/users/login", auth)
+          .then((res) => {
+            let token   = JSON.stringify(res.token);
+            let userId  = JSON.stringify(res.userId);
 
-          localStorage.setItem("userToken", token);
-          localStorage.setItem("userId", userId);
+            localStorage.setItem("userToken", token);
+            localStorage.setItem("userId", userId);
 
-          this.$router.go("/");
-        });
+            this.$router.go("/");
+          })
+          .catch(err => { console.log(err) });
+      }
+    },
+
+    /**
+     * FORGOT PASSWORD
+     */
+    forgotPass() {
+      if (this.$serve.checkEmail(this.email) && confirm(constants.FORGOT_CONFIRM)) {
+        let message = new FormData();
+
+        message.append("email", this.email);
+        message.append("subject", constants.FORGOT_SUBJECT);
+        message.append("text", constants.FORGOT_TEXT);
+
+        this.$serve.postData("/api/users/forgot", message)
+          .then(() => {
+            alert(message.get("subject") + " sended !");
+            this.$router.push("/login");
+          })
+          .catch(err => { console.log(err) });
+      }
     }
   }
 }

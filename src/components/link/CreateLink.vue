@@ -7,8 +7,8 @@
           v-model:value="name"
           info="Indiquer le nom du lien"
           @keyup.enter="validateNewLink()"
-          max="50"
-          required>
+          min="2"
+          max="50">
           <template #legend>
             Nom
           </template>
@@ -21,12 +21,12 @@
       <li>
         <FieldElt
           id="url"
+          type="url"
           v-model:value="url"
           info="Indiquer l'URL du lien"
           @keyup.enter="validateNewLink()"
-          type="url"
-          max="100"
-          required>
+          min="5"
+          max="100">
           <template #legend>
             URL
           </template>
@@ -39,12 +39,11 @@
       <li>
         <FieldElt
           id="cat"
+          type="list"
           v-model:value="cat"
           info="Choisissez une Catégorie"
           @keyup.enter="validateNewLink()"
-          type="list"
-          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
-          required>
+          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']">
           <template #legend>
             Catégorie
           </template>
@@ -85,16 +84,20 @@ export default {
 
   methods: {
     /**
-     * VALIDATE NEW LINK IF URL IS VALID
+     * VALIDATE NEW LINK IF DATA ARE VALID
      */
     validateNewLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
+        if (this.name.length > 1 && this.name.length < 51) {
 
-        if (this.cat === "") {
-          this.cat = "HTML5";
+          if (this.cat === "") {
+            this.cat = "HTML5";
+          }
+          this.checkNewLink();
+
+        } else {
+          alert("Le Nom du lien doit comporter entre 2 & 50 caractères !");
         }
-
-        this.checkNewLink();
       }
     },
 

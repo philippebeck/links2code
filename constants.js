@@ -2,9 +2,11 @@
 /* eslint-disable */
 
 export default {
+  /* SERVIDIO */
+
   ALERT_EMAIL : "Your Email is not a valid address.",
   ALERT_PASS : "Your Password must have 8 to 50 characters, with uppercase, lowercase, 1 number minimum & no space.",
-  ALERT_URL : "This URL is not valid.",
+  ALERT_URL : "This URL is not a valid path.",
 
   API_URL : "http://localhost:3000",
   CONTENT_TYPE : "multipart/form-data", 
@@ -14,5 +16,11 @@ export default {
   PASS_MIN : 8,
 
   TOKEN : JSON.parse(localStorage.getItem("userToken")),
-  USER_ID : JSON.parse(localStorage.getItem("userId"))
+  USER_ID : JSON.parse(localStorage.getItem("userId")),
+
+  /* LINKS2CODE */
+
+  FORGOT_CONFIRM : "Do you confirm sending a new password ?",
+  FORGOT_SUBJECT : "New Password",
+  FORGOT_TEXT : "This is your new Password, keep it safe : ",
 }

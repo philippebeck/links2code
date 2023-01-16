@@ -47,6 +47,58 @@ exports.login = (req, res, next) => {
   })
 }
 
+/**
+ * FORGOT PASSWORD
+ * @param {object} req 
+ * @param {object} res 
+ * @param {function} next 
+ */
+exports.forgot = (req, res, next) => {
+  form.parse(req, (err, fields, files) => {
+
+    if (err) {
+      next(err);
+      return;
+    }
+
+    UserModel
+      .findOne({ email: fields.email })
+      .then((user) => { 
+        let pass    = nem.generatePass();
+        fields.text = fields.text + pass;
+
+        bcrypt
+          .hash(pass, 10)
+          .then((hash) => {
+            let newUser = {
+              name: user.name,
+              email: user.email,
+              image: user.image,
+              pass: hash
+            };
+
+            UserModel
+              .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
+              .then(() => {
+                const mailer  = nem.createMailer();
+
+                (async function(){
+                  try {
+                    let mail = nem.createMessage(fields);
+
+                    await mailer.sendMail(mail, function() {
+                      res.status(200).json({ message: process.env.USER_MESSAGE });
+                    });
+                  } catch(e){ console.error(e); }
+                })();
+              })
+          })
+          .catch((error) => res.status(400).json({ error }));
+      })
+      .catch((error) => res.status(500).json({ error }));
+  })
+}
+
 //! ****************************** CRUD ******************************
 
 /**
