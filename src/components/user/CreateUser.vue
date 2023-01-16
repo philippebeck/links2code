@@ -10,7 +10,8 @@
           v-model:value="name"
           info="Indiquer le nom de l'utilisateur"
           @keyup.enter="validateNewUser()"
-          required>
+          min="2"
+          max="50">
           <template #legend>
             Nom
           </template>
@@ -27,7 +28,8 @@
           info="Indiquer l'email de l'utilisateur"
           @keyup.enter="validateNewUser()"
           type="email"
-          required>
+          min="8"
+          max="50">
           <template #legend>
             Email
           </template>
@@ -42,8 +44,7 @@
           id="image"
           v-model:value="image"
           info="Fournissez l'image de l'utilisateur"
-          type="file"
-          required>
+          type="file">
           <template #legend>
             Image
           </template>
@@ -61,7 +62,7 @@
           @keyup.enter="validateNewUser()"
           type="password"
           min="8"
-          required>
+          max="50">
           <template #legend>
             Mot de Passe
           </template>
