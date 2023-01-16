@@ -14,5 +14,11 @@ export default {
   PASS_MIN : 8,
 
   TOKEN : JSON.parse(localStorage.getItem("userToken")),
-  USER_ID : JSON.parse(localStorage.getItem("userId"))
+  USER_ID : JSON.parse(localStorage.getItem("userId")),
+
+  /* LINKS2CODE */
+
+  FORGOT_CONFIRM : "Do you confirm sending a new password ?",
+  FORGOT_SUBJECT : "New Password",
+  FORGOT_TEXT : "This is your new Password, keep it safe : ",
 }
