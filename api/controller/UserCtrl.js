@@ -5,7 +5,6 @@ const formidable  = require("formidable");
 const fs          = require("fs");
 const nem         = require("nemjs");
 const accents     = require("remove-accents");
-const generator   = require("generate-password");
 const UserModel   = require("../model/UserModel");
 
 require("dotenv").config();
@@ -65,11 +64,7 @@ exports.forgot = (req, res, next) => {
     UserModel
       .findOne({ email: fields.email })
       .then((user) => { 
-        let pass = generator.generate({
-          length: 12,
-          numbers: true,
-          symbols: true
-        });
+        let pass = nem.generatePass();
 
         bcrypt
           .hash(pass, 10)
