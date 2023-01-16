@@ -102,13 +102,22 @@ export default {
 
   methods: {
     /**
-     * VALIDATE NEW USER IF EMAIL & PASS ARE VALID
+     * VALIDATE NEW USER IF DATA ARE VALID
      */
     validateNewUser() {
-      if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
+      if (this.name.length > 1 && this.name.length < 51) {
+        if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
 
-        this.checkNewUser();
-      }
+          if (typeof document.getElementById('image').files[0] !== "undefined") {
+            this.checkNewUser();
+
+          } else {
+            alert("Une photo de l'utilisateur doit être uploadée !");
+          }
+        }
+      } else {
+          alert("Le Nom de l'utilisateur doit comporter entre 2 & 50 caractères !");
+        }
     },
 
     /**
