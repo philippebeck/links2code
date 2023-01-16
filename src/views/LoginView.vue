@@ -111,8 +111,10 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
+import BtnElt from "@/components/base/BtnElt";
+import FieldElt from "@/components/base/FieldElt";
+
+import constants from "/constants";
 
 export default {
   name: "LoginView",
@@ -124,6 +126,7 @@ export default {
     return {
       email: "",
       pass: "",
+      isLogin: true
     }
   },
 
@@ -135,24 +138,65 @@ export default {
 
   methods: {
     /**
+     * TOGGLE FORM TYPE
+     */
+    toggleFormType() {
+      if (this.isLogin) {
+        this.isLogin = false;
+      } else {
+        this.isLogin = true;
+      }
+    },
+
+    /**
      * USER LOGIN
      */
     login() {
-      let auth = new FormData();
+      if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
+        let auth = new FormData();
 
-      auth.append("email", this.email);
-      auth.append("pass", this.pass);
+        auth.append("email", this.email);
+        auth.append("pass", this.pass);
 
-      this.$serve.postData("/api/users/login", auth)
-        .then((res) => {
-          let token   = JSON.stringify(res.token);
-          let userId  = JSON.stringify(res.userId);
+        this.$serve.postData("/api/users/login", auth)
+          .then((res) => {
+            let token   = JSON.stringify(res.token);
+            let userId  = JSON.stringify(res.userId);
 
-          localStorage.setItem("userToken", token);
-          localStorage.setItem("userId", userId);
+            localStorage.setItem("userToken", token);
+            localStorage.setItem("userId", userId);
 
-          this.$router.go("/");
-        });
+            this.$router.go("/");
+          });
+      }
+    },
+
+    /**
+     * FORGOT PASSWORD
+     */
+    forgotPass() {
+      if (this.$serve.checkEmail(this.email) && confirm(constants.FORGOT_CONFIRM)) {
+
+        let email = new FormData();
+        email.append("email", this.email);
+
+        this.$serve.postData("/api/users/forgot", email)
+          .then((pass) => {
+            let message = new FormData();
+
+            message.append("email", this.email);
+            message.append("subject", constants.FORGOT_SUBJECT);
+            message.append("text", constants.FORGOT_TEXT + pass);
+
+            this.$serve.postData("/api/users/send", message)
+              .then(() => {
+                alert(message.get("subject") + " sended !");
+                this.$router.push("/login");
+              })
+              .catch(err => { console.log(err); });
+          })
+          .catch(err => { console.log(err); });
+      }
     }
   }
 }
