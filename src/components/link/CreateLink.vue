@@ -85,16 +85,20 @@ export default {
 
   methods: {
     /**
-     * VALIDATE NEW LINK IF URL IS VALID
+     * VALIDATE NEW LINK IF DATA ARE VALID
      */
     validateNewLink() {
       if (this.$serve.checkUrl(`https://${this.url}`)) {
+        if (this.name.length > 1 && this.name.length < 51) {
 
-        if (this.cat === "") {
-          this.cat = "HTML5";
+          if (this.cat === "") {
+            this.cat = "HTML5";
+          }
+          this.checkNewLink();
+
+        } else {
+          alert("Le Nom du lien doit comporter entre 2 & 50 caractères !");
         }
-
-        this.checkNewLink();
       }
     },
 
