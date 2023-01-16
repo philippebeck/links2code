@@ -13,7 +13,8 @@
       :step="step"
       :type="type"
       :value="value"
-      @input="onInput">
+      @input="onInput"
+      :required="required">
 
     <input 
       v-else-if="getFieldType() === 'special'"
@@ -21,14 +22,16 @@
       :name="name"
       :type="type"
       :value="value"
-      @input="onInput">
+      @input="onInput"
+      :required="required">
 
     <select
       v-else-if="getFieldType() === 'list'"
       :id="id"
       :name="id"
       :placeholder="info"
-      @input="onInput">
+      @input="onInput"
+      :required="required">
       <option 
         v-if="value"
         :value="value">
@@ -55,7 +58,8 @@
       :placeholder="info"
       :rows="rows"
       :value="value"
-      @input="onInput"></textarea>
+      @input="onInput"
+      :required="required"></textarea>
 
     <input 
       v-else
@@ -66,7 +70,8 @@
       :placeholder="info"
       :type="type"
       :value="value"
-      @input="onInput">
+      @input="onInput"
+      :required="required">
 
     <label 
       v-if="hasSlot('label')"
@@ -127,6 +132,10 @@ export default {
     step: {
       type: Number,
       default: 1
+    },
+    required: {
+      type: String,
+      default: "required"
     }
   },
   methods: {
