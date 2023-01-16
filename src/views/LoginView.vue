@@ -167,7 +167,8 @@ export default {
             localStorage.setItem("userId", userId);
 
             this.$router.go("/");
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     },
 
@@ -176,26 +177,18 @@ export default {
      */
     forgotPass() {
       if (this.$serve.checkEmail(this.email) && confirm(constants.FORGOT_CONFIRM)) {
+        let message = new FormData();
 
-        let email = new FormData();
-        email.append("email", this.email);
+        message.append("email", this.email);
+        message.append("subject", constants.FORGOT_SUBJECT);
+        message.append("text", constants.FORGOT_TEXT);
 
-        this.$serve.postData("/api/users/forgot", email)
-          .then((pass) => {
-            let message = new FormData();
-
-            message.append("email", this.email);
-            message.append("subject", constants.FORGOT_SUBJECT);
-            message.append("text", constants.FORGOT_TEXT + pass);
-
-            this.$serve.postData("/api/users/send", message)
-              .then(() => {
-                alert(message.get("subject") + " sended !");
-                this.$router.push("/login");
-              })
-              .catch(err => { console.log(err); });
+        this.$serve.postData("/api/users/forgot", message)
+          .then(() => {
+            alert(message.get("subject") + " sended !");
+            this.$router.push("/login");
           })
-          .catch(err => { console.log(err); });
+          .catch(err => { console.log(err) });
       }
     }
   }
