@@ -5,6 +5,7 @@ const formidable  = require("formidable");
 const fs          = require("fs");
 const nem         = require("nemjs");
 const accents     = require("remove-accents");
+const generator   = require("generate-password");
 const UserModel   = require("../model/UserModel");
 
 require("dotenv").config();
@@ -43,6 +44,49 @@ exports.login = (req, res, next) => {
     UserModel
       .findOne({ email: fields.email })
       .then((user) => { nem.checkLogin(fields.pass, user, res) })
+      .catch((error) => res.status(500).json({ error }));
+  })
+}
+
+/**
+ * FORGOT PASSWORD
+ * @param {object} req 
+ * @param {object} res 
+ * @param {function} next 
+ */
+exports.forgot = (req, res, next) => {
+  form.parse(req, (err, fields, files) => {
+
+    if (err) {
+      next(err);
+      return;
+    }
+
+    UserModel
+      .findOne({ email: fields.email })
+      .then((user) => { 
+        let pass = generator.generate({
+          length: 12,
+          numbers: true,
+          symbols: true
+        });
+
+        bcrypt
+          .hash(pass, 10)
+          .then((hash) => {
+            let newUser = {
+              name: user.name,
+              email: user.email,
+              image: user.image,
+              pass: hash
+            };
+
+            UserModel
+              .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
+              .then(() => res.status(200).json(pass))
+          })
+          .catch((error) => res.status(400).json({ error }));
+      })
       .catch((error) => res.status(500).json({ error }));
   })
 }
