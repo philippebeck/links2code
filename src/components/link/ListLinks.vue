@@ -124,7 +124,8 @@ export default {
       for (let i = 0; i < this.links.length; i++ ) {
         if (this.links[i]._id === id) {
 
-          if (this.$serve.checkUrl(`https://${this.links[i].url}`)) {
+          if (this.$serve.checkName(this.links[i].name) && 
+            this.$serve.checkUrl(`https://${this.links[i].url}`)) {
 
             this.checkUpdatedLink(i);
           }

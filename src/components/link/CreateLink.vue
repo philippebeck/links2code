@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
+import BtnElt from "@/components/base/BtnElt";
+import FieldElt from "@/components/base/FieldElt";
 
 export default {
   name: "CreateLink",
@@ -87,17 +87,14 @@ export default {
      * VALIDATE NEW LINK IF DATA ARE VALID
      */
     validateNewLink() {
-      if (this.$serve.checkUrl(`https://${this.url}`)) {
-        if (this.name.length > 1 && this.name.length < 51) {
+      if (this.$serve.checkName(this.name) &&
+        this.$serve.checkUrl(`https://${this.url}`)) {
 
-          if (this.cat === "") {
-            this.cat = "HTML5";
-          }
-          this.checkNewLink();
-
-        } else {
-          alert("Le Nom du lien doit comporter entre 2 & 50 caractères !");
+        if (this.cat === "") {
+          this.cat = "HTML5";
         }
+
+        this.checkNewLink();
       }
     },
 
