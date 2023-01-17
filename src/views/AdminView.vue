@@ -62,7 +62,6 @@
         v-if="users.length > 0"
         :users="users"/>
     </section>
-
   </main>
 </template>
 

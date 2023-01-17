@@ -74,7 +74,6 @@
       </template>
     </TableElt>
   </form>
-
 </template>
 
 <script>
