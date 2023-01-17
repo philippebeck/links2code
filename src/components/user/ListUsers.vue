@@ -11,14 +11,14 @@
       </template>
 
       <template #cell-_id="slotProps">
-        <img
+        <ImgElt
           :src="'/img/users/' + users[slotProps.index].image"
           :alt="'Photo de ' + users[slotProps.index].name"
-          :title="users[slotProps.index].image"
-          :width="parseInt('40')"
-          class="bord bord-sm bord-blue bord-round">
-        <br>
-        {{ slotProps.index + 1 }}
+          :title="users[slotProps.index].image">
+          <template #figcaption>
+            {{ slotProps.index + 1 }}
+          </template>
+        </ImgElt>
       </template>
 
       <template #cell-name="slotProps">
@@ -87,13 +87,15 @@
 import TableElt from "@/components/data/TableElt"
 import BtnElt from "@/components/base/BtnElt"
 import FieldElt from "@/components/base/FieldElt"
+import ImgElt from "@/components/base/ImgElt"
 
 export default {
   name: "ListUsers",
   components: {
     TableElt,
     BtnElt,
-    FieldElt
+    FieldElt,
+    ImgElt
   },
 
   props: ["users"],
