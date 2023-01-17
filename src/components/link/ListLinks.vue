@@ -23,7 +23,7 @@
         <FieldElt
           :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
-          info="Indiquer le nom du lien"
+          info="Update the link name"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
           max="50"
           required>
@@ -34,7 +34,7 @@
         <FieldElt
           :id="'url-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].url"
-          info="Indiquer l'URL du lien"
+          info="Update the link URL"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
           type="url"
           max="100"
@@ -46,7 +46,7 @@
         <FieldElt
           :id="'cat-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].cat"
-          info="Choisissez une Catégorie"
+          info="Update the category"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
           type="list"
           :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
@@ -60,7 +60,7 @@
           type="button"
           @click="validateUpdatedLink(table[slotProps.index]._id)" 
           class="sky"
-          title="Modifier">
+          :title="'Update ' + table[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-edit"></i>
           </template>
@@ -70,7 +70,7 @@
           type="button"
           @click="deleteLink(table[slotProps.index]._id)" 
           class="red"
-          title="Supprimer">
+          :title="'Delete ' + table[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-trash-alt"></i>
           </template>
@@ -148,12 +148,12 @@ export default {
             }
 
             if (links[j] && links[j].name === this.links[i].name) {
-              alert(this.links[i].name + " n'est pas disponible !");
+              alert(this.links[i].name + " is not available !");
               isReferenced = true;
             }
 
             if (links[j] && links[j].url === this.links[i].url) {
-              alert(this.links[i].url+ " est déjà référencé !");
+              alert(this.links[i].url+ " is already referenced !");
               isReferenced = true;
             }
           }
@@ -178,7 +178,7 @@ export default {
 
         this.$serve.putData(`/api/links/${link.get("id")}`, link)
           .then(() => {
-            alert(link.get("name") + " modifié !");
+            alert(link.get("name") + " updated !");
             this.$router.go();
           });
       }
@@ -197,10 +197,10 @@ export default {
         }
       }
 
-      if (confirm(`Supprimer ${linkName} ?`) === true) {
+      if (confirm(`Delete ${linkName} ?`) === true) {
         this.$serve.deleteData(`/api/links/${id}`)
           .then(() => {
-            alert(linkName + " supprimé !");
+            alert(linkName + " deleted !");
             this.$router.go();
           });
       }

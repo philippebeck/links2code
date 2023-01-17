@@ -5,15 +5,15 @@
         <FieldElt
           id="name"
           v-model:value="name"
-          info="Indiquer le nom du lien"
+          info="Indicate the link name"
           @keyup.enter="validateNewLink()"
           min="2"
           max="50">
           <template #legend>
-            Nom
+            Name
           </template>
           <template #label>
-            Nom descriptif du lien
+            The name should be descriptive
           </template>
         </FieldElt>
       </li>
@@ -23,7 +23,7 @@
           id="url"
           type="url"
           v-model:value="url"
-          info="Indiquer l'URL du lien"
+          info="Indicate the link URL"
           @keyup.enter="validateNewLink()"
           min="5"
           max="100">
@@ -31,7 +31,7 @@
             URL
           </template>
           <template #label>
-            Une URL valide svp !
+            A valid URL please
           </template>
         </FieldElt>
       </li>
@@ -41,14 +41,14 @@
           id="cat"
           type="list"
           v-model:value="cat"
-          info="Choisissez une Catégorie"
+          info="Choose a category"
           @keyup.enter="validateNewLink()"
           :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']">
           <template #legend>
-            Catégorie
+            Category
           </template>
           <template #label>
-            Choisissez une Catégorie
+            Choose Dev if others are not suitable
           </template>
         </FieldElt>
 
@@ -57,7 +57,7 @@
 
     <BtnElt
       type="button"
-      content="Créer"
+      content="Create"
       @click="validateNewLink()" 
       class="green"/>
   </form>
@@ -109,12 +109,12 @@ export default {
           for (let i = 0; i < links.length; i++) {
 
             if (links[i].name === this.name) {
-              alert(this.name + " n'est pas disponible !");
+              alert(this.name + " is not available !");
               isReferenced = true;
             }
 
             if (links[i].url === this.url) {
-              alert(this.url + " est déjà référencé !");
+              alert(this.url + " is already referenced !");
               isReferenced = true;
             }
           }
@@ -137,7 +137,7 @@ export default {
 
         this.$serve.postData("/api/links", link)
           .then(() => {
-            alert(link.get("name") + " créé !");
+            alert(link.get("name") + " created !");
             this.$router.go();
         });
       }
