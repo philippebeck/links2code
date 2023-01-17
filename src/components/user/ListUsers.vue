@@ -123,7 +123,9 @@ export default {
       for (let i = 0; i < this.users.length; i++ ) {
         if (this.users[i]._id === id) {
 
-          if (this.$serve.checkEmail(this.users[i].email) && this.$serve.checkPass(this.pass)) {
+          if (this.$serve.checkName(this.users[i].name) && 
+            this.$serve.checkEmail(this.users[i].email) && 
+            this.$serve.checkPass(this.pass)) {
 
             this.checkUpdatedUser(i);
           }
