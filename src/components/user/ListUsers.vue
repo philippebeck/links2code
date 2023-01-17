@@ -15,7 +15,7 @@
           :src="'/img/users/' + users[slotProps.index].image"
           :alt="'Photo de ' + users[slotProps.index].name"
           :title="users[slotProps.index].image"
-          width="40"
+          :width="parseInt('40')"
           class="bord bord-sm bord-blue bord-round">
         <br>
         {{ slotProps.index + 1 }}
@@ -26,28 +26,25 @@
           :id="'name-' + users[slotProps.index]._id"
           v-model:value="getUsers()[slotProps.index].name"
           info="Update the user name"
-          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
-          required>
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)">
         </FieldElt>
       </template>
 
       <template #cell-email="slotProps">
         <FieldElt
           :id="'email-' + users[slotProps.index]._id"
-          v-model:value="getUsers()[slotProps.index].email"
-          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
           type="email"
-          required>
+          v-model:value="getUsers()[slotProps.index].email"
           info="Update the user email"
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)">
         </FieldElt>
       </template>
 
       <template #cell-image="slotProps">
         <FieldElt
           :id="'image-' + users[slotProps.index]._id"
-          v-model:value="image"
           type="file"
-          required>
+          v-model:value="image"
           info="Update the user image">
         </FieldElt>
       </template>
@@ -55,13 +52,10 @@
       <template #cell-pass="slotProps">
         <FieldElt
           :id="'pass-' + users[slotProps.index]._id"
+          type="password"
           v-model:value="pass"
           info="Update the user password"
-          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)"
-          type="password"
-          min="8"
-          max="50"
-          required>
+          @keyup.enter="validateUpdatedUser(users[slotProps.index]._id)">
         </FieldElt>
       </template>
 

@@ -24,33 +24,29 @@
           :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
           info="Update the link name"
-          @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
-          max="50"
-          required>
+          @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)">
         </FieldElt>
       </template>
 
       <template #cell-url="slotProps">
         <FieldElt
           :id="'url-' + table[slotProps.index]._id"
+          type="url"
           v-model:value="table[slotProps.index].url"
           info="Update the link URL"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
-          type="url"
-          max="100"
-          required>
+          :max="parseInt('100')">
         </FieldElt>
       </template>
 
       <template #cell-cat="slotProps">
         <FieldElt
           :id="'cat-' + table[slotProps.index]._id"
+          type="list"
           v-model:value="table[slotProps.index].cat"
           info="Update the category"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)"
-          type="list"
-          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']"
-          required>
+          :list="['HTML5', 'CSS3', 'JS', 'PHP', 'Python', 'Git', 'Dev']">
           {{ value }}
         </FieldElt>
       </template>

@@ -13,8 +13,7 @@
             v-model:value="email"
             info="Indicate your Email"
             @keyup.enter="login()"
-            type="email"
-            required>
+            type="email">
             <template #legend>
               Email
             </template>
@@ -29,8 +28,7 @@
             v-model:value="pass"
             info="Indicate your Password"
             @keyup.enter="login()"
-            type="password"
-            required>
+            type="password">
             <template #legend>
               Password
             </template>

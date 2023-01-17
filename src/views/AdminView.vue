@@ -11,7 +11,7 @@
         v-for="(cat, index) in cats"
         :key="index"
         :href="`#${cat}`"
-        :title="cat">
+        :title="'Set ' + cat + ' links'">
         <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw color-violet`"></i>
       </a>
       

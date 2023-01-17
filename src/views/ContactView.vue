@@ -16,9 +16,7 @@
               v-model:value="email"
               info="An email to answer you ?"
               @keyup.enter="send()"
-              type="email"
-              min="8"
-              max="50">
+              type="email">
               <template #legend>
                 Email
               </template>
@@ -32,9 +30,7 @@
               id="subject"
               v-model:value="subject"
               info="The subject of your message ?"
-              @keyup.enter="send()"
-              min="2"
-              max="50">
+              @keyup.enter="send()">
               <template #legend>
                 Subject
               </template>
@@ -50,8 +46,7 @@
               info="The text of your message ?"
               @keyup.enter="send()"
               type="area"
-              min="2"
-              max="100">
+              :max="parseInt('100')">
               <template #legend>
                 Text
               </template>

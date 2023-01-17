@@ -7,8 +7,7 @@
           v-model:value="name"
           info="Indicate the link name"
           @keyup.enter="validateNewLink()"
-          min="2"
-          max="50">
+          :min="parseInt('2')">
           <template #legend>
             Name
           </template>
@@ -25,8 +24,8 @@
           v-model:value="url"
           info="Indicate the link URL"
           @keyup.enter="validateNewLink()"
-          min="5"
-          max="100">
+          :min="parseInt('5')"
+          :max="parseInt('100')">
           <template #legend>
             URL
           </template>

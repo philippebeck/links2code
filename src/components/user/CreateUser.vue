@@ -10,8 +10,7 @@
           v-model:value="name"
           info="Indicate the user name"
           @keyup.enter="validateNewUser()"
-          min="2"
-          max="50">
+          :min="parseInt('2')">
           <template #legend>
             Name
           </template>
@@ -27,9 +26,7 @@
           v-model:value="email"
           info="Indicate the user email"
           @keyup.enter="validateNewUser()"
-          type="email"
-          min="8"
-          max="50">
+          type="email">
           <template #legend>
             Email
           </template>
@@ -60,9 +57,7 @@
           v-model:value="pass"
           info="Indicate the user password"
           @keyup.enter="validateNewUser()"
-          type="password"
-          min="8"
-          max="50">
+          type="password">
           <template #legend>
             Password
           </template>
