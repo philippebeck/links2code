@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from "../views/HomeView"
-import ContactView from "../views/ContactView"
-import LoginView from "../views/LoginView"
-import AdminView from "../views/AdminView"
-import ErrorView from "../views/ErrorView"
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView";
+import ContactView from "../views/ContactView";
+import LoginView from "../views/LoginView";
+import AdminView from "../views/AdminView";
+import ErrorView from "../views/ErrorView";
 
 const routes = [
   {
@@ -28,8 +28,8 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/:pathMatch(.*)*',
-    name: 'error',
+    path: "/:pathMatch(.*)*",
+    name: "error",
     component: ErrorView
   }
 ]

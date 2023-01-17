@@ -1,33 +1,29 @@
 <template>
   <article v-if="article === true">
-    <header v-if="hasSlot('head')">
-      <slot name="head"></slot>
+    <header>
+      <slot name="header"></slot>
     </header>
-
     <slot name="body"></slot>
 
     <aside v-if="hasSlot('aside')">
       <slot name="aside"></slot>
     </aside>
-
-    <footer v-if="hasSlot('foot')">
-      <slot name="foot"></slot>
+    <footer v-if="hasSlot('footer')">
+      <slot name="footer"></slot>
     </footer>
   </article>
 
   <section v-else>
-    <header v-if="hasSlot('head')">
-      <slot name="head"></slot>
+    <header>
+      <slot name="header"></slot>
     </header>
-
     <slot name="body"></slot>
 
     <aside v-if="hasSlot('aside')">
       <slot name="aside"></slot>
     </aside>
-
-    <footer v-if="hasSlot('foot')">
-      <slot name="foot"></slot>
+    <footer v-if="hasSlot('footer')">
+      <slot name="footer"></slot>
     </footer>
   </section>
 </template>
@@ -50,66 +46,25 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 article,
 section {
-  --card-max-width: 500px;
+  --card-box-sizing: border-box;
+  --card-margin: auto;
+  --card-border: 1px solid transparent;
+  --card-border-radius: 10px;
+  --card-padding: 20px;
+  --card-width: 90%;
+  --card-background-color: transparent;
+  --card-color: var(--gray);
 
-  display: flex;
-  flex-direction: column;
-  place-content: space-evenly;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-  margin: 100px auto;
-  border: solid medium;
-  border-radius: 10px;
-  padding: 10px;
-  height: initial;
-  max-width: var(--card-max-width);
-  background-color: var(--blue-light);
-  color: var(--black);
-
-  &:hover,
-  &:focus {
-    transform: rotate(1deg);
-    transition: transform 200ms;
-  }
-
-  & > * {
-    margin: 10px;
-    border: solid thin;
-    border-radius: 20px;
-    padding: 5px 10px;
-    max-width: calc(var(--card-max-width) * 0.9);
-    background-color: var(--white);
-    text-align: center;
-
-    &::selection {
-      background-color: var(--black);
-      color: var(--green);
-    }
-  }
-
-  & > *:first-child {
-    font-size: 3rem;
-    text-shadow: 2px 2px 5px;
-  }
-
-  & > [class*="btn"],
-  & > [class*="button"] {
-    width: calc(var(--card-child-max-width) * 0.5);
-    background-color: inherit;
-    color: var(--white);
-    font-weight: bold;
-    text-align: center;
-
-    &:hover,
-    &:focus {
-      border-color: initial;
-      background-color: var(--white);
-      color: initial;
-    }
-  }
+  box-sizing: var(--card-box-sizing);
+  margin: var(--card-margin);
+  border: var(--card-border);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  width: var(--card-width);
+  background-color: var(--card-background-color);
+  color: var(--card-color);
 }
 </style>

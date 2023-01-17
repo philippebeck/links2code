@@ -1,58 +1,63 @@
 <template>
-  <main id="links" class="container-80tn-70md-60xl">
+  <main class="container-80tn-70md-60xl">
 
-    <nav class="sidebar">
-      <a
-        v-for="(cat, index) in cats"
-        :key="index"
-        :href="`#${cat}`"
-        :title="cat">
-        <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
-      </a>
-      <a
-        href="#links"
-        title="Top of page">
-        <i class="fas fa-chevron-circle-up fa-fw"></i>
-      </a>
-    </nav>
+    <CardElt>
+      <template #header>
+        <i class="blue fa-solid fa-link fa-2x"></i>
+        <h1 class="blue shatex-blur-sm anima-slideB">
+          Links2Code
+        </h1>
+        <strong class="gray">
+          Links for Coding !
+        </strong>
 
-    <header>
-      <i class="blue fa-solid fa-link fa-2x"></i>
-      <h1 class="blue shatex-blur-sm anima-slideB">
-        Links2Code
-      </h1>
-      <strong class="gray">
-        Links for Coding !
-      </strong>
-    </header>
-
-    <ListElt :items="itemsByCat(links)">
-      <template #items="slotProps">
-        <i 
-          :class="`fa-brands fa-${slotProps.index.toLowerCase()} fa-6x sky shatex-blur-md anima-grow mar-lg`"
-          :id="slotProps.index">
-        </i>
+        <nav class="sidebar">
+          <a
+            v-for="(cat, index) in cats"
+            :key="index"
+            :href="`#${cat}`"
+            :title="cat">
+            <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
+          </a>
+          <a
+            href="#links"
+            title="Top of page">
+            <i class="fas fa-chevron-circle-up fa-fw"></i>
+          </a>
+        </nav>
       </template>
 
-      <template #nested="slotProps">
-        <BtnElt
-          :content="slotProps.value.name"
-          :href="`https://${slotProps.value.url}`" 
-          :title="slotProps.value.url"
-          class="blue"/>
-      </template>
-    </ListElt>
+      <template #body>
+        <ListElt :items="itemsByCat(links)">
+          <template #items="slotProps">
+            <i 
+              :class="`fa-brands fa-${slotProps.index.toLowerCase()} fa-6x sky shatex-blur-md anima-grow mar-lg`"
+              :id="slotProps.index">
+            </i>
+          </template>
 
+          <template #nested="slotProps">
+            <BtnElt
+              :content="slotProps.value.name"
+              :href="`https://${slotProps.value.url}`" 
+              :title="slotProps.value.url"
+              class="blue"/>
+          </template>
+        </ListElt>
+      </template>
+    </CardElt>
   </main>
 </template>
 
 <script>
+import CardElt from "@/components/main/CardElt"
 import BtnElt from "@/components/base/BtnElt"
 import ListElt from "@/components/data/ListElt"
 
 export default {
   name: "HomeView",
   components: {
+    CardElt,
     BtnElt,
     ListElt
   },
