@@ -8,15 +8,14 @@
         <FieldElt
           id="name"
           v-model:value="name"
-          info="Indiquer le nom de l'utilisateur"
+          info="Indicate the user name"
           @keyup.enter="validateNewUser()"
-          min="2"
-          max="50">
+          :min="parseInt('2')">
           <template #legend>
-            Nom
+            Name
           </template>
           <template #label>
-            Prénom ou Pseudo
+            Pseudo or first name
           </template>
         </FieldElt>
       </li>
@@ -25,16 +24,14 @@
         <FieldElt
           id="email"
           v-model:value="email"
-          info="Indiquer l'email de l'utilisateur"
+          info="Indicate the user email"
           @keyup.enter="validateNewUser()"
-          type="email"
-          min="8"
-          max="50">
+          type="email">
           <template #legend>
             Email
           </template>
           <template #label>
-            Un email valide svp !
+            A valid email please
           </template>
         </FieldElt>
       </li>
@@ -43,13 +40,13 @@
         <FieldElt
           id="image"
           v-model:value="image"
-          info="Fournissez l'image de l'utilisateur"
+          info="Provide user image"
           type="file">
           <template #legend>
             Image
           </template>
           <template #label>
-            Un fichier image svp !
+            An image file please
           </template>
         </FieldElt>
       </li>
@@ -58,16 +55,14 @@
         <FieldElt
           id="pass"
           v-model:value="pass"
-          info="Indiquer le mot de passe de l'utilisateur"
+          info="Indicate the user password"
           @keyup.enter="validateNewUser()"
-          type="password"
-          min="8"
-          max="50">
+          type="password">
           <template #legend>
-            Mot de Passe
+            Password
           </template>
           <template #label>
-            8 caractères mini avec des chiffres et des lettres
+            8 to 50 characters with upper & lower, 1 number mini & no space
           </template>
         </FieldElt>
       </li>
@@ -75,7 +70,7 @@
 
     <BtnElt
       type="button"
-      content="Créer"
+      content="Create"
       @click="validateNewUser()" 
       class="green"/>
   </form>
@@ -106,19 +101,17 @@ export default {
      * VALIDATE NEW USER IF DATA ARE VALID
      */
     validateNewUser() {
-      if (this.name.length > 1 && this.name.length < 51) {
-        if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
+      if (this.$serve.checkName(this.name) && 
+        this.$serve.checkEmail(this.email) && 
+        this.$serve.checkPass(this.pass)) {
 
-          if (typeof document.getElementById('image').files[0] !== "undefined") {
-            this.checkNewUser();
+        if (typeof document.getElementById('image').files[0] !== "undefined") {
+          this.checkNewUser();
 
-          } else {
-            alert("Une photo de l'utilisateur doit être uploadée !");
-          }
+        } else {
+          alert("Une photo de l'utilisateur doit être uploadée !");
         }
-      } else {
-          alert("Le Nom de l'utilisateur doit comporter entre 2 & 50 caractères !");
-        }
+      }
     },
 
     /**
@@ -132,12 +125,12 @@ export default {
           for (let i = 0; i < users.length; i++) {
 
             if (users[i].name === this.name) {
-              alert(this.name + " n'est pas disponible !");
+              alert(this.name + " is not available !");
               isReferenced = true;
             }
 
             if (users[i].email === this.email) {
-              alert(this.email + " est déjà référencé !");
+              alert(this.email + " is already referenced !");
               isReferenced = true;
             }
           }
@@ -162,7 +155,7 @@ export default {
 
         this.$serve.postData("/api/users", user)
           .then(() => {
-            alert(user.get("name") + " créé !");
+            alert(user.get("name") + " created !");
             this.$router.go();
           });
       }

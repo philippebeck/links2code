@@ -36,11 +36,11 @@ export default {
     },
     title2: {
       type: String,
-      default: "Links"
+      default: "Tools"
     },
     title3: {
       type: String,
-      default: "Tools"
+      default: "Links"
     }
   },
   methods: {

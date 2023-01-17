@@ -5,7 +5,7 @@
         <a 
           class="anima-slideB"
           href="/"
-          title="Accueil">
+          title="Home">
           <img 
             src="/img/logo.svg"
             alt="Logo Phi"
@@ -20,7 +20,7 @@
             <a
               href="/">
               <i class="fa-solid fa-link fa-fw"></i>
-              <strong>Liens</strong>
+              <strong>Links</strong>
             </a>
           </li>
           <li>
@@ -91,7 +91,7 @@
           <li>
             <a
               href="https://asperger.philippebeck.net"
-              title="Tests pour le Syndrome d'Asperger">
+              title="Tests for Asperger's Syndrome">
               Asperger
             </a>
           </li>
@@ -107,19 +107,32 @@
 
       <template #foot2>
         <ul>
-
           <li>
             <a
-              href="https://philippebeck.net"
-              title="Portail">
-              Philippe Beck
+              href="https://www.npmjs.com/package/animadio"
+              title="Animadio CSS Library">
+              Animadio
             </a>
           </li>
           <li>
             <a
-              href="https://links2code.philippebeck.net"
-              title="Des Liens pour Coder">
-              Links2Code
+              href="https://www.npmjs.com/package/servidio"
+              title="JavaScript Frontend Services">
+              Servidio
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.npmjs.com/package/nemjs"
+              title="JavaScript Backend Services">
+              Nemjs
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://packagist.org/packages/devsagency/pam"
+              title="PHP Adaptive Microframework">
+              Pam
             </a>
           </li>
         </ul>
@@ -129,16 +142,16 @@
         <ul>
           <li>
             <a
-              href="https://animadio.org"
-              title="Animadio CSS Framework">
-              Animadio
+              href="https://philippebeck.net"
+              title="Portal">
+              Philippe Beck
             </a>
           </li>
           <li>
             <a
-              href="https://pam.philippebeck.net"
-              title="PHP Adaptive Microframework">
-              Pam
+              href="https://links2code.philippebeck.net"
+              title="Links For Coding">
+              Links2Code
             </a>
           </li>
         </ul>

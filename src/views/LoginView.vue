@@ -13,8 +13,7 @@
             v-model:value="email"
             info="Indicate your Email"
             @keyup.enter="login()"
-            type="email"
-            required>
+            type="email">
             <template #legend>
               Email
             </template>
@@ -29,8 +28,7 @@
             v-model:value="pass"
             info="Indicate your Password"
             @keyup.enter="login()"
-            type="password"
-            required>
+            type="password">
             <template #legend>
               Password
             </template>
@@ -152,9 +150,10 @@ export default {
      * USER LOGIN
      */
     login() {
-      if (this.$serve.checkEmail(this.email) && this.$serve.checkPass(this.pass)) {
-        let auth = new FormData();
+      if (this.$serve.checkEmail(this.email) && 
+        this.$serve.checkPass(this.pass)) {
 
+        let auth = new FormData();
         auth.append("email", this.email);
         auth.append("pass", this.pass);
 
@@ -176,9 +175,10 @@ export default {
      * FORGOT PASSWORD
      */
     forgotPass() {
-      if (this.$serve.checkEmail(this.email) && confirm(constants.FORGOT_CONFIRM)) {
-        let message = new FormData();
+      if (this.$serve.checkEmail(this.email) && 
+        confirm(constants.FORGOT_CONFIRM)) {
 
+        let message = new FormData();
         message.append("email", this.email);
         message.append("subject", constants.FORGOT_SUBJECT);
         message.append("text", constants.FORGOT_TEXT);
