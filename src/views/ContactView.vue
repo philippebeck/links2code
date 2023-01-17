@@ -102,7 +102,8 @@ export default {
      * SEND A CONTACT MESSAGE
      */
     send() {
-      if (this.$serve.checkEmail(this.email)) {
+      if (this.$serve.checkEmail(this.email) && 
+      this.$serve.checkName(this.subject)) {
         let message = new FormData();
 
         message.append("email", this.email);
