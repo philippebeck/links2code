@@ -123,7 +123,7 @@ export default {
     },
     min: {
       type: Number,
-      default: 2
+      default: 8
     },
     rows: {
       type: Number,
