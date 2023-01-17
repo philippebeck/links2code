@@ -11,7 +11,7 @@
       </a>
       <a
         href="#links"
-        title="Haut de page">
+        title="Top of page">
         <i class="fas fa-chevron-circle-up fa-fw"></i>
       </a>
     </nav>
@@ -22,7 +22,7 @@
         Links2Code
       </h1>
       <strong class="gray">
-        Des Liens pour Coder !
+        Links for Coding !
       </strong>
     </header>
 

@@ -14,7 +14,7 @@
             <FieldElt
               id="email"
               v-model:value="email"
-              info="Un email pour vous répondre ?"
+              info="An email to answer you ?"
               @keyup.enter="send()"
               type="email"
               min="8"
@@ -31,12 +31,12 @@
             <FieldElt
               id="subject"
               v-model:value="subject"
-              info="Le sujet de votre message ?"
+              info="The subject of your message ?"
               @keyup.enter="send()"
               min="2"
               max="50">
               <template #legend>
-                Sujet
+                Subject
               </template>
               <template #label>
                 Soyez bref et précis !
@@ -47,13 +47,13 @@
             <FieldElt
               id="text"
               v-model:value="text"
-              info="Le texte de votre message ?"
+              info="The text of your message ?"
               @keyup.enter="send()"
               type="area"
               min="2"
               max="100">
               <template #legend>
-                Texte
+                Text
               </template>
               <template #label>
                 Que puis-je faire pour vous ?
@@ -115,7 +115,7 @@ export default {
 
         this.$serve.postData("/api/users/send", message)
           .then(() => {
-            alert(message.get("subject") + " envoyé !");
+            alert(message.get("subject") + " sended !");
             this.$router.push("/");
           });
       }

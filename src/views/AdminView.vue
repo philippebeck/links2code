@@ -3,7 +3,7 @@
     <nav class="sidebar">
       <a
         href="#link"
-        title="Créer un lien">
+        title="Create a link">
         <i class="fas fa-link fa-fw color-violet"></i>
       </a>
 
@@ -17,17 +17,17 @@
       
       <a
         href="#user"
-        title="Créer un utilisateur">
+        title="Create a user">
         <i class="fas fa-user fa-fw color-violet"></i>
       </a>
       <a
         href="#users"
-        title="Gérer les utilisateurs">
+        title="Set users">
         <i class="fas fa-users fa-fw color-violet"></i>
       </a>
       <a
         href="#admin"
-        title="Haut de page">
+        title="Top of page">
         <i class="fas fa-chevron-circle-up fa-fw color-violet"></i>
       </a>
     </nav>
@@ -40,7 +40,7 @@
     <section>
       <h2 id="link">
         <i class="fa-solid fa-link fa-2x"></i>
-        Liens
+        Links
       </h2>
 
       <CreateLink />
@@ -53,7 +53,7 @@
     <section>
       <h2 id="user">
         <i class="fa-solid fa-users fa-2x"></i>
-        Utilisateurs
+        Users
       </h2>
 
       <CreateUser />
