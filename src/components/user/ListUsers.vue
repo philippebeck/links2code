@@ -44,7 +44,6 @@
         <FieldElt
           :id="'image-' + users[slotProps.index]._id"
           type="file"
-          v-model:value="image"
           info="Update the user image">
         </FieldElt>
       </template>
