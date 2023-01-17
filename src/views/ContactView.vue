@@ -17,7 +17,8 @@
               info="Un email pour vous répondre ?"
               @keyup.enter="send()"
               type="email"
-              required>
+              min="8"
+              max="50">
               <template #legend>
                 Email
               </template>
@@ -32,7 +33,8 @@
               v-model:value="subject"
               info="Le sujet de votre message ?"
               @keyup.enter="send()"
-              required>
+              min="2"
+              max="50">
               <template #legend>
                 Sujet
               </template>
@@ -48,7 +50,8 @@
               info="Le texte de votre message ?"
               @keyup.enter="send()"
               type="area"
-              required>
+              min="2"
+              max="100">
               <template #legend>
                 Texte
               </template>
