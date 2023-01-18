@@ -6,10 +6,10 @@
       </template>
       
       <template #body>
-        <ImgElt
+        <MediaElt
           src="/img/errors/error-404.webp" 
           alt="Error 404">
-        </ImgElt>
+        </MediaElt>
 
         <BtnElt href="/">
           <template #btn>
@@ -25,14 +25,14 @@
 
 <script>
 import CardElt from "@/components/main/CardElt"
-import ImgElt from "@/components/base/ImgElt"
+import MediaElt from "@/components/base/MediaElt"
 import BtnElt from "@/components/base/BtnElt"
 
 export default {
   name: 'ErrorView',
   components: {
     CardElt,
-    ImgElt,
+    MediaElt,
     BtnElt
   }
 }

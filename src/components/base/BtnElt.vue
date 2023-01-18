@@ -74,32 +74,55 @@
 <style lang="scss" scoped>
 a,
 button {
-  display: inline-block;
-  margin: 10px;
-  border: solid 2px var(--black);
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-family: var(--monospace);
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  background-color: var(--black);
-  color: var(--white);
-  cursor: pointer;
+  --btn-display: inline-block;
+  --btn-margin: 10px;
+  --btn-border: solid 2px var(--black);
+  --btn-border-radius: 10px;
+  --btn-padding: 5px 10px;
+  --btn-font-family: var(--monospace);
+  --btn-font-size: 1.2rem;
+  --btn-font-weight: bold;
+  --btn-text-align: center;
+  --btn-text-decoration: none;
+  --btn-background-color: var(--black);
+  --btn-color: var(--white);
+  --btn-cursor: pointer;
+
+  display: var(--btn-display);
+  margin: var(--btn-margin);
+  border: var(--btn-border);
+  border-radius: var(--btn-border-radius);
+  padding: var(--btn-padding);
+  font-family: var(--btn-font-family);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  text-align: var(--btn-text-align);
+  text-decoration: var(--btn-text-decoration);
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+  cursor: var(--btn-cursor);
 
   &:hover,
   &:focus {
-    border-radius: 5px;
-    background-color: var(--white);
-    color: var(--black);
-    box-shadow: inset 0 0 5px 2px;
-    transition: all 200ms;
+    --btn-hover-border-radius: 5px;
+    --btn-hover-background-color: var(--white);
+    --btn-hover-color: var(--black);
+    --btn-hover-box-shadow: inset 0 0 5px 2px;
+    --btn-hover-transition: all 200ms;
+
+    border-radius: var(--btn-hover-border-radius);
+    background-color: var(--btn-hover-background-color);
+    color: var(--btn-hover-color);
+    box-shadow: var(--btn-hover-box-shadow);
+    transition: var(--btn-hover-transition);
   }
 
   & > * {
-    display: block;
-    margin: auto;
+    --btn-child-display: block;
+    --btn-child-margin: auto;
+
+    display: var(--btn-child-display);
+    margin: var(--btn-child-margin);
   }
 }
 
@@ -107,14 +130,10 @@ $colors:
   "red",
   "orange",
   "yellow",
-  "lime",
   "green",
-  "aqua",
-  "cyan",
   "sky",
   "blue",
-  "indigo",
-  "magenta",
+  "violet",
   "pink";
 
 @mixin colors($color) {
@@ -129,7 +148,6 @@ $colors:
     border-color: var(--#{$color});
     background-color: var(--white);
     color: var(--#{$color});
-    transition: all 1s;
   }
 }
 

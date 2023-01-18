@@ -1,5 +1,7 @@
 <template>
-  <main class="container-80tn-70md-60xl">
+  <main 
+    id="admin"
+    class="container-80tn-70md-60xl">
 
     <CardElt>
       <template #header>

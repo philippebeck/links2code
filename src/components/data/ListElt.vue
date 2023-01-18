@@ -10,7 +10,7 @@
         {{ item }}
       </slot>
       
-      <ul v-if="isNested()">
+      <ul v-if="hasSlot('nested')">
         <li
           v-for="(value, key) in item"
           :key="key">
@@ -42,8 +42,8 @@ export default {
     }
   },
   methods: {
-    isNested() {
-      return this.$slots["nested"] !== undefined;
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
     }
   }
 }
@@ -51,15 +51,24 @@ export default {
 
 <style scoped>
 ul {
-  margin: 20px 0;
-  padding: 0;
-  list-style: none;
-  text-align: center;
+  --ul-margin: 20px 0;
+  --ul-padding: 0;
+  --ul-list-style: none;
+  --ul-text-align: center;
+
+  margin: var(--ul-margin);
+  padding: var(--ul-padding);
+  list-style: var(--ul-list-style);
+  text-align: var(--ul-text-align);
 }
 
 li > ul {
-  display: flex;
-  flex-wrap: wrap;
-  place-content: center;
+  --li-ul-display: flex;
+  --li-ul-flex-flow: wrap;
+  --li-ul-place-content: center;
+
+  display: var(--li-ul-display);
+  flex-flow: var(--li-ul-flex-flow);
+  place-content: var(--li-ul-place-content);
 }
 </style>

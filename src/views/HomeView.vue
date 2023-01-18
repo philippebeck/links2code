@@ -1,5 +1,7 @@
 <template>
-  <main class="container-80tn-70md-60xl">
+  <main 
+    id="home"
+    class="container-80tn-70md-60xl">
 
     <CardElt>
       <template #header>
@@ -20,7 +22,7 @@
             <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
           </a>
           <a
-            href="#links"
+            href="#home"
             title="Top of page">
             <i class="fas fa-chevron-circle-up fa-fw"></i>
           </a>

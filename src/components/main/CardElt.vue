@@ -1,5 +1,5 @@
 <template>
-  <article v-if="article === true">
+  <article v-if="isArticle === true">
     <header>
       <slot name="header"></slot>
     </header>
@@ -32,7 +32,7 @@
 export default {
   name: "CardElt",
   props: {
-    article: {
+    isArticle: {
       type: Boolean,
       default: false
     }
