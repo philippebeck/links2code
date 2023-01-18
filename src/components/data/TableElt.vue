@@ -73,94 +73,135 @@ export default {
 
 <style scoped>
 table {
-  display: table;
-  overflow: hidden;
-  margin: 50px auto;
-  border-collapse: collapse;
-  border-radius: 10px;
-  width: auto;
-  max-width: 100%;
-  font-size: 1.2rem;
+  --table-display: table;
+  --table-overflow: hidden;
+  --table-margin: 50px auto;
+  --table-border-collapse: collapse;
+  --table-border-radius: 10px;
+  --table-width: auto;
+  --table-max-width: 100%;
+  --table-font-size: 1.2rem;
+
+  display: var(--table-display);
+  overflow: var(--table-overflow);
+  margin: var(--table-margin);
+  border-collapse: var(--table-border-collapse);
+  border-radius: var(--table-border-radius);
+  width: var(--table-width);
+  max-width: var(--table-max-width);
+  font-size: var(--table-font-size);
 }
 
 caption {
-  caption-side: top;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--gray);
-  text-shadow: 1px 1px 2px;
+  --caption-caption-side: top;
+  --caption-margin-bottom: 20px;
+  --caption-font-size: 1.5rem;
+  --caption-font-weight: bold;
+  --caption-color: var(--gray);
+  --caption-text-shadow: 1px 1px 2px;
+
+  caption-side: var(--caption-caption-side);
+  margin-bottom: var(--caption-margin-bottom);
+  font-size: var(--caption-font-size);
+  font-weight: var(--caption-font-weight);
+  color: var(--caption-color);
+  text-shadow: var(--caption-text-shadow);
 }
 
 th {
-  display: table-column;
-  font-size: 1.5rem;
-  font-style: italic;
-  text-transform: uppercase;
-  background-color: var(--blue);
-  color: var(--white);
+  --th-display: table-column;
+  --th-font-size: 1.5rem;
+  --th-font-style: italic;
+  --th-text-transform: uppercase;
+  --th-background-color: var(--blue);
+  --th-color: var(--white);
+
+  display: var(--th-display);
+  font-size: var(--th-font-size);
+  font-style: var(--th-font-style);
+  text-transform: var(--th-text-transform);
+  background-color: var(--th-background-color);
+  color: var(--th-color);
 }
 
 th,
 td {
-  padding: 5px;
-  text-align: center;
-  vertical-align: middle;
+  --th-td-padding: 5px;
+  --th-td-text-align: center;
+  --th-td-vertical-align: middle;
+
+  padding: var(--th-td-padding);
+  text-align: var(--th-td-text-align);
+  vertical-align: var(--th-td-vertical-align);
 }
 
 td {
-  display: table-row;
-  word-break: normal;
-  cursor: cell;
+  --td-display: table-row;
+  --td-word-break: normal;
+  --td-cursor: cell;
+
+  display: var(--td-display);
+  word-break: var(--td-word-break);;
+  cursor: var(--td-cursor);
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--gray-light);
-  color: var(--black);
+  --tbody-even-background-color: var(--gray-light);
+  --tbody-even-color: var(--black);
+
+  background-color: var(--btbody-even-background-color);
+  color: var(--btbody-even-background-color);
 }
 
 tbody tr:nth-child(odd) {
-  background-color: var(--white);
-  color: var(--gray);
+  --tbody-odd-background-color: var(--white);
+  --tbody-odd-color: var(--gray);
+
+  background-color: var(--tbody-odd-background-color);
+  color: var(--tbody-odd-color);
 }
 
 tbody tr:hover,
 tbody tr:focus {
-  background-color: var(--silver);
-  color: var(--black);
+  --tbody-hover-background-color: var(--silver);
+  --tbody-hover-color: var(--black);
+
+  background-color: var(--tbody-hover-background-color);
+  color: var(--tbody-hover-color);
 }
 
 @media (min-width: 576px) {
   table {
-    max-width: 95%;
+    --table-max-width:: 95%;
   }
   th,
   td {
-    display: table-cell;
+    --th-td-display: table-cell;
+    display: var(--th-td-display);
   }
 }
 
 @media (min-width: 768px) {
   table {
-    max-width: 90%;
+    --table-max-width: 90%;
   }
 }
 
 @media (min-width: 992px) {
   table {
-    max-width: 85%;
+    --table-max-width: 85%;
   }
 }
 
 @media (min-width: 1200px) {
   table {
-    max-width: 80%;
+    --table-max-width: 80%;
   }
 }
 
 @media (min-width: 1600px) {
   table {
-    max-width: 75%;
+    --table-max-width: 75%;
   }
 }
 </style>
