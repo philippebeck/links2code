@@ -22,7 +22,7 @@
             <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
           </a>
           <a
-            href="#links"
+            href="#home"
             title="Top of page">
             <i class="fas fa-chevron-circle-up fa-fw"></i>
           </a>
