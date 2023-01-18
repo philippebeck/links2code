@@ -1,20 +1,48 @@
 <template>
   <figure :title="title">
-    <picture v-if="items">
+
+    <audio
+      v-if="type === 'audio'"
+      controls
+      :src="src"
+      :loop="loop">
+      <slot name="audio"></slot>
+    </audio>
+
+    <video 
+      v-else-if="type === 'video'"
+      controls
+      :src="src"
+      :loop="loop"
+      :height="height"
+      :width="width">
       <source 
-        v-for="(item, index) in items"
+        v-for="(video, index) in medias"
         :key="index"
-        :srcset="item.srcset"
-        :media="item.media">
+        :src="video.src"
+        :type="video.type">
+      <slot name="video"></slot>
+    </video>
+
+    <picture 
+      v-else-if="type === 'picture'">
+      <source 
+        v-for="(picture, index) in medias"
+        :key="index"
+        :srcset="picture.src"
+        :media="picture.media"
+        :type="picture.type">
       <img 
         :src="src"
         :alt="alt">
     </picture>
+
     <img
       v-else
       :src="src"
       :alt="alt">
-    <figcaption>
+
+    <figcaption v-if="hasSlot('figcaption')">
       <slot name="figcaption"></slot>
     </figcaption>
   </figure>
@@ -22,23 +50,43 @@
 
 <script>
 export default {
-  name: "ImgElt",
+  name: "MediaElt",
 
   props: {
-    items: {
-      type: Array
-    },
     src: {
       type: String,
       required: true
     },
     alt: {
-      type: String,
-      required: true
+      type: String
     },
     title: {
       type: String
     },
+    type: {
+      type: String,
+      default: ""
+    },
+    medias: {
+      type: Array
+    },
+    loop: {
+      type: Boolean,
+      default: false
+    },
+    height: {
+      type: Number
+    },
+    width: {
+      type: Number,
+      default: 300
+    }
+  },
+  
+  methods: {
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
+    }
   }
 }
 </script>
@@ -68,6 +116,22 @@ img {
   height: var(--img-height);
   object-fit: var(--img-object-fit);
   object-position: var(--img-object-position);
+}
+
+audio {
+  --audio-border: 2px solid var(--black);
+  --audio-border-radius: 10px;
+
+  border: var(--audio-border);
+  border-radius: var(--audio-border-radius);
+}
+
+video {
+  --video-border: 2px solid var(--black);
+  --video-border-radius: 20px;
+
+  border: var(--video-border);
+  border-radius: var(--video-border-radius);
 }
 
 figcaption {
