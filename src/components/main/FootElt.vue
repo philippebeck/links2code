@@ -53,85 +53,117 @@ export default {
 
 <style scoped>
 footer {
-  margin-top: 20px;
-  text-align: center;
+  --footer-margin-top: 20px;
+  --footer-text-align: center;
+
+  margin-top: var(--footer-margin-top);
+  text-align: var(--footer-text-align);
 }
 
 h3,
 :deep(ul) {
-  margin: 0;
-  padding: 0;
+  --footer-child-margin: 0;
+  --footer-child-padding: 0;
+
+  margin: var(--footer-child-margin);
+  padding: var(--footer-child-padding);
 }
 
 :deep(li) {
-  list-style-type: none;
+  --footer-li-list-style: none;
+  list-style: var(--footer-li-list-style);
 }
 
 :deep(a) {
-  text-decoration: none;
+  --footer-a-text-decoration: none;
+  text-decoration: var(--footer-a-text-decoration);
 }
 
 /********************* MAIN PART *********************/
 
 footer > ul { 
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: var(--sky);
+  --footer-ul-display: flex;
+  --footer-ul-flex-direction: column;
+  --footer-ul-place-items: center;
+  --footer-ul-gap: 20px;
+  --footer-ul-padding: 20px;
+  --footer-ul-background-color: var(--sky);
+
+  display: var(--footer-ul-display);
+  flex-direction: var(--footer-ul-flex-direction);
+  place-items: var(--footer-ul-place-items);
+  gap: var(--footer-ul-gap);
+  padding: var(--footer-ul-padding);
+  background-color: var(--footer-ul-background-color);
 }
 
 h3 {
-  margin-bottom: 5px;
-  font-size: 2rem;
-  font-family: monospace;
-  color: var(--yellow);
+  --footer-h3-margin-bottom: 5px;
+  --footer-h3-font-size: 2rem;
+  --footer-h3-font-family: monospace;
+  --footer-h3-color: var(--yellow);
+
+  margin-bottom: var(--footer-h3-margin-bottom);
+  font-size: var(--footer-h3-font-size);
+  font-family: var(--footer-h3-font-family);
+  color: var(--footer-h3-color);
 }
 
 section :deep(a) {
-  color: var(--white);
+  --footer-section-a-color: var(--white);
+  color: var(--footer-section-a-color);
 }
 
 section :deep(a):hover,
 section :deep(a):focus {
-  color: var(--gray);
+  --footer-section-a-hover-color: var(--gray);
+  color: var(--footer-section-a-hover-color);
 }
 
 /********************* SECOND PART *********************/
 
 aside > :deep(ul) {
-  display: flex;
-  flex-direction: row;
-  place-content: center;
-  gap: 10px;
-  padding: 10px;
-  background-color: var(--white);
+  --aside-ul-display: flex;
+  --aside-ul-flex-direction: row;
+  --aside-ul-place-content: center;
+  --aside-ul-gap: 10px;
+  --aside-ul-padding: 10px;
+  --aside-ul-background-color: var(--white);
+
+  display: var(--aside-ul-display);
+  flex-direction: var(--aside-ul-flex-direction);
+  place-content: var(--aside-ul-place-content);
+  gap: var(--aside-ul-gap);
+  padding: var(--aside-ul-padding);
+  background-color: var(--aside-ul-background-color);
 }
 
 aside :deep(a) {
-  color: var(--blue);
+  --aside-a-color: var(--blue);
+  color: var(--aside-a-color);
 }
 
 /********************* RESPONSIVE *********************/
 
 @media (min-width: 576px) {
   footer > ul {
-    flex-direction: row;
-    place-content: space-around;
+    --footer-ul-flex-direction: row;
+    --footer-ul-place-content: space-around;
+
+    place-content: var(--footer-ul-place-content);
   }
 }
 
 @media (min-width: 768px) {
   footer > ul {
-    place-content: space-evenly;
+    --footer-ul-place-content: space-evenly;
   }
 }
 
 @media (min-width: 992px) {
   footer > ul {
-    place-content: center;
-    gap: 10%;
+    --footer-ul-place-content: center;
+    --footer-ul-gap: 10%;
   }
 }
 </style>
