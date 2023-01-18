@@ -180,52 +180,83 @@ export default {
 
 <style scoped>
 fieldset {
-  --field-max-width: 350px;
+  --fieldset-display: flex;
+  --fieldset-flex-flow: row wrap;
+  --fieldset-place-items: center;
+  --fieldset-margin: auto;
+  --fieldset-border: none;
+  --fieldset-padding: 0;
+  --fieldset-max-width: 300px;
+  --fieldset-text-align: center;
+  --fieldset-transition: max-width 1s;
 
-  display: flex;
-  flex-wrap: wrap;
-  place-items: center;
-  margin: auto;
-  border: none;
-  padding: 0;
-  max-width: var(--field-max-width);
-  transition: max-width 2s;
-  text-align: center;
+  display: var(--fieldset-display);
+  flex-flow: var(--fieldset-flex-flow);
+  place-items: var(--fieldset-place-items);;
+  margin: var(--fieldset-margin);
+  border: var(--fieldset-border);
+  padding: var(--fieldset-padding);
+  max-width: var(--fieldset-max-width);
+  text-align: var(--fieldset-text-align);
+  transition: var(--fieldset-transition);
 }
 
 fieldset > * {
-  box-sizing: border-box;
-  margin: 5px;
-  padding: 5px;
+  --field-box-sizing: border-box;
+  --field-margin: 5px;
+  --field-padding: 5px;
+
+  box-sizing: var(--field-box-sizing);
+  margin: var(--field-margin);
+  padding: var(--field-padding);
 }
 
 legend {
-  width: 93%;
-  font-size: 1.2rem;
-  color: var(--gray);
+  --legend-width: 93%;
+  --legend-font-size: 1.2rem;
+  --legend-color: var(--gray);
+
+  width: var(--legend-width);
+  font-size: var(--legend-font-size);
+  color: var(--legend-color);
 }
 
 label {
-  width: 90%;
-  visibility: hidden;
-  font-size: 0.8rem;
-  font-style: italic;
-  color: var(--blue);
+  --label-width: 90%;
+  --label-visibility: hidden;
+  --label-font-size: 0.8rem;
+  --label-font-style: italic;
+  --label-color: var(--blue);
+
+  width: var(--label-width);
+  visibility: var(--label-visibility);
+  font-size: var(--label-font-size);
+  font-style: var(--label-font-style);
+  color: var(--label-color);
 }
 
 input,
 select,
 textarea {
-  border: 1px solid var(--blue);
-  border-radius: 10px;
-  outline: none;
-  width: 100%;
-  line-height: 1.8;
-  background-color: var(--white);
+  --input-border: 1px solid var(--blue);
+  --input-border-radius: 10px;
+  --input-outline: none;
+  --input-width: 100%;
+  --input-line-height: 1.8;
+  --input-background-color: var(--white);
+
+  border: var(--input-border);
+  border-radius: var(--input-border-radius);
+  outline: var(--input-outline);
+  width: var(--input-width);
+  line-height: var(--input-line-height);
+  background-color: var(--input-background-color);
 }
 
 fieldset:hover legend {
-  color: var(--black);
+  --hover-legend-color: var(--black);
+
+  color: var(--hover-legend-color);
 }
 
 fieldset:hover > input,
@@ -234,18 +265,27 @@ fieldset:hover > textarea,
 input:focus,
 select:focus,
 textarea:focus {
-  border: 1px solid var(--sky);
-  border-radius: 0;
-  background-color: var(--white);
-  transition: all 500ms;
+  --hover-input-border: 1px solid var(--sky);
+  --hover-input-border-radius: 0;
+  --hover-input-background-color: var(--white);
+  --hover-input-transition: all 500ms;
+
+  border: var(--hover-input-border);
+  border-radius: var(--hover-input-border-radius);
+  background-color: var(--hover-input-background-color);
+  transition: var(--hover-input-transition);
 }
 
 fieldset:hover > label,
 input:focus + label,
 select:focus + label,
 textarea:focus + label {
-  visibility: visible;
-  transform: scale(1.1);
-  transition: all 1s;
+  --hover-label-visibility: visible;
+  --hover-label-transform: scale(1.1);
+  --hover-label-transition: all 1s;
+
+  visibility: var(--hover-label-visibility);
+  transform: var(--hover-label-transform);
+  transition: var(--hover-label-transition);
 }
 </style>
