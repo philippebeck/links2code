@@ -10,7 +10,7 @@
         {{ item }}
       </slot>
       
-      <ul v-if="isNested()">
+      <ul v-if="hasSlot('nested')">
         <li
           v-for="(value, key) in item"
           :key="key">
@@ -42,8 +42,8 @@ export default {
     }
   },
   methods: {
-    isNested() {
-      return this.$slots["nested"] !== undefined;
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
     }
   }
 }
