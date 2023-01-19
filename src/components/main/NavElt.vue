@@ -64,7 +64,7 @@ export default {
   name: "NavElt",
 
   props: {
-    type: {
+    class: {
       type: String,
       default: "navbar"
     },
@@ -74,8 +74,8 @@ export default {
   },
 
   methods: {
-    getNavType() {
-      if (this.type === "sidebar") {
+    getNavClass() {
+      if (this.class === "sidebar") {
         return "sidebar";
       }
       return "navbar";
