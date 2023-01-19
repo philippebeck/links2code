@@ -1,6 +1,6 @@
 <template>
   <main 
-    id="admin"
+    id="top"
     class="container-80tn-70md-60xl">
 
     <CardElt>
@@ -10,37 +10,39 @@
           Admin
         </h1>
 
-        <nav class="sidebar">
-          <a
-            href="#link"
-            title="Create a link">
-            <i class="fas fa-link fa-fw color-violet"></i>
-          </a>
+        <NavElt
+          :items="cats"
+          class="sidebar">
 
-          <a
-            v-for="(cat, index) in cats"
-            :key="index"
-            :href="`#${cat}`"
-            :title="'Set ' + cat + ' links'">
-            <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw color-violet`"></i>
-          </a>
-          
-          <a
-            href="#user"
-            title="Create a user">
-            <i class="fas fa-user fa-fw color-violet"></i>
-          </a>
-          <a
-            href="#users"
-            title="Set users">
-            <i class="fas fa-users fa-fw color-violet"></i>
-          </a>
-          <a
-            href="#admin"
-            title="Top of page">
-            <i class="fas fa-chevron-circle-up fa-fw color-violet"></i>
-          </a>
-        </nav>
+          <template #first>
+            <a
+              href="#link"
+              title="Create a link">
+              <i class="fas fa-link fa-fw"></i>
+            </a>
+          </template>
+
+          <template #items="slotProps">
+            <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
+          </template>
+
+          <template #last>
+            <a
+              href="#user"
+              title="Create a user">
+              <i class="fas fa-user fa-fw"></i>
+            </a>
+            <a
+              href="#users"
+              title="Set users">
+              <i class="fas fa-users fa-fw"></i>
+            </a>
+          </template>
+
+          <template #top>
+            <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
+          </template>
+        </NavElt>
       </template>
 
       <template #body>
@@ -84,6 +86,7 @@
 
 <script>
 import CardElt from "@/components/main/CardElt"
+import NavElt from "@/components/main/NavElt"
 import CreateLink from "@/components/link/CreateLink"
 import ListLinks from "@/components/link/ListLinks"
 import CreateUser from "@/components/user/CreateUser"
@@ -93,6 +96,7 @@ export default {
   name: "AdminView",
   components: {
     CardElt,
+    NavElt,
     CreateLink,
     CreateUser,
     ListLinks,

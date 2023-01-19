@@ -1,6 +1,6 @@
 <template>
   <main 
-    id="home"
+    id="top"
     class="container-80tn-70md-60xl">
 
     <CardElt>
@@ -13,20 +13,19 @@
           Links for Coding !
         </strong>
 
-        <nav class="sidebar">
-          <a
-            v-for="(cat, index) in cats"
-            :key="index"
-            :href="`#${cat}`"
-            :title="cat">
-            <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw`"></i>
-          </a>
-          <a
-            href="#home"
-            title="Top of page">
-            <i class="fas fa-chevron-circle-up fa-fw"></i>
-          </a>
-        </nav>
+        <NavElt
+          type="sidebar"
+          :items="cats"
+          class="sidebar">
+
+          <template #items="slotProps">
+            <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
+          </template>
+
+          <template #top>
+            <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
+          </template>
+        </NavElt>
       </template>
 
       <template #body>
@@ -53,6 +52,7 @@
 
 <script>
 import CardElt from "@/components/main/CardElt"
+import NavElt from "@/components/main/NavElt"
 import BtnElt from "@/components/base/BtnElt"
 import ListElt from "@/components/data/ListElt"
 
@@ -60,6 +60,7 @@ export default {
   name: "HomeView",
   components: {
     CardElt,
+    NavElt,
     BtnElt,
     ListElt
   },

@@ -62,10 +62,8 @@
           this.type === "submit" || 
           this.type === "reset") {
           return "button";
-
-        } else {
-          return "link";
         }
+        return "link";
       }
     }
   }

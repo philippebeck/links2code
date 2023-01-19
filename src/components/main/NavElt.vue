@@ -1,5 +1,35 @@
 <template>
-  <nav class="navbar">
+  <nav
+    v-if="getNavClass() === 'sidebar'" 
+    class="sidebar">
+
+    <slot name="first"></slot>
+
+    <a 
+      v-for="(item, index) in items"
+      :key="index"
+      :href="`#${item}`"
+      :title="item">
+      <slot 
+        name="items"
+        :item="item"
+        :index="index">
+      </slot>
+    </a>
+
+    <slot name="last"></slot>
+
+    <a
+      v-if="hasSlot('top')"
+      href="#top"
+      title="Top of the Page">
+      <slot name="top"></slot>
+    </a>
+  </nav>
+  
+  <nav 
+    v-else 
+    class="navbar">
     <input
       id="navbar-close"
       class="navbar-close"
@@ -32,9 +62,89 @@
 <script>
 export default {
   name: "NavElt",
-  
+
+  props: {
+    class: {
+      type: String,
+      default: "navbar"
+    },
+    items: {
+      type: Array
+    }
+  },
+
+  methods: {
+    getNavClass() {
+      if (this.class === "sidebar") {
+        return "sidebar";
+      }
+      return "navbar";
+    },
+
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
+    }
+  }
 }
 </script>
+
+<style scoped>
+.sidebar {
+  --sidebar-display: flex;
+  --sidebar-flex-flow: column;
+  --sidebar-position: fixed;
+  --sidebar-top: calc(var(--navbar-height) + 10px);
+  --sidebar-left: 2px;
+  --sidebar-z-index: 10;
+  --sidebar-width: auto;
+
+  display: var(--sidebar-display);
+  flex-flow: var(--sidebar-flex-flow);
+  position: var(--sidebar-position);
+  top: var(--sidebar-top);
+  left: var(--sidebar-left);
+  z-index: var(--sidebar-z-index);
+  width: var(--sidebar-width);
+}
+.sidebar > :deep(a) {
+  --sidebar-a-display: flex;
+  --sidebar-a-place-content: center;
+  --sidebar-a-place-items: center;
+  --sidebar-a-margin: 5px;
+  --sidebar-a-border-radius: 20px;
+  --sidebar-a-padding: 5px;
+  --sidebar-a-width: 100%;
+  --sidebar-a-background-color: var(--white-dark);
+  --sidebar-a-color: var(--blue-dark);
+  --sidebar-a-cursor: crosshair;
+
+  display: var(--sidebar-a-display);
+  place-content: var(--sidebar-a-place-content);
+  place-items: var(--sidebar-a-place-items);
+  margin: var(--sidebar-a-margin);
+  border-radius: var(--sidebar-a-border-radius);
+  padding: var(--sidebar-a-padding);
+  width: var(--sidebar-a-width);
+  background-color: var(--sidebar-a-background-color);
+  color: var(--sidebar-a-color);
+  cursor: var(--sidebar-a-cursor);
+}
+
+.sidebar > :deep(a:hover),
+.sidebar > :deep(a:focus) {
+  --sidebar-a-hover-border-radius: 10px;
+  --sidebar-a-hover-background-color: var(--blue-dark);
+  --sidebar-a-hover-color: var(--white-dark);
+  --sidebar-a-hover-transform: scale(1.1);
+  --sidebar-a-hover-transition: all 500ms;
+
+  border-radius: var(--sidebar-a-hover-border-radius);
+  color: var(--sidebar-a-hover-color);
+  background-color: var(--sidebar-a-hover-background-color);
+  transform: var(--sidebar-a-hover-transform);
+  transition: var(--sidebar-a-hover-transition);
+}
+</style>
 
 <style lang="scss">
 :root {
@@ -56,26 +166,6 @@ export default {
   --navbar-z-index: 1000;
   --navbar-background-color: var(--blue-dark);
   --navbar-color: var(--white);
-  --navbar-link-padding: 20px 10px;
-  --navbar-link-color: var(--white);
-  --navbar-link-cursor: pointer;
-  --navbar-icon-place-self: center;
-  --navbar-list-place-items: center;
-  --navbar-list-margin: 0;
-  --navbar-list-padding: 0;
-  --navbar-list-list-style: none;
-  --navbar-list-link-flex-direction: column;
-  --navbar-link-hover-color: var(--yellow);
-  --navbar-first-list-link-hover-scale: 0.9;
-  --navbar-last-list-img-margin: 5px;
-  --navbar-last-list-height: 50px;
-  --navbar-last-list-link-hover-scale: 1.5;
-  --navbar-brand-link-left: 0;
-  --navbar-brand-link-img-height: 40px;
-  --navbar-label-right: 10px;
-  --navbar-label-hover-color: var(--gray);
-  --navbar-first-list-span-font-size: 2rem;
-  --navbar-first-list-span-text-align: center;
 
   place-content: var(--navbar-place-content);
   place-items: var(--navbar-place-items);
@@ -105,12 +195,17 @@ export default {
   a,
   button,
   label {
+    --navbar-link-padding: 20px 10px;
+    --navbar-link-color: var(--white);
+    --navbar-link-cursor: pointer;
+
     padding: var(--navbar-link-padding);
     color: var(--navbar-link-color);
     cursor: var(--navbar-link-cursor);
   }
 
   i {
+    --navbar-icon-place-self: center;
     place-self: var(--navbar-icon-place-self);
   }
 
@@ -119,6 +214,11 @@ export default {
   }
 
   & > ul {
+    --navbar-list-place-items: center;
+    --navbar-list-margin: 0;
+    --navbar-list-padding: 0;
+    --navbar-list-list-style: none;
+
     place-items: var(--navbar-list-place-items);
     margin: var(--navbar-list-margin);
     padding: var(--navbar-list-padding);
@@ -127,6 +227,7 @@ export default {
     a,
     button,
     label {
+      --navbar-list-link-flex-direction: column;
       flex-direction: var(--navbar-list-link-flex-direction);
     }
 
@@ -137,6 +238,9 @@ export default {
       button:focus,
       label:hover,
       label:focus {
+        --navbar-link-hover-color: var(--yellow);
+        --navbar-first-list-link-hover-scale: 0.9;
+
         color: var(--navbar-link-hover-color);
         transform: scale(var(--navbar-first-list-link-hover-scale));
       }
@@ -145,6 +249,9 @@ export default {
     &:last-of-type {
       img,
       svg {
+        --navbar-last-list-img-margin: 5px;
+        --navbar-last-list-height: 50px;
+
         margin: var(--navbar-last-list-img-margin);
         height: var(--navbar-last-list-height);
       }
@@ -155,6 +262,7 @@ export default {
       button:focus,
       label:hover,
       label:focus {
+        --navbar-last-list-link-hover-scale: 1.5;
         transform: scale(var(--navbar-last-list-link-hover-scale));
       }
     }
@@ -162,16 +270,22 @@ export default {
 
   & > input + a:first-of-type,
   & > input + label:first-of-type {
+    --navbar-brand-link-left: 0;
+
     position: absolute;
     left: var(--navbar-brand-link-left);
   }
 
   & > a:first-of-type img,
   & > a:first-of-type svg {
+    --navbar-brand-link-img-height: 40px;
     height: var(--navbar-brand-link-img-height);
   }
 
   & > [for*="navbar"] {
+    --navbar-label-right: 10px;
+    --navbar-label-hover-color: var(--gray);
+    
     position: absolute;
     right: var(--navbar-label-right);
     &:hover,
@@ -227,118 +341,12 @@ export default {
 
 @media (min-width: 992px) {
   .navbar > ul:first-of-type span {
+    --navbar-first-list-span-font-size: 2rem;
+    --navbar-first-list-span-text-align: center;
+
     display: inline;
     font-size: var(--navbar-first-list-span-font-size);
     text-align: var(--navbar-first-list-span-text-align);
   }
-}
-
-.sidebar {
-  --sidebar-flex-direction: column;
-  --sidebar-position: fixed;
-  --sidebar-top: calc(var(--navbar-height) + 10px);
-  --sidebar-left: 2px;
-  --sidebar-z-index: 10;
-  --sidebar-width: auto;
-  --sidebar-child-place-content: center;
-  --sidebar-child-place-items: center;
-  --sidebar-child-margin: 5px;
-  --sidebar-child-border-radius: 20px;
-  --sidebar-child-padding: 5px;
-  --sidebar-child-width: 100%;
-  --sidebar-child-background-color: var(--white-dark);
-  --sidebar-child-color: var(--blue-dark);
-  --sidebar-child-cursor: crosshair;
-  --sidebar-child-hover-border-radius: 10px;
-  --sidebar-child-hover-background-color: var(--blue-dark);
-  --sidebar-child-hover-color: var(--white-dark);
-  --sidebar-child-hover-transform: scale(1.1);
-  --sidebar-child-hover-transition: all 1s;
-  --sidebar-checked-child-font-weight: bold;
-  --sidebar-checked-child-background-color: var(--blue);
-  --sidebar-checked-child-color: var(--white);
-
-  display: flex;
-  flex-direction: var(--sidebar-flex-direction);
-  position: var(--sidebar-position);
-  top: var(--sidebar-top);
-  left: var(--sidebar-left);
-  z-index: var(--sidebar-z-index);
-  width: var(--sidebar-width);
-
-  & > * {
-    display: flex;
-    place-content: var(--sidebar-child-place-content);
-    place-items: var(--sidebar-child-place-items);
-    margin: var(--sidebar-child-margin);
-    border-radius: var(--sidebar-child-border-radius);
-    padding: var(--sidebar-child-padding);
-    width: var(--sidebar-child-width);
-    background-color: var(--sidebar-child-background-color);
-    color: var(--sidebar-child-color);
-    cursor: var(--sidebar-child-cursor);
-
-    &:hover,
-    &:focus {
-      border-radius: var(--sidebar-child-hover-border-radius);
-      color: var(--sidebar-child-hover-color);
-      background-color: var(--sidebar-child-hover-background-color);
-      transform: var(--sidebar-child-hover-transform);
-      transition: var(--sidebar-child-hover-transition);
-    }
-  }
-}
-
-.sidebar-open,
-.sidebar-check:checked ~ * {
-  display: none;
-}
-
-.sidebar-check:checked ~ .sidebar-open {
-  display: flex;
-}
-
-.sidebar-relay {
-  & > * {
-    display: none;
-  }
-
-  & > h2,
-  & > h3,
-  & > h4,
-  & > h5,
-  & > h6 {
-    display: block;
-  }
-}
-
-.sidebar-radio1:checked ~ .sidebar [for*="sidebar-"][for*="-radio1"],
-.sidebar-radio2:checked ~ .sidebar [for*="sidebar-"][for*="-radio2"],
-.sidebar-radio3:checked ~ .sidebar [for*="sidebar-"][for*="-radio3"],
-.sidebar-radio4:checked ~ .sidebar [for*="sidebar-"][for*="-radio4"],
-.sidebar-radio5:checked ~ .sidebar [for*="sidebar-"][for*="-radio5"],
-.sidebar-radio6:checked ~ .sidebar [for*="sidebar-"][for*="-radio6"],
-.sidebar-radio7:checked ~ .sidebar [for*="sidebar-"][for*="-radio7"],
-.sidebar-radio8:checked ~ .sidebar [for*="sidebar-"][for*="-radio8"],
-.sidebar-radio9:checked ~ .sidebar [for*="sidebar-"][for*="-radio9"] {
-  font-weight: var(--sidebar-checked-child-font-weight);
-  background-color: var(--sidebar-checked-child-background-color);
-  color: var(--sidebar-checked-child-color);
-
-  &:hover {
-    background-color: var(--sidebar-child-hover-background-color);
-  }
-}
-
-.sidebar-radio1:checked ~ .sidebar-relay .sidebar-target1,
-.sidebar-radio2:checked ~ .sidebar-relay .sidebar-target2,
-.sidebar-radio3:checked ~ .sidebar-relay .sidebar-target3,
-.sidebar-radio4:checked ~ .sidebar-relay .sidebar-target4,
-.sidebar-radio5:checked ~ .sidebar-relay .sidebar-target5,
-.sidebar-radio6:checked ~ .sidebar-relay .sidebar-target6,
-.sidebar-radio7:checked ~ .sidebar-relay .sidebar-target7,
-.sidebar-radio8:checked ~ .sidebar-relay .sidebar-target8,
-.sidebar-radio9:checked ~ .sidebar-relay .sidebar-target9 {
-  display: block;
 }
 </style>
