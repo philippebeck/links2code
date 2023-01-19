@@ -18,11 +18,11 @@
           :items="cats"
           class="sidebar">
 
-          <template #sidebar="slotProps">
+          <template #items="slotProps">
             <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
           </template>
 
-          <template #page-top>
+          <template #top>
             <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
           </template>
         </NavElt>
