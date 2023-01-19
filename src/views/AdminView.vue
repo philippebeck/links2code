@@ -11,71 +11,38 @@
         </h1>
 
         <NavElt
-          type="sidebar"
           :items="cats"
           class="sidebar">
 
-          <template #first-child>
+          <template #first>
             <a
               href="#link"
               title="Create a link">
-              <i class="fas fa-link fa-fw color-violet"></i>
+              <i class="fas fa-link fa-fw"></i>
             </a>
           </template>
 
-          <template #sidebar="slotProps">
+          <template #items="slotProps">
             <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
           </template>
 
-          <template #last-child>
+          <template #last>
             <a
               href="#user"
               title="Create a user">
-              <i class="fas fa-user fa-fw color-violet"></i>
+              <i class="fas fa-user fa-fw"></i>
             </a>
             <a
               href="#users"
               title="Set users">
-              <i class="fas fa-users fa-fw color-violet"></i>
+              <i class="fas fa-users fa-fw"></i>
             </a>
           </template>
 
-          <template #page-top>
+          <template #top>
             <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
           </template>
         </NavElt>
-
-        <!--<nav class="sidebar">
-          <a
-            href="#link"
-            title="Create a link">
-            <i class="fas fa-link fa-fw color-violet"></i>
-          </a>
-
-          <a
-            v-for="(cat, index) in cats"
-            :key="index"
-            :href="`#${cat}`"
-            :title="'Set ' + cat + ' links'">
-            <i :class="`fa-brands fa-${cat.toLowerCase()} fa-fw color-violet`"></i>
-          </a>
-          
-          <a
-            href="#user"
-            title="Create a user">
-            <i class="fas fa-user fa-fw color-violet"></i>
-          </a>
-          <a
-            href="#users"
-            title="Set users">
-            <i class="fas fa-users fa-fw color-violet"></i>
-          </a>
-          <a
-            href="#top"
-            title="Top of page">
-            <i class="fas fa-chevron-circle-up fa-fw color-violet"></i>
-          </a>
-        </nav>-->
       </template>
 
       <template #body>
