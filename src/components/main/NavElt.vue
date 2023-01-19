@@ -1,5 +1,29 @@
 <template>
-  <nav class="navbar">
+  <nav
+    v-if="getNavType() === 'sidebar'" 
+    class="sidebar">
+    <slot name="first-child"></slot>
+
+    <a 
+      v-for="(item, index) in items"
+      :key="index"
+      :href="`#${item}`"
+      :title="item">
+      <slot 
+        name="sidebar"
+        :item="item">
+      </slot>
+    </a>
+
+    <slot name="last-child"></slot>
+    <a
+      href="#top"
+      title="Top of the Page">
+      <slot name="page-top"></slot>
+    </a>
+  </nav>
+  
+  <nav v-else class="navbar">
     <input
       id="navbar-close"
       class="navbar-close"
@@ -32,7 +56,29 @@
 <script>
 export default {
   name: "NavElt",
-  
+
+  props: {
+    type: {
+      type: String,
+      default: "navbar"
+    },
+    items: {
+      type: Array
+    }
+  },
+
+  methods: {
+    getNavType() {
+      if (this.type === "sidebar") {
+        return "sidebar";
+      }
+      return "navbar";
+    },
+
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
+    }
+  }
 }
 </script>
 
