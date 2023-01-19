@@ -1,8 +1,9 @@
 <template>
   <nav
-    v-if="getNavType() === 'sidebar'" 
+    v-if="getNavClass() === 'sidebar'" 
     class="sidebar">
-    <slot name="first-child"></slot>
+
+    <slot name="first"></slot>
 
     <a 
       v-for="(item, index) in items"
@@ -10,20 +11,25 @@
       :href="`#${item}`"
       :title="item">
       <slot 
-        name="sidebar"
-        :item="item">
+        name="items"
+        :item="item"
+        :index="index">
       </slot>
     </a>
 
-    <slot name="last-child"></slot>
+    <slot name="last"></slot>
+
     <a
+      v-if="hasSlot('top')"
       href="#top"
       title="Top of the Page">
-      <slot name="page-top"></slot>
+      <slot name="top"></slot>
     </a>
   </nav>
   
-  <nav v-else class="navbar">
+  <nav 
+    v-else 
+    class="navbar">
     <input
       id="navbar-close"
       class="navbar-close"
