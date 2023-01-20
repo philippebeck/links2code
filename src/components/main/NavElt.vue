@@ -223,28 +223,12 @@ export default {
   transform: scale(var(--navbar-first-list-link-hover-scale));
 }
 
-.navbar > :deep(ul):last-of-type img,
-.navbar > :deep(ul):last-of-type svg {
-  --navbar-last-list-img-margin: 5px;
-  --navbar-last-list-height: 50px;
-
-  margin: var(--navbar-last-list-img-margin);
-  height: var(--navbar-last-list-height);
-}
-
 .navbar > :deep(ul):last-of-type a:hover,
 .navbar > :deep(ul):last-of-type a:focus,
 .navbar > :deep(ul):last-of-type button:hover,
 .navbar > :deep(ul):last-of-type button:focus {
   --navbar-last-list-link-hover-scale: 1.5;
   transform: scale(var(--navbar-last-list-link-hover-scale));
-}
-
-
-.navbar > :deep(a):first-of-type img,
-.navbar > :deep(a):first-of-type svg {
-  --navbar-brand-link-img-height: 40px;
-  height: var(--navbar-brand-link-img-height);
 }
 
 .navbar :deep(button) {
