@@ -30,7 +30,6 @@
       <ul v-if="!userId">
         <li>
           <a
-            class="blue-on"
             href="https://paypal.me/philippebeck"
             title="Donation">
             <i class="fa-brands fa-paypal fa-fw"></i>
@@ -38,7 +37,6 @@
         </li>
         <li>
           <a
-            class="pink-on"
             href="https://github.com/sponsors/philippebeck"
             title="Sponsor">
             <i class="far fa-heart fa-fw"></i>
@@ -46,7 +44,6 @@
         </li>
         <li>
           <a
-            class="green-on"
             href="/login"
             title="Login">
             <i class="fa-solid fa-sign-in-alt fa-fw"></i>
@@ -56,8 +53,7 @@
 
       <ul v-else>
         <li>
-          <a 
-            class="violet-on"
+          <a
             href="/admin"
             title="Admin">
             <i class="fa-solid fa-user-ninja fa-fw"></i>
@@ -65,7 +61,6 @@
         </li>
         <li>
           <button 
-            class="red-on"
             type="button"
             @click="logout()"
             title="Logout">
