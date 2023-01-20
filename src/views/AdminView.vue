@@ -1,7 +1,5 @@
 <template>
-  <main 
-    id="top"
-    class="container-80tn-70md-60xl">
+  <main id="top">
 
     <CardElt>
       <template #header>
