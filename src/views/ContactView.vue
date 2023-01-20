@@ -1,80 +1,78 @@
 <template>
-  <main>
-    <CardElt>
-      <template #header>
-        <i class="blue fa-solid fa-at fa-2x"></i>
-        <h1 class="blue anima-slideB">
-          Contact
-        </h1>
-      </template>
+  <CardElt>
+    <template #header>
+      <i class="blue fa-solid fa-at fa-2x"></i>
+      <h1 class="blue anima-slideB">
+        Contact
+      </h1>
+    </template>
 
-      <template #body>
-        <form class="anima-grow">
-          <ul>
-            <li>
-              <FieldElt
-                id="email"
-                v-model:value="email"
-                info="An email to answer you ?"
-                @keyup.enter="send()"
-                type="email">
-                <template #legend>
-                  Email
-                </template>
-                <template #label>
-                  Un email fonctionnel svp !
-                </template>
-              </FieldElt>
-            </li>
-            <li>
-              <FieldElt
-                id="subject"
-                v-model:value="subject"
-                info="The subject of your message ?"
-                @keyup.enter="send()">
-                <template #legend>
-                  Subject
-                </template>
-                <template #label>
-                  Soyez bref et précis !
-                </template>
-              </FieldElt>
-            </li>
-            <li>
-              <FieldElt
-                id="text"
-                v-model:value="text"
-                info="The text of your message ?"
-                @keyup.enter="send()"
-                type="area"
-                :max="parseInt('100')">
-                <template #legend>
-                  Text
-                </template>
-                <template #label>
-                  Que puis-je faire pour vous ?
-                </template>
-              </FieldElt>
-            </li>
-            <li>
-              <div 
-                id="recaptcha" 
-                class="g-recaptcha" 
-                data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
-              </div>
-            </li>
-            <li>
-              <BtnElt
-                type="button"
-                content="Envoyer"
-                @click="send()" 
-                class="green"/>
-            </li>
-          </ul>
-        </form>
-      </template>
-    </CardElt>
-  </main>
+    <template #body>
+      <form class="anima-grow">
+        <ul>
+          <li>
+            <FieldElt
+              id="email"
+              v-model:value="email"
+              info="An email to answer you ?"
+              @keyup.enter="send()"
+              type="email">
+              <template #legend>
+                Email
+              </template>
+              <template #label>
+                Un email fonctionnel svp !
+              </template>
+            </FieldElt>
+          </li>
+          <li>
+            <FieldElt
+              id="subject"
+              v-model:value="subject"
+              info="The subject of your message ?"
+              @keyup.enter="send()">
+              <template #legend>
+                Subject
+              </template>
+              <template #label>
+                Soyez bref et précis !
+              </template>
+            </FieldElt>
+          </li>
+          <li>
+            <FieldElt
+              id="text"
+              v-model:value="text"
+              info="The text of your message ?"
+              @keyup.enter="send()"
+              type="area"
+              :max="parseInt('100')">
+              <template #legend>
+                Text
+              </template>
+              <template #label>
+                Que puis-je faire pour vous ?
+              </template>
+            </FieldElt>
+          </li>
+          <li>
+            <div 
+              id="recaptcha" 
+              class="g-recaptcha" 
+              data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
+            </div>
+          </li>
+          <li>
+            <BtnElt
+              type="button"
+              content="Envoyer"
+              @click="send()" 
+              class="green"/>
+          </li>
+        </ul>
+      </form>
+    </template>
+  </CardElt>
 </template>
 
 <script>
