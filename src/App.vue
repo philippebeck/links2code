@@ -4,9 +4,7 @@
       <img 
         class="anima-slideB"
         src="/img/logo.svg"
-        alt="Logo Phi"
-        width="30"
-        height="30">
+        alt="Logo Phi">
     </template>
 
     <template #nav>
