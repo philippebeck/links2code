@@ -174,11 +174,6 @@ tbody tr:focus {
   table {
     --table-max-width:: 95%;
   }
-  th,
-  td {
-    --th-td-display: table-cell;
-    display: var(--th-td-display);
-  }
 }
 
 @media (min-width: 768px) {
@@ -190,6 +185,11 @@ tbody tr:focus {
 @media (min-width: 992px) {
   table {
     --table-max-width: 85%;
+  }
+  th,
+  td {
+    --th-td-display: table-cell;
+    display: var(--th-td-display);
   }
 }
 
