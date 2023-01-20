@@ -44,8 +44,8 @@
     <template #body>
       <CardElt>
         <template #header>
+          <i class="fa-solid fa-link fa-2x"></i>
           <h2 id="link">
-            <i class="fa-solid fa-link fa-2x"></i>
             Links
           </h2>
         </template>
@@ -61,8 +61,8 @@
 
       <CardElt>
         <template #header>
+          <i class="fa-solid fa-users fa-2x"></i>
           <h2 id="user">
-            <i class="fa-solid fa-users fa-2x"></i>
             Users
           </h2>
         </template>
