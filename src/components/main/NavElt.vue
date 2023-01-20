@@ -30,32 +30,23 @@
   <nav 
     v-else 
     class="navbar">
-    <input
-      id="navbar-close"
-      class="navbar-close"
-      type="radio"
-      name="navbar"
-      checked>
-    <input
-      id="navbar-open"
-      class="navbar-open"
-      type="radio"
-      name="navbar">
 
-    <slot name="brand"></slot>
+    <a 
+      v-if="hasSlot('brand')"
+      href="/"
+      title="Home">
+      <slot name="brand"></slot>
+    </a>
+
     <slot name="nav"></slot>
+
     <slot name="admin"></slot>
-    
-    <label
-      for="navbar-close"
-      title="Close the Navigation Menu">
-      <i class="fa-solid fa-angle-double-up fa-lg"></i>
-    </label>
-    <label
-      for="navbar-open"
-      title="Open the Navigation Menu">
-      <i class="fa-solid fa-angle-double-down fa-lg"></i>
-    </label>
+
+    <button
+      v-if="hasSlot('switch')"
+      type="button">
+      <slot name="switch"></slot>
+    </button>
   </nav>
 </template>
 
@@ -87,6 +78,16 @@ export default {
   }
 }
 </script>
+
+<style>
+:root {
+  --navbar-height: 80px;
+}
+
+[id="app"] {
+  margin-top: calc(var(--navbar-height) + 20px);
+}
+</style>
 
 <style scoped>
 .sidebar {
@@ -144,19 +145,9 @@ export default {
   transform: var(--sidebar-a-hover-transform);
   transition: var(--sidebar-a-hover-transition);
 }
-</style>
-
-<style lang="scss">
-:root {
-  --navbar-height: 80px;
-}
-
-[id="app"] {
-  margin-top: calc(var(--navbar-height) + 20px);
-}
 
 .navbar {
-  --navbar-place-content: center;
+  --navbar-place-content: space-between;
   --navbar-place-items: center;
   --navbar-position: fixed;
   --navbar-top: 0;
@@ -178,141 +169,88 @@ export default {
   height: var(--navbar-height);
   background-color: var(--navbar-background-color);
   color: var(--navbar-color);
+}
 
-  &,
-  & > ul:first-of-type a,
-  & > ul:first-of-type label,
-  & > ul:last-of-type a,
-  & > ul:last-of-type label {
-    display: flex;
-  }
+.navbar,
+.navbar > :deep(ul):first-of-type a,
+.navbar > :deep(ul):last-of-type a {
+  display: flex;
+}
 
-  & > ul:first-of-type span,
-  & > ul:last-of-type span {
-    display: none;
-  }
+.navbar :deep(a),
+.navbar :deep(button) {
+  --navbar-link-padding: 20px 10px;
+  --navbar-link-color: var(--white);
+  --navbar-link-cursor: pointer;
 
-  a,
-  button,
-  label {
-    --navbar-link-padding: 20px 10px;
-    --navbar-link-color: var(--white);
-    --navbar-link-cursor: pointer;
+  padding: var(--navbar-link-padding);
+  color: var(--navbar-link-color);
+  cursor: var(--navbar-link-cursor);
+}
 
-    padding: var(--navbar-link-padding);
-    color: var(--navbar-link-color);
-    cursor: var(--navbar-link-cursor);
-  }
+.navbar :deep(i) {
+  --navbar-icon-place-self: center;
+  place-self: var(--navbar-icon-place-self);
+}
 
-  i {
-    --navbar-icon-place-self: center;
-    place-self: var(--navbar-icon-place-self);
-  }
+.navbar > :deep(ul) {
+  --navbar-list-place-items: center;
+  --navbar-list-margin: 0;
+  --navbar-list-padding: 0;
+  --navbar-list-list-style: none;
 
-  & + * {
-    margin-top: var(--navbar-height);
-  }
+  display: flex !important;
+  place-items: var(--navbar-list-place-items);
+  margin: var(--navbar-list-margin);
+  padding: var(--navbar-list-padding);
+  list-style: var(--navbar-list-list-style);
+}
 
-  & > ul {
-    --navbar-list-place-items: center;
-    --navbar-list-margin: 0;
-    --navbar-list-padding: 0;
-    --navbar-list-list-style: none;
+.navbar > :deep(ul) a,
+.navbar > :deep(ul) button {
+  --navbar-list-link-flex-direction: column;
+  flex-direction: var(--navbar-list-link-flex-direction);
+}
 
-    place-items: var(--navbar-list-place-items);
-    margin: var(--navbar-list-margin);
-    padding: var(--navbar-list-padding);
-    list-style: var(--navbar-list-list-style);
+.navbar > :deep(ul):first-of-type a:hover,
+.navbar > :deep(ul):first-of-type a:focus,
+.navbar > :deep(ul):first-of-type button:hover,
+.navbar > :deep(ul):first-of-type button:focus {
+  --navbar-link-hover-color: var(--yellow);
+  --navbar-first-list-link-hover-scale: 0.9;
 
-    a,
-    button,
-    label {
-      --navbar-list-link-flex-direction: column;
-      flex-direction: var(--navbar-list-link-flex-direction);
-    }
+  color: var(--navbar-link-hover-color);
+  transform: scale(var(--navbar-first-list-link-hover-scale));
+}
 
-    &:first-of-type {
-      a:hover,
-      a:focus,
-      button:hover,
-      button:focus,
-      label:hover,
-      label:focus {
-        --navbar-link-hover-color: var(--yellow);
-        --navbar-first-list-link-hover-scale: 0.9;
+.navbar > :deep(ul):last-of-type img,
+.navbar > :deep(ul):last-of-type svg {
+  --navbar-last-list-img-margin: 5px;
+  --navbar-last-list-height: 50px;
 
-        color: var(--navbar-link-hover-color);
-        transform: scale(var(--navbar-first-list-link-hover-scale));
-      }
-    }
+  margin: var(--navbar-last-list-img-margin);
+  height: var(--navbar-last-list-height);
+}
 
-    &:last-of-type {
-      img,
-      svg {
-        --navbar-last-list-img-margin: 5px;
-        --navbar-last-list-height: 50px;
+.navbar > :deep(ul):last-of-type a:hover,
+.navbar > :deep(ul):last-of-type a:focus,
+.navbar > :deep(ul):last-of-type button:hover,
+.navbar > :deep(ul):last-of-type button:focus {
+  --navbar-last-list-link-hover-scale: 1.5;
+  transform: scale(var(--navbar-last-list-link-hover-scale));
+}
 
-        margin: var(--navbar-last-list-img-margin);
-        height: var(--navbar-last-list-height);
-      }
 
-      a:hover,
-      a:focus,
-      button:hover,
-      button:focus,
-      label:hover,
-      label:focus {
-        --navbar-last-list-link-hover-scale: 1.5;
-        transform: scale(var(--navbar-last-list-link-hover-scale));
-      }
-    }
-  }
+.navbar > :deep(a):first-of-type img,
+.navbar > :deep(a):first-of-type svg {
+  --navbar-brand-link-img-height: 40px;
+  height: var(--navbar-brand-link-img-height);
+}
 
-  & > input + a:first-of-type,
-  & > input + label:first-of-type {
-    --navbar-brand-link-left: 0;
-
-    position: absolute;
-    left: var(--navbar-brand-link-left);
-  }
-
-  & > a:first-of-type img,
-  & > a:first-of-type svg {
-    --navbar-brand-link-img-height: 40px;
-    height: var(--navbar-brand-link-img-height);
-  }
-
-  & > [for*="navbar"] {
-    --navbar-label-right: 10px;
-    --navbar-label-hover-color: var(--gray);
-    
-    position: absolute;
-    right: var(--navbar-label-right);
-    &:hover,
-    &:focus {
-      color: var(--navbar-label-hover-color);
-    }
-  }
-
-  &-close:checked ~ ul:first-of-type,
-  &-open:checked ~ ul:last-of-type {
-    display: flex;
-  }
-
-  &-close,
-  &-open,
-  &-open:checked ~ ul:first-of-type,
-  &-close:checked ~ ul:last-of-type,
-  &-close:checked ~ [for="navbar-close"],
-  &-open:checked ~ [for="navbar-open"] {
-    display: none;
-  }
-
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
+.navbar :deep(button) {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 @media (min-width: 576px) {
@@ -320,33 +258,6 @@ export default {
     --navbar-flex-direction: row;
     --navbar-place-content: space-around;
     --navbar-padding: 10px;
-  }
-}
-
-@media (min-width: 768px) {
-  .navbar {
-    --navbar-place-content: space-evenly;
-    & > ul {
-      display: flex !important;
-    }
-    & > input + a:first-of-type,
-    & > input + label:first-of-type {
-      position: static;
-    }
-    & > [for*="navbar"] {
-      display: none;
-    }
-  }
-}
-
-@media (min-width: 992px) {
-  .navbar > ul:first-of-type span {
-    --navbar-first-list-span-font-size: 2rem;
-    --navbar-first-list-span-text-align: center;
-
-    display: inline;
-    font-size: var(--navbar-first-list-span-font-size);
-    text-align: var(--navbar-first-list-span-text-align);
   }
 }
 </style>
