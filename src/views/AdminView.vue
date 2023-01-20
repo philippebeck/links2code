@@ -1,87 +1,82 @@
 <template>
-  <main 
-    id="top"
-    class="container-80tn-70md-60xl">
+  <CardElt id="top">
+    <template #header>
+      <i class="blue fa-solid fa-cogs fa-2x"></i>
+      <h1 class="blue anima-slideB">
+        Admin
+      </h1>
 
-    <CardElt>
-      <template #header>
-        <i class="blue fa-solid fa-cogs fa-2x"></i>
-        <h1 class="blue anima-slideB">
-          Admin
-        </h1>
+      <NavElt
+        :items="cats"
+        class="sidebar">
 
-        <NavElt
-          :items="cats"
-          class="sidebar">
+        <template #first>
+          <a
+            href="#link"
+            title="Create a link">
+            <i class="fas fa-link fa-fw"></i>
+          </a>
+        </template>
 
-          <template #first>
-            <a
-              href="#link"
-              title="Create a link">
-              <i class="fas fa-link fa-fw"></i>
-            </a>
-          </template>
+        <template #items="slotProps">
+          <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
+        </template>
 
-          <template #items="slotProps">
-            <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
-          </template>
+        <template #last>
+          <a
+            href="#user"
+            title="Create a user">
+            <i class="fas fa-user fa-fw"></i>
+          </a>
+          <a
+            href="#users"
+            title="Set users">
+            <i class="fas fa-users fa-fw"></i>
+          </a>
+        </template>
 
-          <template #last>
-            <a
-              href="#user"
-              title="Create a user">
-              <i class="fas fa-user fa-fw"></i>
-            </a>
-            <a
-              href="#users"
-              title="Set users">
-              <i class="fas fa-users fa-fw"></i>
-            </a>
-          </template>
+        <template #top>
+          <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
+        </template>
+      </NavElt>
+    </template>
 
-          <template #top>
-            <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
-          </template>
-        </NavElt>
-      </template>
+    <template #body>
+      <CardElt>
+        <template #header>
+          <i class="fa-solid fa-link fa-2x"></i>
+          <h2 id="link">
+            Links
+          </h2>
+        </template>
+        
+        <template #body>
+          <CreateLink />
 
-      <template #body>
-        <CardElt>
-          <template #header>
-            <h2 id="link">
-              <i class="fa-solid fa-link fa-2x"></i>
-              Links
-            </h2>
-          </template>
-          
-          <template #body>
-            <CreateLink />
+          <ListLinks
+            v-if="links.length > 0"
+            :links="links"/>
+        </template>
+      </CardElt>
 
-            <ListLinks
-              v-if="links.length > 0"
-              :links="links"/>
-          </template>
-        </CardElt>
+      <CardElt>
+        <template #header>
+          <i class="fa-solid fa-users fa-2x"></i>
+          <h2 id="user">
+            Users
+          </h2>
+        </template>
 
-        <CardElt>
-          <template #header>
-            <h2 id="user">
-              <i class="fa-solid fa-users fa-2x"></i>
-              Users
-            </h2>
-          </template>
+        <template #body>
+          <CreateUser />
 
-          <template #body>
-            <CreateUser />
-
-            <ListUsers
-              v-if="users.length > 0"
-              :users="users"/>
-          </template>
-        </CardElt>
-      </template>
-    </CardElt>
-  </main>
+          <ListUsers
+            v-if="users.length > 0"
+            :users="users"/>
+        </template>
+      </CardElt>
+    </template>
+  </CardElt>
 </template>
 
 <script>

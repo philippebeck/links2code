@@ -12,7 +12,7 @@
       </template>
 
       <template #head>
-        crud
+        up/del
       </template>
 
       <template #cell-_id="slotProps">
