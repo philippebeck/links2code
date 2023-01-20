@@ -7,7 +7,7 @@
       id="users">
 
       <template #head>
-        crud
+        up/del
       </template>
 
       <template #cell-_id="slotProps">
@@ -15,9 +15,6 @@
           :src="'/img/users/' + users[slotProps.index].image"
           :alt="'Photo de ' + users[slotProps.index].name"
           :title="users[slotProps.index].image">
-          <template #figcaption>
-            {{ slotProps.index + 1 }}
-          </template>
         </MediaElt>
       </template>
 
