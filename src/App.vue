@@ -1,5 +1,5 @@
 <template>
-  <NavElt>
+  <NavElt :items="['links', 'contact']">
     <template #brand>
       <img 
         class="anima-slideB"
@@ -7,23 +7,12 @@
         alt="Logo Phi">
     </template>
 
-    <template #nav>
-      <ul>
-        <li>
-          <a
-            href="/">
-            <i class="fa-solid fa-link fa-fw"></i>
-            <strong>Links</strong>
-          </a>
-        </li>
-        <li>
-          <a
-            href="/contact">
-            <i class="fa-brands fa-at fa-fw"></i>
-            <strong>Contact</strong>
-          </a>
-        </li>
-      </ul>
+    <template #nav1>
+      <i class="fa-solid fa-link fa-fw"></i>
+    </template>
+
+    <template #nav2>
+      <i class="fa-brands fa-at fa-fw"></i>
     </template>
 
     <template #admin>
@@ -39,7 +28,7 @@
           <a
             href="https://github.com/sponsors/philippebeck"
             title="Sponsor">
-            <i class="far fa-heart fa-fw"></i>
+            <i class="fa-regular fa-heart fa-fw"></i>
           </a>
         </li>
         <li>
@@ -68,6 +57,10 @@
           </button>
         </li>
       </ul>
+    </template>
+
+    <template #switch>
+
     </template>
   </NavElt>
 
