@@ -7,11 +7,11 @@
         alt="Logo Phi">
     </template>
 
-    <template #nav1>
+    <template #links>
       <i class="fa-solid fa-link fa-fw"></i>
     </template>
 
-    <template #nav2>
+    <template #contact>
       <i class="fa-brands fa-at fa-fw"></i>
     </template>
 

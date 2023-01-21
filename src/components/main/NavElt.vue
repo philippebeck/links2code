@@ -50,7 +50,7 @@
           :title="item.charAt(0).toUpperCase() + item.slice(1)">
 
           <slot 
-            :name="'nav' + (index + 1)"
+            :name="item"
             :item="item"
             :index="index">
           </slot>
