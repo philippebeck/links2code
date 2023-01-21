@@ -118,11 +118,17 @@ export default {
 
 <style>
 :root {
-  --navbar-height: 80px;
+  --navbar-height: 50px;
 }
 
 [id="app"] {
   margin-top: calc(var(--navbar-height) + 20px);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --navbar-height: 80px;
+  }
 }
 </style>
 
@@ -144,7 +150,7 @@ export default {
   z-index: var(--sidebar-z-index);
   width: var(--sidebar-width);
 }
-.sidebar > :deep(a) {
+.sidebar :deep(a) {
   --sidebar-a-display: flex;
   --sidebar-a-place-content: center;
   --sidebar-a-place-items: center;
@@ -168,8 +174,8 @@ export default {
   cursor: var(--sidebar-a-cursor);
 }
 
-.sidebar > :deep(a:hover),
-.sidebar > :deep(a:focus) {
+.sidebar :deep(a:hover),
+.sidebar :deep(a:focus) {
   --sidebar-a-hover-border-radius: 10px;
   --sidebar-a-hover-background-color: var(--blue-dark);
   --sidebar-a-hover-color: var(--white-dark);
@@ -184,6 +190,7 @@ export default {
 }
 
 .navbar {
+  --navbar-display: flex;
   --navbar-place-content: space-between;
   --navbar-place-items: center;
   --navbar-position: fixed;
@@ -195,6 +202,7 @@ export default {
   --navbar-background-color: var(--blue-dark);
   --navbar-color: var(--white);
 
+  display: var(--navbar-display);
   place-content: var(--navbar-place-content);
   place-items: var(--navbar-place-items);
   position: var(--navbar-position);
@@ -208,80 +216,111 @@ export default {
   color: var(--navbar-color);
 }
 
-.navbar,
-.navbar > :deep(ul):first-of-type a,
-.navbar > :deep(ul):last-of-type a {
-  display: flex;
-}
-
 .navbar :deep(a),
 .navbar :deep(button) {
-  --navbar-link-padding: 20px 10px;
-  --navbar-link-color: var(--white);
-  --navbar-link-cursor: pointer;
+  --navbar-a-padding: 10px;
+  --navbar-a-color: var(--white);
+  --navbar-a-cursor: pointer;
 
-  padding: var(--navbar-link-padding);
-  color: var(--navbar-link-color);
-  cursor: var(--navbar-link-cursor);
+  padding: var(--navbar-a-padding);
+  color: var(--navbar-a-color);
+  cursor: var(--navbar-a-cursor);
+}
+
+.navbar :deep(ul) {
+  --navbar-ul-place-items: center;
+  --navbar-ul-margin: 0;
+  --navbar-ul-padding: 0;
+  --navbar-ul-list-style: none;
+
+  display: flex;
+  place-items: var(--navbar-ul-place-items);
+  margin: var(--navbar-ul-margin);
+  padding: var(--navbar-ul-padding);
+  list-style: var(--navbar-ul-list-style);
+}
+
+.navbar ul a {
+  --navbar-ul-a-display: flex;
+  display: var(--navbar-ul-a-display);
+}
+
+.navbar ul a :not(i) {
+  --navbar-ul-a-not-i-display: none;
+  display: var(--navbar-ul-a-not-i-display);
+}
+
+.navbar :deep(ul) a,
+.navbar :deep(ul) button {
+  --navbar-ul-a-flex-direction: column;
+  flex-direction: var(--navbar-ul-a-flex-direction);
+}
+
+.navbar ul a:hover,
+.navbar ul a:focus,
+.navbar ul button:hover,
+.navbar ul button:focus {
+  --navbar-first-ul-a-hover-color: var(--yellow);
+  --navbar-first-ul-a-hover-scale: 0.9;
+
+  color: var(--navbar-first-ul-a-hover-color) !important;
+  transform: scale(var(--navbar-first-ul-a-hover-scale)) !important;
+}
+
+.navbar :deep(ul):last-of-type a:hover,
+.navbar :deep(ul):last-of-type a:focus,
+.navbar :deep(ul):last-of-type button:hover,
+.navbar :deep(ul):last-of-type button:focus {
+  --navbar-last-ul-a-hover-color: var(--orange);
+  --navbar-last-ul-a-hover-scale: 1.5;
+
+  color: var(--navbar-last-ul-a-hover-color);
+  transform: scale(var(--navbar-last-ul-a-hover-scale));
+}
+
+.navbar :deep(button) {
+  --navbar-button-background-color: transparent;
+  --navbar-button-border: none;
+  --navbar-button-cursor: pointer;
+
+  background-color: var(--navbar-button-background-color);
+  border: var(--navbar-button-border);
+  cursor: var(--navbar-button-cursor);
 }
 
 .navbar :deep(i) {
-  --navbar-icon-place-self: center;
-  place-self: var(--navbar-icon-place-self);
+  --navbar-i-place-self: center;
+  place-self: var(--navbar-i-place-self);
 }
 
-.navbar > :deep(ul) {
-  --navbar-list-place-items: center;
-  --navbar-list-margin: 0;
-  --navbar-list-padding: 0;
-  --navbar-list-list-style: none;
-
-  display: flex !important;
-  place-items: var(--navbar-list-place-items);
-  margin: var(--navbar-list-margin);
-  padding: var(--navbar-list-padding);
-  list-style: var(--navbar-list-list-style);
+.hide {
+  --hide-display: none;
+  display: var(--hide-display) !important;
 }
 
-.navbar > :deep(ul) a,
-.navbar > :deep(ul) button {
-  --navbar-list-link-flex-direction: column;
-  flex-direction: var(--navbar-list-link-flex-direction);
-}
-
-.navbar > :deep(ul):first-of-type a:hover,
-.navbar > :deep(ul):first-of-type a:focus,
-.navbar > :deep(ul):first-of-type button:hover,
-.navbar > :deep(ul):first-of-type button:focus {
-  --navbar-first-list-link-hover-color: var(--yellow);
-  --navbar-first-list-link-hover-scale: 0.9;
-
-  color: var(--navbar-first-list-link-hover-color);
-  transform: scale(var(--navbar-first-list-link-hover-scale));
-}
-
-.navbar > :deep(ul):last-of-type a:hover,
-.navbar > :deep(ul):last-of-type a:focus,
-.navbar > :deep(ul):last-of-type button:hover,
-.navbar > :deep(ul):last-of-type button:focus {
-  --navbar-last-list-link-hover-color: var(--orange);
-  --navbar-last-list-link-hover-scale: 1.5;
-
-  color: var(--navbar-last-list-link-hover-color);
-  transform: scale(var(--navbar-last-list-link-hover-scale));
-}
-
-.navbar :deep(button) {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+.show {
+  --show-display: flex;
+  display: var(--show-display);
 }
 
 @media (min-width: 576px) {
   .navbar {
-    --navbar-flex-direction: row;
     --navbar-place-content: space-around;
-    --navbar-padding: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar > button {
+    --navbar-button-display: none;
+    display: var(--navbar-button-display);
+  }
+
+  .navbar ul a :not(i) {
+    --navbar-ul-a-not-i-display: flex;
+  }
+
+  .hide {
+    --hide-display: flex;
   }
 }
 </style>
