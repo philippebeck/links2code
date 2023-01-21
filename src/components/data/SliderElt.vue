@@ -2,56 +2,42 @@
   <div 
     id="slider" 
     class="slider">
+
     <input 
-      id="slider-radio1" 
-      class="slider-radio1" 
+      v-for="(item, index) in items"
+      :key="index"
+      :id="'slider-radio' + (index + 1)" 
+      :class="'slider-radio' + (index + 1)" 
       type="radio" 
       name="slider" 
-      disabled 
-      checked>
-    <input 
-      id="slider-radio2" 
-      class="slider-radio2" 
-      type="radio" 
-      name="slider" 
+      checked
       disabled>
 
     <figure 
       id="slider-relay" 
       class="slider-relay">
-      <figure class="slider-target1">
-        <img 
-          src="https://animadio.org/img/numbers/1.svg" 
-          alt="Your awesome alternate text">
+
+      <figure 
+        v-for="(item, index) in items"
+        :key="index"
+        :class="'slider-target' + (index + 1)">
+
+        <slot
+          name="slide"
+          :item="item"
+          :index="index">
+        </slot>
+
         <figcaption>
-          <a 
-            href="https://animadio.org" 
-            title="Your awesome title">
-            <h2>Your 1st title</h2>
-            <p>Your 1st description</p>
-            <i class="fas fa-image"></i>
-          </a>
+          <slot name="figcaption"></slot>
         </figcaption>
-      </figure>
-      <figure class="slider-target2">
-        <img 
-        src="https://animadio.org/img/numbers/2.svg" 
-        alt="Your awesome alternate text">
-      <figcaption>
-        <a 
-          href="https://animadio.org" 
-          title="Your awesome title">
-          <h2>Your 2nd title</h2>
-          <p>Your 2nd description</p>
-          <i class="fas fa-image"></i>
-        </a>
-      </figcaption>
       </figure>
     </figure>
 
     <ul>
       <li>
         <button 
+          @click="goNext()"
           id="slider-previous" 
           class="slider-previous" 
           title="Previous (&larr;)">
@@ -60,6 +46,7 @@
       </li>
       <li>
         <button 
+          @click="checkAuto()"
           id="slider-auto" 
           class="slider-auto" 
           title="Pause (&uarr;)">
@@ -68,6 +55,7 @@
       </li>
       <li class="hide">
         <button 
+          @click="checkRandom()"
           id="slider-random" 
           class="slider-random" 
           title="Random (&darr;)">
@@ -76,6 +64,7 @@
       </li>
       <li>
         <button 
+          @click="goPrevious()"
           id="slider-next" 
           class="slider-next" 
           title="Next (&rarr;)">
@@ -85,15 +74,11 @@
     </ul>
 
     <ul class="slider-progress">
-      <li>
-        <label for="slider-radio1">
-          <i 
-            class="fas fa-dot-circle" 
-            aria-hidden="true"></i>
-        </label>
-      </li>
-      <li>
-        <label for="slider-radio2">
+
+      <li
+        v-for="(item, index) in items"
+        :key="index">
+        <label :for="'slider-radio1' + (index + 1)">
           <i 
             class="fas fa-dot-circle" 
             aria-hidden="true"></i>
