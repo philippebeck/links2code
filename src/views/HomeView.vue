@@ -15,14 +15,6 @@
 
   <CardElt id="top">
     <template #header>
-      <i class="blue fa-solid fa-link fa-2x"></i>
-      <h1 class="blue shatex-blur-sm anima-slideB">
-        Links2Code
-      </h1>
-      <strong class="gray">
-        Links for Coding !
-      </strong>
-
       <SliderElt
         id="slider" 
         class="slider"
@@ -31,6 +23,13 @@
           <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-10x`"></i>
         </template>
       </SliderElt>
+
+      <h1 class="blue shatex-blur-sm anima-slideB">
+        Links2Code
+      </h1>
+      <strong class="gray">
+        Links for Coding !
+      </strong>
     </template>
 
     <template #body>
