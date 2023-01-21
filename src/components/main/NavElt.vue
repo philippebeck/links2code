@@ -10,6 +10,7 @@
       :key="index"
       :href="`#${item}`"
       :title="item">
+
       <slot 
         name="items"
         :item="item"
@@ -38,14 +39,39 @@
       <slot name="brand"></slot>
     </a>
 
-    <slot name="nav"></slot>
+    <ul 
+      id="nav"
+      class="show">
+      <li 
+        v-for="(item, index) in items"
+        :key="index">
+        <a
+          :href="'/' + item"
+          :title="item.charAt(0).toUpperCase() + item.slice(1)">
 
-    <slot name="admin"></slot>
+          <slot 
+            :name="'nav' + (index + 1)"
+            :item="item"
+            :index="index">
+          </slot>
 
+          <b>{{ item.charAt(0).toUpperCase() + item.slice(1) }}</b>
+        </a>
+      </li>
+    </ul>
+
+    <aside 
+      v-if="hasSlot('admin')"
+      id="admin"
+      class="hide">
+      <slot name="admin"></slot>
+    </aside>
+    
     <button
-      v-if="hasSlot('switch')"
-      type="button">
-      <slot name="switch"></slot>
+      type="button"
+      @click="toggleMenu()"
+      title="Menu">
+      <i class="fa-solid fa-bars"></i>
     </button>
   </nav>
 </template>
