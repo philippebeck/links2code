@@ -92,6 +92,12 @@
 export default {
   name: "SliderElt",
 
+  props: {
+    items: {
+      type: Array
+    }
+  },
+
   data() {
     return {
       sliderElt: null,
@@ -99,16 +105,29 @@ export default {
       slidesCount: 0,
       index: -1,
       timer: null,
-      timeout: timeout,
-      previousElt: null,
-      nextElt: null,
+      timeout: 5000,
       autoElt: null,
       autoIcon: null,
-      autoState: auto,
+      autoState: true,
       randomElt: null,
       randomIcon: null,
-      randomState: random
+      randomState: false
     }
+  },
+
+  mounted() {
+    this.sliderElt    = document.getElementById("slider");
+    this.autoElt      = document.getElementById("slider-auto");
+    this.autoIcon     = this.autoElt.querySelector("i");
+    this.randomElt    = document.getElementById("slider-random");
+    this.randomIcon   = this.randomElt.querySelector("i");
+
+    if (document.querySelectorAll("input")) {
+      this.slidesTriggers = document.querySelectorAll("input");
+      this.slidesCount = this.slidesTriggers.length;
+    }
+
+    document.addEventListener("keydown", this.setKeyboard);
   },
 
   methods: {
@@ -142,26 +161,26 @@ export default {
 
     goPrevious() {
       if (this.randomState) {
-        this.index = getRandomInteger(0, this.slidesCount - 1);
+        this.index = this.getRandomInteger(0, this.slidesCount - 1);
       } else {
         this.index--;
         if (this.index < 0) {
           this.index = this.slidesCount - 1;
         }
       }
-      refreshSlide();
+      this.refreshSlide();
     },
 
     goNext() {
       if (this.randomState) {
-        this.index = getRandomInteger(0, this.slidesCount - 1);
+        this.index = this.getRandomInteger(0, this.slidesCount - 1);
       } else {
         this.index++;
         if (this.index >= this.slidesCount) {
           this.index = 0;
         }
       }
-      refreshSlide();
+      this.refreshSlide();
     },
 
     checkAuto() {
@@ -172,7 +191,7 @@ export default {
         this.setAuto(true, "Pause", "fa-pause", "fa-play");
         this.timer = window.setInterval(this.goNext, this.timeout);
       }
-      refreshSlide();
+      this.refreshSlide();
     },
 
     checkRandom() {
@@ -190,7 +209,8 @@ export default {
           this.slidesTriggers[i].removeAttribute("checked");
         }
       }
-      this.slidesTriggers[index].setAttribute("checked", true);
+
+      this.slidesTriggers[this.index].setAttribute("checked", true);
     },
 
     /**
@@ -235,29 +255,6 @@ export default {
       icon.classList.add(add);
       icon.classList.remove(remove);
     }
-  },
-
-  mounted() {
-    this.sliderElt    = document.getElementById("slider");
-    this.previousElt  = document.getElementById("slider-previous");
-    this.nextElt      = document.getElementById("slider-next");
-    this.autoElt      = document.getElementById("slider-auto");
-    this.randomElt    = document.getElementById("slider-random");
-    this.autoIcon     = this.autoElt.querySelector("i");
-    this.randomIcon   = this.randomElt.querySelector("i");
-
-    if (this.sliderElt.querySelectorAll("input")) {
-      this.slidesTriggers = this.sliderElt.querySelectorAll("input");
-      this.slidesCount    = this.slidesTriggers.length;
-    }
-
-    document.addEventListener("keydown", this.setKeyboard);
-    this.previousElt.addEventListener("click", this.goPrevious);
-    this.nextElt.addEventListener("click", this.goNext);
-    this.autoElt.addEventListener("click", this.checkAuto);
-    this.randomElt.addEventListener("click", this.checkRandom);
-
-    this.initSlider();
   }
 }
 </script>
