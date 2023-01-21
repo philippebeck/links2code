@@ -9,7 +9,8 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView
+    component: HomeView,
+    alias: ["/links"]
   },
   {
     path: "/contact",
