@@ -100,6 +100,17 @@ export default {
 
     hasSlot(name) {
       return this.$slots[name] !== undefined;
+    },
+
+    toggleMenu() {
+      const nav = document.getElementById("nav");
+      const admin = document.getElementById("admin");
+
+      nav.classList.toggle("show");
+      nav.classList.toggle("hide");
+
+      admin.classList.toggle("show");
+      admin.classList.toggle("hide");
     }
   }
 }
