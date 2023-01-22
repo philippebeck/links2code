@@ -108,6 +108,14 @@ export default {
 
   methods: {
     /**
+     * HAS SLOT
+     * @param {string} name 
+     */
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
+    },
+
+    /**
      * RUN SLIDER
      */
     runSlider() {
@@ -128,6 +136,16 @@ export default {
       }
 
       document.getElementById(`slide-${this.index + 1}`).classList.add("show");
+    },
+
+    /**
+     * SET SLIDE
+     * @param {Number} index 
+     */
+    setSlide(index) {
+      this.index = index;
+
+      this.refreshSlide();
     },
 
     /**
