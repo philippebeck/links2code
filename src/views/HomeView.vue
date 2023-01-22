@@ -1,34 +1,42 @@
 <template>
+  <NavElt
+    type="sidebar"
+    :items="cats"
+    class="sidebar">
+
+    <template #items="slotProps">
+      <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
+    </template>
+
+    <template #top>
+      <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
+    </template>
+  </NavElt>
+
   <CardElt id="top">
     <template #header>
-      <i class="blue fa-solid fa-link fa-2x"></i>
+      <SliderElt
+        id="slider" 
+        class="slider"
+        :slides="cats">
+        <template #slide="slotProps">
+          <i :class="`fa-brands fa-${slotProps.slide.toLowerCase()} fa-10x blue`"></i>
+        </template>
+      </SliderElt>
+
       <h1 class="blue shatex-blur-sm anima-slideB">
         Links2Code
       </h1>
       <strong class="gray">
         Links for Coding !
       </strong>
-
-      <NavElt
-        type="sidebar"
-        :items="cats"
-        class="sidebar">
-
-        <template #items="slotProps">
-          <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-fw`"></i>
-        </template>
-
-        <template #top>
-          <i class="fa-solid fa-chevron-circle-up fa-fw"></i>
-        </template>
-      </NavElt>
     </template>
 
     <template #body>
       <ListElt :items="itemsByCat(links)">
         <template #items="slotProps">
           <i 
-            :class="`fa-brands fa-${slotProps.index.toLowerCase()} fa-6x sky shatex-blur-md anima-grow mar-lg`"
+            :class="`fa-brands fa-${slotProps.index.toLowerCase()} fa-5x sky shatex-blur-md anima-grow mar-lg`"
             :id="slotProps.index">
           </i>
         </template>
@@ -48,6 +56,7 @@
 <script>
 import CardElt from "@/components/main/CardElt"
 import NavElt from "@/components/main/NavElt"
+import SliderElt from "@/components/data/SliderElt"
 import BtnElt from "@/components/base/BtnElt"
 import ListElt from "@/components/data/ListElt"
 
@@ -56,6 +65,7 @@ export default {
   components: {
     CardElt,
     NavElt,
+    SliderElt,
     BtnElt,
     ListElt
   },
