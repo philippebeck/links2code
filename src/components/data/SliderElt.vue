@@ -293,7 +293,6 @@ export default {
   --slider-padding: 0;
   --slider-width: 100%;
 
-  position: relative;
   margin: var(--slider-margin);
   border: var(--slider-border);
   padding: var(--slider-padding);
@@ -301,7 +300,8 @@ export default {
 }
 
 [id*="slide-"] {
-  display: none;
+  --slide-display: none;
+  display: var(--slide-display);
 }
 
 figcaption {
@@ -319,10 +319,15 @@ figcaption {
 }
 
 .controls {
-  display: flex;
-  gap: 10px;
-  place-content: center;
-  opacity: 0;
+  --controls-display: flex;
+  --controls-gap: 10px;
+  --controls-place-content: center;
+  --controls-opacity: 0;
+
+  display: var(--controls-display);
+  gap: var(--controls-gap);
+  place-content: var(--controls-place-content);
+  opacity: var(--controls-opacity);
 }
 
 .slider:hover .controls,
