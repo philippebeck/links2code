@@ -18,9 +18,9 @@
       <SliderElt
         id="slider" 
         class="slider"
-        :items="cats">
+        :slides="cats">
         <template #slide="slotProps">
-          <i :class="`fa-brands fa-${slotProps.item.toLowerCase()} fa-10x`"></i>
+          <i :class="`fa-brands fa-${slotProps.slide.toLowerCase()} fa-10x blue`"></i>
         </template>
       </SliderElt>
 
