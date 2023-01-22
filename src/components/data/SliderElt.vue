@@ -1,6 +1,5 @@
 <template>
   <figure 
-    id="slider" 
     class="slider">
 
     <ul class="controls">
@@ -36,9 +35,7 @@
       </li>
     </ul>
 
-    <ul 
-      id="slides" 
-      class="slides">
+    <ul class="slides">
       <li
         v-for="(slide, index) in slides"
         :key="index"
@@ -51,21 +48,28 @@
             :index="index">
           </slot>
 
-          <figcaption>
-            <slot name="figcaption"></slot>
+          <figcaption v-if="hasSlot('info')">
+            <slot 
+              name="info"
+              :slide="slide"
+              :index="index">
+            </slot>
           </figcaption>
         </figure>
       </li>
     </ul>
 
-    <ul class="timeline">
+    <ul class="gallery">
       <li
         v-for="(slide, index) in slides"
-        :key="index">
-        <i 
-          class="fas fa-dot-circle" 
-          aria-hidden="true">
-        </i>
+        :key="index"
+        @click="setSlide(index)">
+
+        <slot
+          name="gallery"
+          :slide="slide"
+          :index="index">
+        </slot>
       </li>
     </ul>
   </figure>
@@ -104,6 +108,14 @@ export default {
 
   methods: {
     /**
+     * HAS SLOT
+     * @param {string} name 
+     */
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
+    },
+
+    /**
      * RUN SLIDER
      */
     runSlider() {
@@ -124,6 +136,16 @@ export default {
       }
 
       document.getElementById(`slide-${this.index + 1}`).classList.add("show");
+    },
+
+    /**
+     * SET SLIDE
+     * @param {Number} index 
+     */
+    setSlide(index) {
+      this.index = index;
+
+      this.refreshSlide();
     },
 
     /**
@@ -267,43 +289,45 @@ export default {
 <style scoped>
 .slider {
   --slider-margin: var(--slider-figcaption-height) auto -20px;
+  --slider-border: none;
+  --slider-padding: 0;
   --slider-width: 100%;
 
-  position: relative;
   margin: var(--slider-margin);
+  border: var(--slider-border);
+  padding: var(--slider-padding);
   width: var(--slider-width);
-}
-.slides {
-  --slider-relay-text-align: center;
-  text-align: var(--slider-relay-text-align);
 }
 
 [id*="slide-"] {
-  display: none;
+  --slide-display: none;
+  display: var(--slide-display);
 }
 
 figcaption {
-  --slider-figcaption-top: -45%;
-  --slider-figcaption-left: 0;
   --slider-figcaption-padding: 5px 20px;
   --slider-figcaption-width: 100%;
   --slider-figcaption-height: 20%;
   --slider-figcaption-font-weight: bold;
+  --slider-figcaption-color: var(--sky);
 
-  position: absolute;
-  top: var(--slider-figcaption-top);
-  left: var(--slider-figcaption-left);
   padding: var(--slider-figcaption-padding);
   width: var(--slider-figcaption-width);
   height: var(--slider-figcaption-height);
   font-weight: var(--slider-figcaption-font-weight);
+  color: var(--slider-figcaption-color);
 }
 
 .controls {
-  display: flex;
-  gap: 10px;
-  place-content: center;
-  opacity: 0;
+  --controls-display: flex;
+  --controls-gap: 10px;
+  --controls-place-content: center;
+  --controls-opacity: 0;
+
+  display: var(--controls-display);
+  gap: var(--controls-gap);
+  place-content: var(--controls-place-content);
+  opacity: var(--controls-opacity);
 }
 
 .slider:hover .controls,
@@ -312,38 +336,55 @@ figcaption {
   opacity: var(--slider-controls-hover-opacity);
 }
 
+.controls > *:hover,
+.controls > *:focus {
+  --controls-hover-color: var(--sky);
+  color: var(--controls-hover-color);
+}
+
 button {
   --slider-button-border: none;
   --slider-button-font-size: 60%;
   --slider-button-background: none;
   --slider-button-color: var(--grey-dark);
 
-  position: static;
   border: var(--slider-button-border);
   font-size: var(--slider-button-font-size);
   background: var(--slider-button-background);
   color: var(--slider-button-color);
 }
 
-.timeline {
-  --timeline-display: flex;
-  --timeline-gap: 5px;
-  --timeline-place-content: center;
-  --timeline-opacity: 0;
+.gallery {
+  --gallery-display: flex;
+  --gallery-gap: 10px;
+  --gallery-place-content: center;
+  --gallery-opacity: 0;
+  --gallery-color: var(--gray);
 
-  display: var(--timeline-display);
-  gap: var(--timeline-gap);
-  place-content: var(--timeline-place-content);
-  opacity: var(--timeline-opacity);
+  display: var(--gallery-display);
+  gap: var(--gallery-gap);
+  place-content: var(--gallery-place-content);
+  opacity: var(--gallery-opacity);
+  color: var(--gallery-color);
 }
 
-.slider:hover .timeline,
-.slider:focus .timeline {
-  --timeline-hover-opacity: 1;
-  opacity: var(--timeline-hover-opacity);
+.slider:hover .gallery,
+.slider:focus .gallery {
+  --gallery-hover-opacity: 1;
+  opacity: var(--gallery-hover-opacity);
+}
+
+.gallery > *:hover,
+.gallery > *:focus {
+  --gallery-child-hover-color: var(--sky);
+  --gallery-child-hover-cursor: pointer;
+
+  color: var(--gallery-child-hover-color);
+  cursor: var(--gallery-child-hover-cursor);
 }
 
 .show {
-  display: list-item;
+  --slider-show-display: list-item;
+  display: var(--slider-show-display);
 }
 </style>
