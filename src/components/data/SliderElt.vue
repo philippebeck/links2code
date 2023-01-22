@@ -1,91 +1,74 @@
 <template>
-  <div 
+  <figure 
     id="slider" 
     class="slider">
 
-    <input 
-      v-for="(item, index) in items"
-      :key="index"
-      :id="'slider-radio' + (index + 1)" 
-      :class="'slider-radio' + (index + 1)" 
-      type="radio" 
-      name="slider" 
-      checked
-      disabled>
-
-    <figure 
-      id="slider-relay" 
-      class="slider-relay">
-
-      <figure 
-        v-for="(item, index) in items"
-        :key="index"
-        :class="'slider-target' + (index + 1)">
-
-        <slot
-          name="slide"
-          :item="item"
-          :index="index">
-        </slot>
-
-        <figcaption>
-          <slot name="figcaption"></slot>
-        </figcaption>
-      </figure>
-    </figure>
-
-    <ul>
+    <ul class="controls">
       <li>
         <button 
-          @click="goNext()"
-          id="slider-previous" 
-          class="slider-previous" 
+          @click="goPrevious()"
           title="Previous (&larr;)">
           <i class="fas fa-step-backward fa-2x"></i>
         </button>
       </li>
       <li>
         <button 
-          @click="checkAuto()"
-          id="slider-auto" 
-          class="slider-auto" 
-          title="Pause (&uarr;)">
-          <i class="fas fa-pause fa-2x"></i>
-        </button>
-      </li>
-      <li class="hide">
-        <button 
           @click="checkRandom()"
           id="slider-random" 
-          class="slider-random" 
-          title="Random (&darr;)">
+          title="Random (&uarr;)">
           <i class="fas fa-random fa-2x"></i>
         </button>
       </li>
       <li>
         <button 
-          @click="goPrevious()"
-          id="slider-next" 
-          class="slider-next" 
+          @click="checkAuto()"
+          id="slider-auto" 
+          title="Pause (&darr;)">
+          <i class="fas fa-pause fa-2x"></i>
+        </button>
+      </li>
+      <li>
+        <button 
+          @click="goNext()"
           title="Next (&rarr;)">
           <i class="fas fa-step-forward fa-2x"></i>
         </button>
       </li>
     </ul>
 
-    <ul class="slider-progress">
-
+    <ul 
+      id="slides" 
+      class="slides">
       <li
-        v-for="(item, index) in items"
-        :key="index">
-        <label :for="'slider-radio1' + (index + 1)">
-          <i 
-            class="fas fa-dot-circle" 
-            aria-hidden="true"></i>
-        </label>
+        v-for="(slide, index) in slides"
+        :key="index"
+        :id="'slide-' + (index + 1)">
+
+        <figure>
+          <slot
+            name="slide"
+            :slide="slide"
+            :index="index">
+          </slot>
+
+          <figcaption>
+            <slot name="figcaption"></slot>
+          </figcaption>
+        </figure>
       </li>
     </ul>
-  </div>
+
+    <ul class="timeline">
+      <li
+        v-for="(slide, index) in slides"
+        :key="index">
+        <i 
+          class="fas fa-dot-circle" 
+          aria-hidden="true">
+        </i>
+      </li>
+    </ul>
+  </figure>
 </template>
 
 <script>
