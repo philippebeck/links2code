@@ -1,6 +1,5 @@
 <template>
   <figure 
-    id="slider" 
     class="slider">
 
     <ul class="controls">
@@ -36,9 +35,7 @@
       </li>
     </ul>
 
-    <ul 
-      id="slides" 
-      class="slides">
+    <ul class="slides">
       <li
         v-for="(slide, index) in slides"
         :key="index"
@@ -51,21 +48,28 @@
             :index="index">
           </slot>
 
-          <figcaption>
-            <slot name="figcaption"></slot>
+          <figcaption v-if="hasSlot('info')">
+            <slot 
+              name="info"
+              :slide="slide"
+              :index="index">
+            </slot>
           </figcaption>
         </figure>
       </li>
     </ul>
 
-    <ul class="timeline">
+    <ul class="gallery">
       <li
         v-for="(slide, index) in slides"
-        :key="index">
-        <i 
-          class="fas fa-dot-circle" 
-          aria-hidden="true">
-        </i>
+        :key="index"
+        @click="setSlide(index)">
+
+        <slot
+          name="gallery"
+          :slide="slide"
+          :index="index">
+        </slot>
       </li>
     </ul>
   </figure>
