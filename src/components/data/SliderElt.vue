@@ -76,100 +76,148 @@ export default {
   name: "SliderElt",
 
   props: {
-    items: {
+    slides: {
       type: Array
     }
   },
 
   data() {
     return {
-      sliderElt: null,
-      slidesTriggers: null,
-      slidesCount: 0,
       index: -1,
       timer: null,
-      timeout: 5000,
+      timeout: 2000,
       autoElt: null,
-      autoIcon: null,
       autoState: true,
       randomElt: null,
-      randomIcon: null,
       randomState: false
     }
   },
 
   mounted() {
-    this.sliderElt    = document.getElementById("slider");
-    this.autoElt      = document.getElementById("slider-auto");
-    this.autoIcon     = this.autoElt.querySelector("i");
-    this.randomElt    = document.getElementById("slider-random");
-    this.randomIcon   = this.randomElt.querySelector("i");
-
-    if (document.querySelectorAll("input")) {
-      this.slidesTriggers = document.querySelectorAll("input");
-      this.slidesCount = this.slidesTriggers.length;
-    }
+    this.autoElt    = document.getElementById("slider-auto");
+    this.randomElt  = document.getElementById("slider-random");
 
     document.addEventListener("keydown", this.setKeyboard);
+
+    this.runSlider();
   },
 
   methods: {
+    /**
+     * RUN SLIDER
+     */
     runSlider() {
       if (this.autoState) {
         this.timer = window.setInterval(this.goNext, this.timeout);
+
       } else {
         this.goNext();
       }
     },
 
     /**
-     * @param {Object} event
+     * REFRESH SLIDE
      */
-    setKeyboard(event) {
-      switch (event.code) {
-        case "ArrowLeft":
-          this.goPrevious();
-          break;
-        case "ArrowUp":
-          this.checkAuto();
-          break;
-        case "ArrowDown":
-          this.checkRandom();
-          break;
-        case "ArrowRight":
-          this.goNext();
-          break;
+    refreshSlide() {
+      for (let i = 1; i <= this.slides.length; i++) {
+        document.getElementById(`slide-${i}`).classList.remove("show");
       }
+
+      document.getElementById(`slide-${this.index + 1}`).classList.add("show");
     },
 
-    goPrevious() {
-      if (this.randomState) {
-        this.index = this.getRandomInteger(0, this.slidesCount - 1);
-      } else {
-        this.index--;
-        if (this.index < 0) {
-          this.index = this.slidesCount - 1;
-        }
-      }
-      this.refreshSlide();
+    /**
+     * GET RANDOM INTEGER
+     * @param {number} min
+     * @param {number} max
+     * @return
+     */
+    getRandomInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     },
 
+
+    /**
+     * GO NEXT SLIDE
+     */
     goNext() {
       if (this.randomState) {
-        this.index = this.getRandomInteger(0, this.slidesCount - 1);
+        this.index = this.getRandomInteger(0, this.slides.length - 1);
+
       } else {
         this.index++;
-        if (this.index >= this.slidesCount) {
+
+        if (this.index >= this.slides.length) {
           this.index = 0;
         }
       }
       this.refreshSlide();
     },
 
+    /**
+     * GO PREVIOUS SLIDE
+     */
+    goPrevious() {
+      if (this.randomState) {
+        this.index = this.getRandomInteger(0, this.slides.length - 1);
+
+      } else {
+        this.index--;
+
+        if (this.index < 0) {
+          this.index = this.slides.length - 1;
+        }
+      }
+      this.refreshSlide();
+    },
+
+    /**
+     * SET ICON
+     * @param {object} icon
+     * @param {string} add
+     * @param {string} remove
+     */
+    setIcon(icon, add, remove) {
+      icon.classList.add(add);
+      icon.classList.remove(remove);
+    },
+
+    /**
+     * SET AUTO
+     * @param {boolean} state
+     * @param {string} title
+     * @param {string} add
+     * @param {string} remove
+     */
+    setAuto(state, title, add, remove) {
+      this.autoState      = state;
+      this.autoElt.title  = title;
+
+      this.setIcon(this.autoElt.querySelector("i"), add, remove);
+    },
+
+    /**
+     * SET RANDOM
+     * @param {boolean} state
+     * @param {string} title
+     * @param {string} add
+     * @param {string} remove
+     */
+    setRandom(state, title, add, remove) {
+      this.randomState      = state;
+      this.randomElt.title  = title;
+
+      this.setIcon(this.randomElt.querySelector("i"), add, remove);
+    },
+
+    /**
+     * CHECK AUTO
+     */
     checkAuto() {
       if (this.autoState) {
         this.setAuto(false, "Play", "fa-play", "fa-pause");
         window.clearInterval(this.timer);
+
       } else {
         this.setAuto(true, "Pause", "fa-pause", "fa-play");
         this.timer = window.setInterval(this.goNext, this.timeout);
@@ -177,6 +225,9 @@ export default {
       this.refreshSlide();
     },
 
+    /**
+     * CHECK RANDOM
+     */
     checkRandom() {
       if (this.randomState) {
         this.setRandom(false, "Random", "fa-random", "fa-long-arrow-alt-right");
@@ -186,57 +237,28 @@ export default {
       this.refreshSlide();
     },
 
-    refreshSlide() {
-      for (let i = 0; i < this.slidesCount; i++) {
-        if (this.slidesTriggers[i].hasAttribute("checked")) {
-          this.slidesTriggers[i].removeAttribute("checked");
-        }
+    /**
+     * SET KEYBOARD
+     * @param {Object} event
+     */
+    setKeyboard(event) {
+      switch (event.code) {
+        case "ArrowLeft":
+          this.goPrevious();
+          break;
+
+        case "ArrowUp":
+          this.checkRandom();
+          break;
+
+        case "ArrowDown":
+          this.checkAuto();
+          break;
+
+        case "ArrowRight":
+          this.goNext();
+          break;
       }
-
-      this.slidesTriggers[this.index].setAttribute("checked", true);
-    },
-
-    /**
-     * @param {number} min
-     * @param {number} max
-     * @return
-     */
-    getRandomInteger(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
-
-    /**
-     * @param {boolean} state
-     * @param {string} title
-     * @param {string} add
-     * @param {string} remove
-     */
-    setAuto(state, title, add, remove) {
-      this.autoState      = state;
-      this.autoElt.title  = title;
-      this.setIcon(this.autoIcon, add, remove);
-    },
-
-    /**
-     * @param {boolean} state
-     * @param {string} title
-     * @param {string} add
-     * @param {string} remove
-     */
-    setRandom(state, title, add, remove) {
-      this.randomState      = state;
-      this.randomElt.title  = title;
-      this.setIcon(this.randomIcon, add, remove);
-    },
-
-    /**
-     * @param {object} icon
-     * @param {string} add
-     * @param {string} remove
-     */
-    setIcon(icon, add, remove) {
-      icon.classList.add(add);
-      icon.classList.remove(remove);
     }
   }
 }
