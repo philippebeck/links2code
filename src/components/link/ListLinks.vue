@@ -154,7 +154,8 @@ export default {
           }
 
           this.updateLink(isReferenced, i);
-        });
+        })
+        .catch(err => { console.log(err) });
     },
 
     /**
@@ -175,7 +176,8 @@ export default {
           .then(() => {
             alert(link.get("name") + " updated !");
             this.$router.go();
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     },
 
@@ -197,7 +199,8 @@ export default {
           .then(() => {
             alert(linkName + " deleted !");
             this.$router.go();
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }

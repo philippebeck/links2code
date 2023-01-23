@@ -136,7 +136,8 @@ export default {
           }
 
           this.createUser(isReferenced);
-        });
+        })
+        .catch(err => { console.log(err) });
     },
 
     /**
@@ -157,7 +158,8 @@ export default {
           .then(() => {
             alert(user.get("name") + " created !");
             this.$router.go();
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }

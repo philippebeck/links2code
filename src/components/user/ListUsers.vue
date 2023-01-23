@@ -151,7 +151,8 @@ export default {
           }
 
           this.updateUser(isReferenced, i);
-        });
+        })
+        .catch(err => { console.log(err) });
     },
 
     /**
@@ -179,7 +180,8 @@ export default {
           .then(() => {
             alert(user.get("name") + " updated !");
             this.$router.go();
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     },
 
@@ -201,7 +203,8 @@ export default {
           .then(() => {
             alert(userName + " deleted !");
             this.$router.go();
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }

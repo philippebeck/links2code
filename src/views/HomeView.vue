@@ -110,6 +110,7 @@ export default {
       .then(response => {
         this.links = response;
       })
+      .catch(err => { console.log(err) });
   }
 }
 </script>

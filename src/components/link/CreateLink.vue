@@ -121,7 +121,8 @@ export default {
           }
 
           this.createLink(isReferenced);
-        });
+        })
+        .catch(err => { console.log(err) });
     },
 
     /**
@@ -140,7 +141,8 @@ export default {
           .then(() => {
             alert(link.get("name") + " created !");
             this.$router.go();
-        });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }
