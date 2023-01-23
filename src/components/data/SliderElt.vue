@@ -121,6 +121,10 @@ export default {
     this.runSlider();
   },
 
+  updated() {
+    document.getElementById("slide-1").classList.add("show");
+  },
+
   methods: {
     /******************** SETTERS ********************/
 
