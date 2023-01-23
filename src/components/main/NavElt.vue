@@ -261,10 +261,10 @@ export default {
 .navbar ul button:hover,
 .navbar ul button:focus {
   --navbar-first-ul-a-hover-color: var(--yellow);
-  --navbar-first-ul-a-hover-scale: 0.9;
+  --navbar-first-ul-a-hover-transform: scale(0.9);
 
   color: var(--navbar-first-ul-a-hover-color) !important;
-  transform: scale(var(--navbar-first-ul-a-hover-scale)) !important;
+  transform: var(--navbar-first-ul-a-hover-transform) !important;
 }
 
 .navbar :deep(ul):last-of-type a:hover,
@@ -272,10 +272,10 @@ export default {
 .navbar :deep(ul):last-of-type button:hover,
 .navbar :deep(ul):last-of-type button:focus {
   --navbar-last-ul-a-hover-color: var(--orange);
-  --navbar-last-ul-a-hover-scale: 1.5;
+  --navbar-last-ul-a-hover-transform: scale(1.5);
 
   color: var(--navbar-last-ul-a-hover-color);
-  transform: scale(var(--navbar-last-ul-a-hover-scale));
+  transform: var(--navbar-last-ul-a-hover-transform);
 }
 
 .navbar :deep(button) {
