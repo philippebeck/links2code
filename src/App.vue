@@ -100,13 +100,6 @@
         </li>
         <li>
           <a
-            href="https://www.npmjs.com/package/servidio"
-            title="JavaScript Frontend Services">
-            Servidio
-          </a>
-        </li>
-        <li>
-          <a
             href="https://www.npmjs.com/package/nemjs"
             title="JavaScript Backend Services">
             Nemjs
@@ -119,6 +112,13 @@
             Pam
           </a>
         </li>
+        <li>
+          <a
+            href="https://www.npmjs.com/package/servidio"
+            title="JavaScript Frontend Services">
+            Servidio
+          </a>
+        </li>
       </ul>
     </template>
 
@@ -126,16 +126,16 @@
       <ul>
         <li>
           <a
-            href="https://philippebeck.net"
-            title="Portal">
-            Philippe Beck
+            href="https://links2code.philippebeck.net"
+            title="Links For Coding">
+            Links2Code
           </a>
         </li>
         <li>
           <a
-            href="https://links2code.philippebeck.net"
-            title="Links For Coding">
-            Links2Code
+            href="https://philippebeck.net"
+            title="Portal">
+            Philippe Beck
           </a>
         </li>
       </ul>
