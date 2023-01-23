@@ -82,116 +82,51 @@ export default {
   props: {
     slides: {
       type: Array
+    },
+    delay: {
+      type: Number,
+      default: 2000
+    },
+    auto: {
+      type: Boolean,
+      default: true
+    },
+    random: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
       index: -1,
-      timer: null,
-      timeout: 2000,
+      intervalId: 0,
       autoElt: null,
-      autoState: true,
       randomElt: null,
-      randomState: false
+      autoState: this.auto,
+      randomState: this.random
+    }
+  },
+
+  beforeCreate() {
+    for (let i = 0; i < 1000; i++) {
+      clearTimeout(i);
     }
   },
 
   mounted() {
     this.autoElt    = document.getElementById("slider-auto");
     this.randomElt  = document.getElementById("slider-random");
-
     document.addEventListener("keydown", this.setKeyboard);
-
     this.runSlider();
   },
 
+  updated() {
+    document.getElementById("slide-1").classList.add("show");
+  },
+
   methods: {
-    /**
-     * HAS SLOT
-     * @param {string} name 
-     */
-    hasSlot(name) {
-      return this.$slots[name] !== undefined;
-    },
-
-    /**
-     * RUN SLIDER
-     */
-    runSlider() {
-      if (this.autoState) {
-        this.timer = window.setInterval(this.goNext, this.timeout);
-
-      } else {
-        this.goNext();
-      }
-    },
-
-    /**
-     * REFRESH SLIDE
-     */
-    refreshSlide() {
-      for (let i = 1; i <= this.slides.length; i++) {
-        document.getElementById(`slide-${i}`).classList.remove("show");
-      }
-
-      document.getElementById(`slide-${this.index + 1}`).classList.add("show");
-    },
-
-    /**
-     * SET SLIDE
-     * @param {Number} index 
-     */
-    setSlide(index) {
-      this.index = index;
-
-      this.refreshSlide();
-    },
-
-    /**
-     * GET RANDOM INTEGER
-     * @param {number} min
-     * @param {number} max
-     * @return
-     */
-    getRandomInteger(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
-
-
-    /**
-     * GO NEXT SLIDE
-     */
-    goNext() {
-      if (this.randomState) {
-        this.index = this.getRandomInteger(0, this.slides.length - 1);
-
-      } else {
-        this.index++;
-
-        if (this.index >= this.slides.length) {
-          this.index = 0;
-        }
-      }
-      this.refreshSlide();
-    },
-
-    /**
-     * GO PREVIOUS SLIDE
-     */
-    goPrevious() {
-      if (this.randomState) {
-        this.index = this.getRandomInteger(0, this.slides.length - 1);
-
-      } else {
-        this.index--;
-
-        if (this.index < 0) {
-          this.index = this.slides.length - 1;
-        }
-      }
-      this.refreshSlide();
-    },
+    /******************** SETTERS ********************/
 
     /**
      * SET ICON
@@ -214,7 +149,6 @@ export default {
     setAuto(state, title, add, remove) {
       this.autoState      = state;
       this.autoElt.title  = title;
-
       this.setIcon(this.autoElt.querySelector("i"), add, remove);
     },
 
@@ -228,8 +162,59 @@ export default {
     setRandom(state, title, add, remove) {
       this.randomState      = state;
       this.randomElt.title  = title;
-
       this.setIcon(this.randomElt.querySelector("i"), add, remove);
+    },
+    
+    /**
+     * SET SLIDE
+     * @param {Number} index 
+     */
+    setSlide(index) {
+      this.index = index;
+      this.refreshSlide();
+    },
+
+    /**
+     * SET KEYBOARD
+     * @param {Object} event
+     */
+    setKeyboard(event) {
+      switch (event.code) {
+        case "ArrowLeft":
+          this.goPrevious();
+          break;
+        case "ArrowUp":
+          this.checkRandom();
+          break;
+        case "ArrowDown":
+          this.checkAuto();
+          break;
+        case "ArrowRight":
+          this.goNext();
+          break;
+      }
+    },
+
+    /******************** GETTERS ********************/
+
+    /**
+     * GET RANDOM INTEGER
+     * @param {number} min
+     * @param {number} max
+     * @return
+     */
+    getRandomInteger(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    /******************** CHECKERS ********************/
+
+    /**
+     * HAS SLOT
+     * @param {string} name 
+     */
+    hasSlot(name) {
+      return this.$slots[name] !== undefined;
     },
 
     /**
@@ -238,11 +223,10 @@ export default {
     checkAuto() {
       if (this.autoState) {
         this.setAuto(false, "Play", "fa-play", "fa-pause");
-        window.clearInterval(this.timer);
-
+        window.clearInterval(this.intervalId);
       } else {
         this.setAuto(true, "Pause", "fa-pause", "fa-play");
-        this.timer = window.setInterval(this.goNext, this.timeout);
+        this.intervalId = window.setInterval(this.goNext, this.delay);
       }
       this.refreshSlide();
     },
@@ -259,29 +243,58 @@ export default {
       this.refreshSlide();
     },
 
+    /******************** MAIN ********************/
+
     /**
-     * SET KEYBOARD
-     * @param {Object} event
+     * RUN SLIDER
      */
-    setKeyboard(event) {
-      switch (event.code) {
-        case "ArrowLeft":
-          this.goPrevious();
-          break;
-
-        case "ArrowUp":
-          this.checkRandom();
-          break;
-
-        case "ArrowDown":
-          this.checkAuto();
-          break;
-
-        case "ArrowRight":
-          this.goNext();
-          break;
+    runSlider() {
+      if (this.autoState) {
+        this.intervalId = window.setInterval(this.goNext, this.delay);
+      } else {
+        this.goNext();
       }
-    }
+    },
+
+    /**
+     * REFRESH SLIDE
+     */
+    refreshSlide() {
+      for (let i = 1; i <= this.slides.length; i++) {
+        document.getElementById(`slide-${i}`).classList.remove("show");
+      }
+      document.getElementById(`slide-${this.index + 1}`).classList.add("show");
+    },
+
+    /**
+     * GO NEXT SLIDE
+     */
+    goNext() {
+      if (this.randomState) {
+        this.index = this.getRandomInteger(0, this.slides.length - 1);
+      } else {
+        this.index++;
+        if (this.index >= this.slides.length) {
+          this.index = 0;
+        }
+      }
+      this.refreshSlide();
+    },
+
+    /**
+     * GO PREVIOUS SLIDE
+     */
+    goPrevious() {
+      if (this.randomState) {
+        this.index = this.getRandomInteger(0, this.slides.length - 1);
+      } else {
+        this.index--;
+        if (this.index < 0) {
+          this.index = this.slides.length - 1;
+        }
+      }
+      this.refreshSlide();
+    },
   }
 }
 </script>
@@ -322,7 +335,7 @@ figcaption {
   --controls-display: flex;
   --controls-gap: 10px;
   --controls-place-content: center;
-  --controls-opacity: 0;
+  --controls-opacity: 1;
 
   display: var(--controls-display);
   gap: var(--controls-gap);
@@ -358,7 +371,7 @@ button {
   --gallery-display: flex;
   --gallery-gap: 10px;
   --gallery-place-content: center;
-  --gallery-opacity: 0;
+  --gallery-opacity: 1;
   --gallery-color: var(--gray);
 
   display: var(--gallery-display);
@@ -386,5 +399,14 @@ button {
 .show {
   --slider-show-display: list-item;
   display: var(--slider-show-display);
+}
+
+@media (min-width: 1200px) {
+  .controls {
+  --controls-opacity: 0;
+  }
+  .gallery {
+    --gallery-opacity: 0;
+  }
 }
 </style>

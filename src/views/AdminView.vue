@@ -118,12 +118,12 @@ export default {
     if (localStorage.userId) {
 
       this.$serve.getData("/api/links")
-        .then(res => { this.links = res;})
-        .catch(err => { console.log(err); });
+        .then(res => { this.links = res })
+        .catch(err => { console.log(err) });
 
       this.$serve.getData("/api/users")
-        .then(res => { this.users = res; })
-        .catch(err => { console.log(err); });
+        .then(res => { this.users = res })
+        .catch(err => { console.log(err) });
 
     } else {
       alert("Go back Home !");

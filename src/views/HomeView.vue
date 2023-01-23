@@ -15,15 +15,11 @@
 
   <CardElt id="top">
     <template #header>
-      <SliderElt
-        id="slider" 
-        class="slider"
-        :slides="cats">
 
+      <SliderElt :slides="cats">
         <template #slide="slotProps">
           <i :class="`fa-brands fa-${slotProps.slide.toLowerCase()} fa-10x blue`"></i>
         </template>
-
         <template #gallery="slotProps">
           <i :class="`fa-brands fa-${slotProps.slide.toLowerCase()}`"></i>
         </template>
@@ -114,6 +110,7 @@ export default {
       .then(response => {
         this.links = response;
       })
+      .catch(err => { console.log(err) });
   }
 }
 </script>

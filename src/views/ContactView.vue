@@ -112,7 +112,8 @@ export default {
           .then(() => {
             alert(message.get("subject") + " sended !");
             this.$router.push("/");
-          });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }

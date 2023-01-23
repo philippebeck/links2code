@@ -87,7 +87,7 @@ export default {
      */
     validateNewLink() {
       if (this.$serve.checkName(this.name) &&
-        this.$serve.checkUrl(`https://${this.url}`)) {
+        this.$serve.checkUrl(this.url)) {
 
         if (this.cat === "") {
           this.cat = "HTML5";
@@ -103,7 +103,9 @@ export default {
     checkNewLink() {
       this.$serve.getData("/api/links")
         .then((links) => {
+
           let isReferenced = false;
+          this.url = this.url.split("//")[1];
 
           for (let i = 0; i < links.length; i++) {
 
@@ -119,7 +121,8 @@ export default {
           }
 
           this.createLink(isReferenced);
-        });
+        })
+        .catch(err => { console.log(err) });
     },
 
     /**
@@ -138,7 +141,8 @@ export default {
           .then(() => {
             alert(link.get("name") + " created !");
             this.$router.go();
-        });
+          })
+          .catch(err => { console.log(err) });
       }
     }
   }
