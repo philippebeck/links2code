@@ -50,14 +50,14 @@
           <li>
             <BtnElt
               type="button"
-              content="Login"
-              @click="login()"
-              class="green"/>
-            <BtnElt
-              type="button"
               content="Forgot Password"
               @click="toggleFormType()"
               class="orange"/>
+            <BtnElt
+              type="button"
+              content="Login"
+              @click="login()"
+              class="green"/>
           </li>
         </ul>
       </form>
@@ -97,14 +97,14 @@
           <li>
             <BtnElt
               type="button"
-              content="Send"
-              @click="forgotPass()"
-              class="orange"/>
-            <BtnElt
-              type="button"
               content="Login"
               @click="toggleFormType()"
               class="green"/>
+            <BtnElt
+              type="button"
+              content="Send"
+              @click="forgotPass()"
+              class="orange"/>
           </li>
         </ul>
       </form>
