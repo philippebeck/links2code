@@ -1,24 +1,13 @@
 # links2code
 
-## Project setup
-```
-npm install
-```
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/philippebeck/links2code.svg)](https://github.com/philippebeck/links2code/commits/master)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[![GitHub Top Language](https://img.shields.io/github/languages/top/philippebeck/links2code)](https://github.com/philippebeck/links2code)
+[![Code Size](https://img.shields.io/github/languages/code-size/philippebeck/links2code)](https://github.com/philippebeck/links2code/tree/master)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/538ee45df4a948478092250161f883a8)](https://www.codacy.com/gh/philippebeck/links2code/dashboard)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a19ce27c45c1af9dddcd/maintainability)](https://codeclimate.com/github/philippebeck/links2code/maintainability)
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Download
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`git clone https://github.com/philippebeck/links2code.git`  
