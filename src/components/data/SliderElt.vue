@@ -331,7 +331,7 @@ figcaption {
   --controls-display: flex;
   --controls-gap: 10px;
   --controls-place-content: center;
-  --controls-opacity: 0;
+  --controls-opacity: 1;
 
   display: var(--controls-display);
   gap: var(--controls-gap);
@@ -367,7 +367,7 @@ button {
   --gallery-display: flex;
   --gallery-gap: 10px;
   --gallery-place-content: center;
-  --gallery-opacity: 0;
+  --gallery-opacity: 1;
   --gallery-color: var(--gray);
 
   display: var(--gallery-display);
@@ -395,5 +395,14 @@ button {
 .show {
   --slider-show-display: list-item;
   display: var(--slider-show-display);
+}
+
+@media (min-width: 1200px) {
+  .controls {
+  --controls-opacity: 0;
+  }
+  .gallery {
+    --gallery-opacity: 0;
+  }
 }
 </style>
