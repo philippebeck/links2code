@@ -122,7 +122,7 @@ section :deep(a):focus {
 
 /********************* SECOND PART *********************/
 
-aside > :deep(ul) {
+aside :deep(ul) {
   --aside-ul-display: flex;
   --aside-ul-flex-direction: row;
   --aside-ul-place-content: center;
@@ -141,6 +141,15 @@ aside > :deep(ul) {
 aside :deep(a) {
   --aside-a-color: var(--blue);
   color: var(--aside-a-color);
+}
+
+aside :deep(i):hover,
+aside :deep(i):focus {
+  --aside-a-hover-transform: scale(1.2);
+  --aside-a-hover-transition: transform 200ms;
+
+  transform: var(--aside-a-hover-transform);
+  transition: var(--aside-a-hover-transition);
 }
 
 /********************* RESPONSIVE *********************/
