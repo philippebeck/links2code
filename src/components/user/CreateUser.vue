@@ -77,15 +77,8 @@
 </template>
 
 <script>
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
-
 export default {
   name: "CreateUser",
-  components: {
-    BtnElt,
-    FieldElt
-  },
 
   data() {
     return {

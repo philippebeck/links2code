@@ -113,19 +113,10 @@
 </template>
 
 <script>
-import CardElt from "@/components/main/CardElt";
-import BtnElt from "@/components/base/BtnElt";
-import FieldElt from "@/components/base/FieldElt";
-
 import constants from "/constants";
 
 export default {
   name: "LoginView",
-  components: {
-    CardElt,
-    BtnElt,
-    FieldElt
-  },
 
   data() {
     return {

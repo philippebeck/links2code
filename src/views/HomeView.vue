@@ -55,21 +55,8 @@
 </template>
 
 <script>
-import CardElt from "@/components/main/CardElt"
-import NavElt from "@/components/main/NavElt"
-import SliderElt from "@/components/data/SliderElt"
-import BtnElt from "@/components/base/BtnElt"
-import ListElt from "@/components/data/ListElt"
-
 export default {
   name: "HomeView",
-  components: {
-    CardElt,
-    NavElt,
-    SliderElt,
-    BtnElt,
-    ListElt
-  },
 
   data() {
     return {

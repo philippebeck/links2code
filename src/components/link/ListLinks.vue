@@ -77,18 +77,8 @@
 </template>
 
 <script>
-import TableElt from "@/components/data/TableElt"
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
-
 export default {
   name: "ListLinks",
-  components: {
-    TableElt,
-    BtnElt,
-    FieldElt
-  },
-
   props: ["links"],
 
   methods: {

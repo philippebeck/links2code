@@ -80,8 +80,6 @@
 </template>
 
 <script>
-import CardElt from "@/components/main/CardElt"
-import NavElt from "@/components/main/NavElt"
 import CreateLink from "@/components/link/CreateLink"
 import ListLinks from "@/components/link/ListLinks"
 import CreateUser from "@/components/user/CreateUser"
@@ -90,8 +88,6 @@ import ListUsers from "@/components/user/ListUsers"
 export default {
   name: "AdminView",
   components: {
-    CardElt,
-    NavElt,
     CreateLink,
     CreateUser,
     ListLinks,

@@ -22,16 +22,7 @@
 </template>
 
 <script>
-import CardElt from "@/components/main/CardElt"
-import MediaElt from "@/components/base/MediaElt"
-import BtnElt from "@/components/base/BtnElt"
-
 export default {
   name: 'ErrorView',
-  components: {
-    CardElt,
-    MediaElt,
-    BtnElt
-  }
 }
 </script>
