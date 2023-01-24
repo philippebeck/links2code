@@ -33,7 +33,7 @@ exports.listUsers = (req, res) => {
  * @param {function} next 
  */
 exports.loginUser = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);

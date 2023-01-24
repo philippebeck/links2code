@@ -28,7 +28,7 @@ exports.listLinks = (req, res) => {
  * @param {function} next 
  */
 exports.createLink = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
@@ -48,9 +48,10 @@ exports.createLink = (req, res, next) => {
  * UPDATE LINK
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
 exports.updateLink = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
