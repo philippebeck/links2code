@@ -99,6 +99,22 @@ exports.forgot = (req, res, next) => {
   })
 }
 
+/**
+ * CHECK USER CREDENTIALS
+ * @param {string} email 
+ * @param {string} pass 
+ * @param {object} res 
+ */
+exports.checkCredentials = (email, pass, res) => {
+  if (!nem.checkEmail(email)) {
+    return res.status(401).json({ message: process.env.USER_EMAIL });
+  }
+
+  if (!nem.checkPass(pass)) {
+    return res.status(401).json({ message: process.env.USER_PASS });
+  }
+}
+
 //! ****************************** CRUD ******************************
 
 /**
