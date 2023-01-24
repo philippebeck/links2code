@@ -67,7 +67,7 @@
               type="button"
               content="Envoyer"
               @click="send()" 
-              class="green"/>
+              class="btn-green"/>
           </li>
         </ul>
       </form>

@@ -72,7 +72,7 @@
       type="button"
       content="Create"
       @click="validateNewUser()" 
-      class="green"/>
+      class="btn-green"/>
   </form>
 </template>
 

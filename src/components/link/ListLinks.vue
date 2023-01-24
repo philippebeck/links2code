@@ -55,7 +55,7 @@
         <BtnElt
           type="button"
           @click="validateUpdatedLink(table[slotProps.index]._id)" 
-          class="sky"
+          class="btn-sky"
           :title="'Update ' + table[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-edit"></i>
@@ -65,7 +65,7 @@
         <BtnElt
           type="button"
           @click="deleteLink(table[slotProps.index]._id)" 
-          class="red"
+          class="btn-red"
           :title="'Delete ' + table[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-trash-alt"></i>

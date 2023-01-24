@@ -47,7 +47,7 @@
             :content="slotProps.value.name"
             :href="`https://${slotProps.value.url}`" 
             :title="slotProps.value.url"
-            class="blue"/>
+            class="btn-blue"/>
         </template>
       </ListElt>
     </template>
