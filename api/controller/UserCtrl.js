@@ -132,15 +132,7 @@ exports.createUser = (req, res, next) => {
     }
 
     let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
-
-    if (!nem.checkEmail(fields.email)) {
-      return res.status(401).json({ message: process.env.USER_EMAIL });
-    }
-
-    if (!nem.checkPass(fields.pass)) {
-      return res.status(401).json({ message: process.env.USER_PASS });
-    }
-
+    this.checkCredentials(fields.email, fields.pass, res);
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -179,14 +171,7 @@ exports.updateUser = (req, res, next) => {
       return;
     }
 
-    if (!nem.checkEmail(fields.email)) {
-      return res.status(401).json({ message: process.env.USER_EMAIL });
-    };
-
-    if (!nem.checkPass(fields.pass)) {
-      return res.status(401).json({ message: process.env.USER_PASS });
-    }
-
+    this.checkCredentials(fields.email, fields.pass, res);
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
