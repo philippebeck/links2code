@@ -5,12 +5,12 @@ const router    = express.Router();
 const nem       = require("nemjs");
 const UserCtrl  = require("../controller/UserCtrl");
 
-router.get("/", nem.checkAuth, UserCtrl.list);
-router.post("/login", UserCtrl.login);
-router.post("/forgot", UserCtrl.forgot);
-router.post("/", nem.checkAuth, UserCtrl.create);
-router.put("/:id", nem.checkAuth, UserCtrl.update);
-router.delete("/:id", nem.checkAuth, UserCtrl.delete);
-router.post("/send", UserCtrl.send);
+router.get("/", nem.checkAuth, UserCtrl.listUsers);
+router.post("/login", UserCtrl.loginUser);
+router.post("/forgot", UserCtrl.forgotPass);
+router.post("/", nem.checkAuth, UserCtrl.createUser);
+router.put("/:id", nem.checkAuth, UserCtrl.updateUser);
+router.delete("/:id", nem.checkAuth, UserCtrl.deleteUser);
+router.post("/send", UserCtrl.sendMessage);
 
 module.exports = router;

@@ -19,7 +19,7 @@ const form = formidable({
  * @param {object} req 
  * @param {object} res 
  */
-exports.list = (req, res) => {
+exports.listUsers = (req, res) => {
   UserModel
     .find()
     .then((users) => res.status(200).json(users))
@@ -32,7 +32,7 @@ exports.list = (req, res) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.login = (req, res, next) => {
+exports.loginUser = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -53,7 +53,7 @@ exports.login = (req, res, next) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.forgot = (req, res, next) => {
+exports.forgotPass = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -123,7 +123,7 @@ exports.checkCredentials = (email, pass, res) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.create = (req, res, next) => {
+exports.createUser = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -171,7 +171,7 @@ exports.create = (req, res, next) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.update = (req, res, next) => {
+exports.updateUser = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -227,7 +227,7 @@ exports.update = (req, res, next) => {
  * @param {object} req 
  * @param {object} res 
  */
-exports.delete = (req, res) => {
+exports.deleteUser = (req, res) => {
   UserModel
     .findOne({ _id: req.params.id })
     .then(user => {
@@ -248,7 +248,7 @@ exports.delete = (req, res) => {
  * @param {object} req 
  * @param {object} res 
  */
-exports.send = (req, res) => {
+exports.sendMessage = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {

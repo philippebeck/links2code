@@ -12,7 +12,7 @@ const form = formidable();
  * @param {object} req 
  * @param {object} res 
  */
-exports.list = (req, res) => {
+exports.listLinks = (req, res) => {
   LinkModel
     .find()
     .then((links) => res.status(200).json(links))
@@ -27,7 +27,7 @@ exports.list = (req, res) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.create = (req, res, next) => {
+exports.createLink = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -49,7 +49,7 @@ exports.create = (req, res, next) => {
  * @param {object} req 
  * @param {object} res 
  */
-exports.update = (req, res) => {
+exports.updateLink = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -69,7 +69,7 @@ exports.update = (req, res) => {
  * @param {object} req 
  * @param {object} res 
  */
-exports.delete = (req, res) => {
+exports.deleteLink = (req, res) => {
   LinkModel
     .deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: process.env.LINK_DELETED }))
