@@ -35,18 +35,20 @@ exports.checkCredentials = (email, pass, res) => {
  * @param {string} name 
  */
 exports.getImgName = (name) => {
+
   return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
 }
 
 /**
- * SET USER
+ * GET USER
  * @param {string} name 
  * @param {string} email 
- * @param {*} image 
+ * @param {string} image 
  * @param {string} pass 
  * @returns 
  */
-exports.setUser = (name, email, image, pass) => {
+exports.getUser = (name, email, image, pass) => {
+
   return {
     name: name,
     email: email,
@@ -132,7 +134,7 @@ exports.forgotPass = (req, res, next) => {
         bcrypt
           .hash(pass, 10)
           .then((hash) => {
-            let newUser = getUser(user.name, user.email, user.image, hash);
+            let newUser = this.getUser(user.name, user.email, user.image, hash);
 
             UserModel
               .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
@@ -168,7 +170,7 @@ exports.createUser = (req, res, next) => {
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-        let user = new UserModel(getUser(fields.name, fields.email, image, hash));
+        let user = new UserModel(this.getUser(fields.name, fields.email, image, hash));
 
         fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
           user
@@ -216,7 +218,7 @@ exports.updateUser = (req, res, next) => {
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-        let user = setUser(fields.name, fields.email, image, hash);
+        let user = this.getUser(fields.name, fields.email, image, hash);
 
         UserModel
           .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
