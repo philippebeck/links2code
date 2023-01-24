@@ -52,12 +52,12 @@
               type="button"
               content="Forgot Password"
               @click="toggleFormType()"
-              class="orange"/>
+              class="btn-orange"/>
             <BtnElt
               type="button"
               content="Login"
               @click="login()"
-              class="green"/>
+              class="btn-green"/>
           </li>
         </ul>
       </form>
@@ -99,12 +99,12 @@
               type="button"
               content="Login"
               @click="toggleFormType()"
-              class="green"/>
+              class="btn-green"/>
             <BtnElt
               type="button"
               content="Send"
               @click="forgotPass()"
-              class="orange"/>
+              class="btn-orange"/>
           </li>
         </ul>
       </form>
@@ -113,19 +113,10 @@
 </template>
 
 <script>
-import CardElt from "@/components/main/CardElt";
-import BtnElt from "@/components/base/BtnElt";
-import FieldElt from "@/components/base/FieldElt";
-
 import constants from "/constants";
 
 export default {
   name: "LoginView",
-  components: {
-    CardElt,
-    BtnElt,
-    FieldElt
-  },
 
   data() {
     return {

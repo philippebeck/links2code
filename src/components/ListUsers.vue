@@ -59,7 +59,7 @@
         <BtnElt
           type="button"
           @click="validateUpdatedUser(users[slotProps.index]._id)" 
-          class="sky"
+          class="btn-sky"
           :title="'Update ' + users[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-edit"></i>
@@ -69,7 +69,7 @@
         <BtnElt
           type="button"
           @click="deleteUser(users[slotProps.index]._id)" 
-          class="red"
+          class="btn-red"
           :title="'Delete ' + users[slotProps.index].name">
           <template #btn>
             <i class="fa-solid fa-trash-alt"></i>
@@ -81,20 +81,8 @@
 </template>
 
 <script>
-import TableElt from "@/components/data/TableElt"
-import BtnElt from "@/components/base/BtnElt"
-import FieldElt from "@/components/base/FieldElt"
-import MediaElt from "@/components/base/MediaElt"
-
 export default {
   name: "ListUsers",
-  components: {
-    TableElt,
-    BtnElt,
-    FieldElt,
-    MediaElt
-  },
-
   props: ["users"],
 
   data() {
