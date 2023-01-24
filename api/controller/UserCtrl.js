@@ -162,7 +162,7 @@ exports.createUser = (req, res, next) => {
     }
 
     this.checkCredentials(fields.email, fields.pass, res);
-    let image = createImgName(fields.name);
+    let image = getImgName(fields.name);
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -199,7 +199,7 @@ exports.updateUser = (req, res, next) => {
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = createImgName(fields.name);
+      image = getImgName(fields.name);
       nem.createImage(files.image.newFilename, image);
 
       UserModel
