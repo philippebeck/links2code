@@ -228,12 +228,13 @@ export default {
 }
 
 .navbar :deep(ul) {
+  --navbar-ul-display: flex;
   --navbar-ul-place-items: center;
   --navbar-ul-margin: 0;
   --navbar-ul-padding: 0;
   --navbar-ul-list-style: none;
 
-  display: flex;
+  display: var(--navbar-ul-display);
   place-items: var(--navbar-ul-place-items);
   margin: var(--navbar-ul-margin);
   padding: var(--navbar-ul-padding);
@@ -272,10 +273,7 @@ export default {
 .navbar :deep(ul):last-of-type button:hover,
 .navbar :deep(ul):last-of-type button:focus {
   --navbar-last-ul-a-hover-color: var(--orange);
-  --navbar-last-ul-a-hover-transform: scale(1.5);
-
   color: var(--navbar-last-ul-a-hover-color);
-  transform: var(--navbar-last-ul-a-hover-transform);
 }
 
 .navbar :deep(button) {
