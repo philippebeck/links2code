@@ -115,6 +115,15 @@ exports.checkCredentials = (email, pass, res) => {
   }
 }
 
+/**
+ * CREATE IMAGE NAME
+ * @param {string} name 
+ */
+exports.createImgName = (name) => {
+  return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+}
+
+}
 //! ****************************** CRUD ******************************
 
 /**
@@ -131,8 +140,8 @@ exports.createUser = (req, res, next) => {
       return;
     }
 
-    let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
     this.checkCredentials(fields.email, fields.pass, res);
+    let image = createImgName(fields.name);
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -175,7 +184,7 @@ exports.updateUser = (req, res, next) => {
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      image = createImgName(fields.name);
       nem.createImage(files.image.newFilename, image);
 
       UserModel
