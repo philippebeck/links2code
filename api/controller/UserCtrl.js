@@ -15,6 +15,22 @@ const form = formidable({
 });
 
 /**
+ * SET USER
+ * @param {string} name 
+ * @param {string} email 
+ * @param {*} image 
+ * @param {string} pass 
+ * @returns 
+ */
+exports.setUser = (name, email, image, pass) => {
+  return {
+    name: name,
+    email: email,
+    image: image,
+    pass: pass
+  }
+}
+/**
  * LIST ALL USERS
  * @param {object} req 
  * @param {object} res 
@@ -70,12 +86,7 @@ exports.forgotPass = (req, res, next) => {
         bcrypt
           .hash(pass, 10)
           .then((hash) => {
-            let newUser = {
-              name: user.name,
-              email: user.email,
-              image: user.image,
-              pass: hash
-            };
+            let newUser = getUser(user.name, user.email, user.image, hash);
 
             UserModel
               .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
@@ -154,13 +165,7 @@ exports.createUser = (req, res, next) => {
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-
-        let user = new UserModel({
-          name: fields.name,
-          email: fields.email,
-          image: image,
-          pass: hash
-        });
+        let user = new UserModel(getUser(fields.name, fields.email, image, hash));
 
         fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
           user
@@ -208,12 +213,7 @@ exports.updateUser = (req, res, next) => {
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-        let user = {
-          name: fields.name,
-          email: fields.email,
-          image: image,
-          pass: hash
-        };
+        let user = setUser(fields.name, fields.email, image, hash);
 
         UserModel
           .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
