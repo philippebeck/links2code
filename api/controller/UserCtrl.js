@@ -15,6 +15,30 @@ const form = formidable({
 });
 
 /**
+ * CHECK USER CREDENTIALS
+ * @param {string} email 
+ * @param {string} pass 
+ * @param {object} res 
+ */
+exports.checkCredentials = (email, pass, res) => {
+  if (!nem.checkEmail(email)) {
+    return res.status(401).json({ message: process.env.USER_EMAIL });
+  }
+
+  if (!nem.checkPass(pass)) {
+    return res.status(401).json({ message: process.env.USER_PASS });
+  }
+}
+
+/**
+ * GET IMAGE NAME
+ * @param {string} name 
+ */
+exports.getImgName = (name) => {
+  return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+}
+
+/**
  * SET USER
  * @param {string} name 
  * @param {string} email 
@@ -30,6 +54,28 @@ exports.setUser = (name, email, image, pass) => {
     pass: pass
   }
 }
+
+/**
+ * SET MESSAGE
+ * @param {string} fields 
+ * @param {object} res 
+ */
+exports.setMessage = (fields, res) => {
+  const mailer  = nem.createMailer();
+
+  (async function(){
+    try {
+      let mail = nem.createMessage(fields);
+
+      await mailer.sendMail(mail, function() {
+        res.status(200).json({ message: process.env.USER_MESSAGE });
+      });
+    } catch(e){ console.error(e); }
+  })();
+}
+
+//! ****************************** MAIN ******************************
+
 /**
  * LIST ALL USERS
  * @param {object} req 
@@ -97,49 +143,6 @@ exports.forgotPass = (req, res, next) => {
       })
       .catch((error) => res.status(500).json({ error }));
   })
-}
-
-/**
- * CHECK USER CREDENTIALS
- * @param {string} email 
- * @param {string} pass 
- * @param {object} res 
- */
-exports.checkCredentials = (email, pass, res) => {
-  if (!nem.checkEmail(email)) {
-    return res.status(401).json({ message: process.env.USER_EMAIL });
-  }
-
-  if (!nem.checkPass(pass)) {
-    return res.status(401).json({ message: process.env.USER_PASS });
-  }
-}
-
-/**
- * CREATE IMAGE NAME
- * @param {string} name 
- */
-exports.createImgName = (name) => {
-  return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
-}
-
-/**
- * SET MESSAGE
- * @param {string} fields 
- * @param {object} res 
- */
-exports.setMessage = (fields, res) => {
-  const mailer  = nem.createMailer();
-
-  (async function(){
-    try {
-      let mail = nem.createMessage(fields);
-
-      await mailer.sendMail(mail, function() {
-        res.status(200).json({ message: process.env.USER_MESSAGE });
-      });
-    } catch(e){ console.error(e); }
-  })();
 }
 
 //! ****************************** CRUD ******************************
