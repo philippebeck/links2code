@@ -79,19 +79,8 @@ exports.forgotPass = (req, res, next) => {
 
             UserModel
               .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
-              .then(() => {
-                const mailer  = nem.createMailer();
-
-                (async function(){
-                  try {
-                    let mail = nem.createMessage(fields);
-
-                    await mailer.sendMail(mail, function() {
-                      res.status(200).json({ message: process.env.USER_MESSAGE });
-                    });
-                  } catch(e){ console.error(e); }
-                })();
-              })
+              .then(() => { this.setMessage(fields, res) })
+              .catch((error) => res.status(500).json({ error }));
           })
           .catch((error) => res.status(400).json({ error }));
       })
@@ -123,7 +112,25 @@ exports.createImgName = (name) => {
   return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
 }
 
+/**
+ * SET MESSAGE
+ * @param {string} fields 
+ * @param {object} res 
+ */
+exports.setMessage = (fields, res) => {
+  const mailer  = nem.createMailer();
+
+  (async function(){
+    try {
+      let mail = nem.createMessage(fields);
+
+      await mailer.sendMail(mail, function() {
+        res.status(200).json({ message: process.env.USER_MESSAGE });
+      });
+    } catch(e){ console.error(e); }
+  })();
 }
+
 //! ****************************** CRUD ******************************
 
 /**
@@ -244,24 +251,13 @@ exports.deleteUser = (req, res) => {
  * @param {function} next 
  */
 exports.sendMessage = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
       return;
     }
 
-    const mailer  = nem.createMailer();
-
-    (async function(){
-      try {
-        let mail = nem.createMessage(fields);
-
-        await mailer.sendMail(mail, function() {
-          res.status(200).json({ message: process.env.USER_MESSAGE });
-        });
-
-      } catch(e){ console.error(e); }
-    })();
+    this.setMessage(fields, res);
   })
 }
