@@ -10,26 +10,42 @@
           <i class="fas fa-step-backward fa-2x"></i>
         </button>
       </li>
-      <li>
+      <li v-if="random === true">
         <button 
           @click="checkRandom()"
           id="slider-random" 
-          title="Random (&uarr;)">
+          title="Normal">
+          <i class="fas fa-long-arrow-alt-right fa-2x"></i>
+        </button>
+      </li>
+      <li v-else>
+        <button 
+          @click="checkRandom()"
+          id="slider-random" 
+          title="Random">
           <i class="fas fa-random fa-2x"></i>
         </button>
       </li>
-      <li>
+      <li v-if="auto === true">
         <button 
           @click="checkAuto()"
           id="slider-auto" 
-          title="Pause (&darr;)">
+          title="Pause">
           <i class="fas fa-pause fa-2x"></i>
+        </button>
+      </li>
+      <li v-else>
+        <button 
+          @click="checkAuto()"
+          id="slider-auto" 
+          title="Play">
+          <i class="fas fa-play fa-2x"></i>
         </button>
       </li>
       <li>
         <button 
           @click="goNext()"
-          title="Next (&rarr;)">
+          title="Next">
           <i class="fas fa-step-forward fa-2x"></i>
         </button>
       </li>
@@ -118,11 +134,11 @@ export default {
     this.autoElt    = document.getElementById("slider-auto");
     this.randomElt  = document.getElementById("slider-random");
     document.addEventListener("keydown", this.setKeyboard);
-    this.runSlider();
   },
 
   updated() {
     document.getElementById("slide-1").classList.add("show");
+    this.runSlider();
   },
 
   methods: {

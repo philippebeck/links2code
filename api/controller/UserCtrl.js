@@ -15,11 +15,75 @@ const form = formidable({
 });
 
 /**
- * LIST USERS
+ * CHECK USER CREDENTIALS
+ * @param {string} email 
+ * @param {string} pass 
+ * @param {object} res 
+ */
+exports.checkCredentials = (email, pass, res) => {
+  if (!nem.checkEmail(email)) {
+    return res.status(401).json({ message: process.env.USER_EMAIL });
+  }
+
+  if (!nem.checkPass(pass)) {
+    return res.status(401).json({ message: process.env.USER_PASS });
+  }
+}
+
+/**
+ * GET IMAGE NAME
+ * @param {string} name 
+ */
+exports.getImgName = (name) => {
+
+  return accents.remove(name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+}
+
+/**
+ * GET USER
+ * @param {string} name 
+ * @param {string} email 
+ * @param {string} image 
+ * @param {string} pass 
+ * @returns 
+ */
+exports.getUser = (name, email, image, pass) => {
+
+  return {
+    name: name,
+    email: email,
+    image: image,
+    pass: pass
+  }
+}
+
+/**
+ * SET MESSAGE
+ * @param {string} fields 
+ * @param {object} res 
+ */
+exports.setMessage = (fields, res) => {
+  const mailer  = nem.createMailer();
+
+  (async function(){
+    try {
+      let mail = nem.createMessage(fields);
+
+      await mailer.sendMail(mail, function() {
+        res.status(200).json({ message: process.env.USER_MESSAGE });
+      });
+    } catch(e){ console.error(e); }
+  })();
+}
+
+//! ****************************** MAIN ******************************
+
+/**
+ * LIST ALL USERS
  * @param {object} req 
  * @param {object} res 
  */
-exports.list = (req, res) => {
+exports.listUsers = (req, res) => {
   UserModel
     .find()
     .then((users) => res.status(200).json(users))
@@ -32,8 +96,8 @@ exports.list = (req, res) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.login = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+exports.loginUser = (req, res, next) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
@@ -53,8 +117,8 @@ exports.login = (req, res, next) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.forgot = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+exports.forgotPass = (req, res, next) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
@@ -70,28 +134,12 @@ exports.forgot = (req, res, next) => {
         bcrypt
           .hash(pass, 10)
           .then((hash) => {
-            let newUser = {
-              name: user.name,
-              email: user.email,
-              image: user.image,
-              pass: hash
-            };
+            let newUser = this.getUser(user.name, user.email, user.image, hash);
 
             UserModel
               .updateOne({ _id: user._id }, { ...newUser, _id: user._id })
-              .then(() => {
-                const mailer  = nem.createMailer();
-
-                (async function(){
-                  try {
-                    let mail = nem.createMessage(fields);
-
-                    await mailer.sendMail(mail, function() {
-                      res.status(200).json({ message: process.env.USER_MESSAGE });
-                    });
-                  } catch(e){ console.error(e); }
-                })();
-              })
+              .then(() => { this.setMessage(fields, res) })
+              .catch((error) => res.status(500).json({ error }));
           })
           .catch((error) => res.status(400).json({ error }));
       })
@@ -107,7 +155,7 @@ exports.forgot = (req, res, next) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.create = (req, res, next) => {
+exports.createUser = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -115,28 +163,14 @@ exports.create = (req, res, next) => {
       return;
     }
 
-    let image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
-
-    if (!nem.checkEmail(fields.email)) {
-      return res.status(401).json({ message: process.env.USER_EMAIL });
-    }
-
-    if (!nem.checkPass(fields.pass)) {
-      return res.status(401).json({ message: process.env.USER_PASS });
-    }
-
+    this.checkCredentials(fields.email, fields.pass, res);
+    let image = this.getImgName(fields.name);
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-
-        let user = new UserModel({
-          name: fields.name,
-          email: fields.email,
-          image: image,
-          pass: hash
-        });
+        let user = new UserModel(this.getUser(fields.name, fields.email, image, hash));
 
         fs.unlink(process.env.IMG_URL + files.image.newFilename, () => {
           user
@@ -155,7 +189,7 @@ exports.create = (req, res, next) => {
  * @param {object} res 
  * @param {function} next 
  */
-exports.update = (req, res, next) => {
+exports.updateUser = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
 
     if (err) {
@@ -163,18 +197,11 @@ exports.update = (req, res, next) => {
       return;
     }
 
-    if (!nem.checkEmail(fields.email)) {
-      return res.status(401).json({ message: process.env.USER_EMAIL });
-    };
-
-    if (!nem.checkPass(fields.pass)) {
-      return res.status(401).json({ message: process.env.USER_PASS });
-    }
-
+    this.checkCredentials(fields.email, fields.pass, res);
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = accents.remove(fields.name).toLowerCase() + "-" + Date.now() + "." + process.env.IMG_EXT;
+      image = this.getImgName(fields.name);
       nem.createImage(files.image.newFilename, image);
 
       UserModel
@@ -191,12 +218,7 @@ exports.update = (req, res, next) => {
     bcrypt
       .hash(fields.pass, 10)
       .then((hash) => {
-        let user = {
-          name: fields.name,
-          email: fields.email,
-          image: image,
-          pass: hash
-        };
+        let user = this.getUser(fields.name, fields.email, image, hash);
 
         UserModel
           .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
@@ -211,7 +233,7 @@ exports.update = (req, res, next) => {
  * @param {object} req 
  * @param {object} res 
  */
-exports.delete = (req, res) => {
+exports.deleteUser = (req, res) => {
   UserModel
     .findOne({ _id: req.params.id })
     .then(user => {
@@ -231,26 +253,16 @@ exports.delete = (req, res) => {
  * SEND USER MESSAGE
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
-exports.send = (req, res) => {
-  form.parse(req, (err, fields, files) => {
+exports.sendMessage = (req, res, next) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
       return;
     }
 
-    const mailer  = nem.createMailer();
-
-    (async function(){
-      try {
-        let mail = nem.createMessage(fields);
-
-        await mailer.sendMail(mail, function() {
-          res.status(200).json({ message: process.env.USER_MESSAGE });
-        });
-
-      } catch(e){ console.error(e); }
-    })();
+    this.setMessage(fields, res);
   })
 }
