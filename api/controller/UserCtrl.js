@@ -116,7 +116,7 @@ exports.loginUser = (req, res, next) => {
  * @param {function} next 
  */
 exports.forgotPass = (req, res, next) => {
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, (err, fields) => {
 
     if (err) {
       next(err);
@@ -162,7 +162,7 @@ exports.createUser = (req, res, next) => {
     }
 
     this.checkCredentials(fields.email, fields.pass, res);
-    let image = getImgName(fields.name);
+    let image = this.getImgName(fields.name);
     nem.createImage(files.image.newFilename, image);
 
     bcrypt
@@ -199,7 +199,7 @@ exports.updateUser = (req, res, next) => {
     let image = fields.image;
 
     if (Object.keys(files).length !== 0) {
-      image = getImgName(fields.name);
+      image = this.getImgName(fields.name);
       nem.createImage(files.image.newFilename, image);
 
       UserModel
