@@ -15,7 +15,7 @@ const form = formidable({
 });
 
 /**
- * LIST USERS
+ * LIST ALL USERS
  * @param {object} req 
  * @param {object} res 
  */
@@ -232,6 +232,7 @@ exports.deleteUser = (req, res) => {
  * SEND USER MESSAGE
  * @param {object} req 
  * @param {object} res 
+ * @param {function} next 
  */
 exports.sendMessage = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
