@@ -69,12 +69,12 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 a,
 button {
   --btn-display: inline-block;
   --btn-margin: 10px;
-  --btn-border: solid 2px var(--black);
+  --btn-border: solid 2px var(--white);
   --btn-border-radius: 10px;
   --btn-padding: 5px 10px;
   --btn-font-family: var(--monospace);
@@ -99,57 +99,129 @@ button {
   background-color: var(--btn-background-color);
   color: var(--btn-color);
   cursor: var(--btn-cursor);
-
-  &:hover,
-  &:focus {
-    --btn-hover-border-radius: 5px;
-    --btn-hover-background-color: var(--white);
-    --btn-hover-color: var(--black);
-    --btn-hover-box-shadow: inset 0 0 5px 2px;
-    --btn-hover-transition: all 200ms;
-
-    border-radius: var(--btn-hover-border-radius);
-    background-color: var(--btn-hover-background-color);
-    color: var(--btn-hover-color);
-    box-shadow: var(--btn-hover-box-shadow);
-    transition: var(--btn-hover-transition);
-  }
-
-  & > * {
-    --btn-child-display: block;
-    --btn-child-margin: auto;
-
-    display: var(--btn-child-display);
-    margin: var(--btn-child-margin);
-  }
 }
 
-$colors:
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "sky",
-  "blue",
-  "violet",
-  "pink";
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  --btn-hover-border-color: var(--black);
+  --btn-hover-border-radius: 5px;
+  --btn-hover-background-color: var(--white);
+  --btn-hover-color: var(--black);
+  --btn-hover-box-shadow: inset 0 0 5px 2px;
+  --btn-hover-transition: all 200ms;
 
-@mixin colors($color) {
-  .#{$color} {
-    border-color: var(--white);
-    background-color: var(--#{$color});
-    color: var(--white);
-  }
-
-  .#{$color}:hover,
-  .#{$color}:focus {
-    border-color: var(--#{$color});
-    background-color: var(--white);
-    color: var(--#{$color});
-  }
+  border-color: var(--btn-hover-border);
+  border-radius: var(--btn-hover-border-radius);
+  background-color: var(--btn-hover-background-color);
+  color: var(--btn-hover-color);
+  box-shadow: var(--btn-hover-box-shadow);
+  transition: var(--btn-hover-transition);
 }
 
-@each $key, $value in $colors {
-    @include colors($key);
-  }
+a > *,
+button > * {
+  --btn-child-display: block;
+  --btn-child-margin: auto;
+
+  display: var(--btn-child-display);
+  margin: var(--btn-child-margin);
+}
+
+/* RED */
+
+.btn-red {
+  background-color: var(--red);
+}
+
+.btn-red:hover,
+.btn-red:focus {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ORANGE */
+
+.btn-orange {
+  background-color: var(--orange);
+}
+
+.btn-orange:hover,
+.btn-orange:focus {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+/* YELLOW */
+
+.btn-yellow {
+  background-color: var(--yellow);
+}
+
+.btn-yellow:hover,
+.btn-yellow:focus {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+/* GREEN */
+
+.btn-green {
+  background-color: var(--green);
+}
+
+.btn-green:hover,
+.btn-green:focus {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* SKY */
+
+.btn-sky {
+  background-color: var(--sky);
+}
+
+.btn-sky:hover,
+.btn-sky:focus {
+  border-color: var(--sky);
+  color: var(--sky);
+}
+
+/* BLUE */
+
+.btn-blue {
+  background-color: var(--blue);
+}
+
+.btn-blue:hover,
+.btn-blue:focus {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* VIOLET */
+
+.btn-violet {
+  background-color: var(--violet);
+}
+
+.btn-violet:hover,
+.btn-violet:focus {
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+/* PINK */
+
+.btn-pink {
+  background-color: var(--pink);
+}
+
+.btn-pink:hover,
+.btn-pink:focus {
+  border-color: var(--pink);
+  color: var(--pink);
+}
 </style>
