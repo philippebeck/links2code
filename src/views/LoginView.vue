@@ -7,10 +7,10 @@
 
     <template #body>
       <form class="form">
-        <ul>
-          <li>
-            <FieldElt
-              id="email"
+        <ListElt :items="['email', 'pass']">
+
+          <template #items-1>
+            <FieldElt id="email"
               v-model:value="email"
               info="Indicate your Email"
               @keyup.enter="login()"
@@ -22,10 +22,10 @@
                 This email must have been registered before
               </template>
             </FieldElt>
-          </li>
-          <li>
-            <FieldElt
-              id="pass"
+          </template>
+
+          <template #items-2>
+            <FieldElt id="pass"
               v-model:value="pass"
               info="Indicate your Password"
               @keyup.enter="login()"
@@ -37,29 +37,23 @@
                 You can use the Forgot Password feature if needed
               </template>
             </FieldElt>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <div 
-              id="recaptcha"
-              class="g-recaptcha"
-              data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
-            </div>
-          </li>
-          <li>
-            <BtnElt
-              type="button"
-              content="Forgot Password"
-              @click="toggleFormType()"
-              class="btn-orange"/>
-            <BtnElt
-              type="button"
-              content="Login"
-              @click="login()"
-              class="btn-green"/>
-          </li>
-        </ul>
+          </template>
+        </ListElt>
+
+        <div id="recaptcha"
+          class="g-recaptcha"
+          data-sitekey="">
+        </div>
+
+        <BtnElt type="button"
+          content="Forgot Password"
+          @click="toggleFormType()"
+          class="btn-orange"/>
+
+        <BtnElt type="button"
+          content="Login"
+          @click="login()"
+          class="btn-green"/>
       </form>
     </template>
   </CardElt>
@@ -72,8 +66,7 @@
 
     <template #body>
       <form>
-        <FieldElt
-          id="email"
+        <FieldElt id="email"
           v-model:value="email"
           info="Indicate your Email"
           @keyup.enter="forgotPass()"
@@ -86,27 +79,21 @@
             This email must have been registered before
           </template>
         </FieldElt>
-        <ul>
-          <li>
-            <div 
-              id="recaptcha"
-              class="g-recaptcha"
-              data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
-            </div>
-          </li>
-          <li>
-            <BtnElt
-              type="button"
-              content="Login"
-              @click="toggleFormType()"
-              class="btn-green"/>
-            <BtnElt
-              type="button"
-              content="Send"
-              @click="forgotPass()"
-              class="btn-orange"/>
-          </li>
-        </ul>
+
+        <div id="recaptcha"
+          class="g-recaptcha"
+          data-sitekey="">
+        </div>
+
+        <BtnElt type="button"
+          content="Login"
+          @click="toggleFormType()"
+          class="btn-green"/>
+
+        <BtnElt type="button"
+          content="Send"
+          @click="forgotPass()"
+          class="btn-orange"/>
       </form>
     </template>
   </CardElt>

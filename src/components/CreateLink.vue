@@ -1,28 +1,27 @@
 <template>
   <form class="container-60lg-50wd">
-    <ul>
-      <li>
-        <FieldElt
-          id="name"
+    <ListElt :items="['name', 'url', 'cat']">
+
+      <template #items-1>
+        <FieldElt id="name"
           v-model:value="name"
-          info="Indicate the link name"
+          info="GitHub"
           @keyup.enter="validateNewLink()"
           :min="parseInt('2')">
           <template #legend>
             Name
           </template>
           <template #label>
-            The name should be descriptive
+            Indicate the link name
           </template>
         </FieldElt>
-      </li>
+      </template>
 
-      <li>
-        <FieldElt
-          id="url"
+      <template #items-2>
+        <FieldElt id="url"
           type="url"
           v-model:value="url"
-          info="Indicate the link URL"
+          info="https://"
           @keyup.enter="validateNewLink()"
           :min="parseInt('5')"
           :max="parseInt('100')">
@@ -30,14 +29,13 @@
             URL
           </template>
           <template #label>
-            A valid URL please
+            Indicate the link URL
           </template>
         </FieldElt>
-      </li>
+      </template>
       
-      <li>
-        <FieldElt
-          id="cat"
+      <template #items-3>
+        <FieldElt id="cat"
           type="list"
           v-model:value="cat"
           info="Choose a category"
@@ -50,12 +48,10 @@
             Choose Dev if others are not suitable
           </template>
         </FieldElt>
+      </template>
+    </ListElt>
 
-      </li>
-    </ul>
-
-    <BtnElt
-      type="button"
+    <BtnElt type="button"
       content="Create"
       @click="validateNewLink()" 
       class="btn-green"/>

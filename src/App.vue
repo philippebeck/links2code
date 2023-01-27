@@ -1,8 +1,7 @@
 <template>
   <NavElt :items="['links', 'contact']">
     <template #brand>
-      <img 
-        class="anima-slideB"
+      <img class="anima-slideB"
         src="/img/logo.svg"
         alt="Logo Phi">
     </template>
@@ -10,182 +9,165 @@
     <template #links>
       <i class="fa-solid fa-link fa-fw"></i>
     </template>
-
     <template #contact>
       <i class="fa-brands fa-at fa-fw"></i>
     </template>
 
     <template #admin>
-      <ul v-if="!userId">
-        <li>
-          <a
-            href="https://paypal.me/philippebeck"
+      <ListElt v-if="!userId"
+        :items="['paypal', 'github', 'login']">
+
+        <template #items-1>
+          <a href="https://paypal.me/philippebeck"
             title="Donation">
             <i class="fa-brands fa-paypal fa-fw"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/sponsors/philippebeck"
+        </template>
+
+        <template #items-2>
+          <a href="https://github.com/sponsors/philippebeck"
             title="Sponsor">
             <i class="fa-regular fa-heart fa-fw"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="/login"
+        </template>
+
+        <template #items-3>
+          <a href="/login"
             title="Login">
             <i class="fa-solid fa-sign-in-alt fa-fw"></i>
           </a>
-        </li>
-      </ul>
+        </template>
+      </ListElt>
 
-      <ul v-else>
-        <li>
-          <a
-            href="/admin"
+      <ListElt v-else
+        :items="['admin', 'logout']">
+        <template #items-1>
+          <a href="/admin"
             title="Admin">
             <i class="fa-solid fa-user-ninja fa-fw"></i>
           </a>
-        </li>
-        <li>
-          <button 
-            type="button"
+        </template>
+
+        <template #items-2>
+          <button type="button"
             @click="logout()"
             title="Logout">
             <i class="fa-solid fa-sign-out-alt fa-fw"></i>
           </button>
-        </li>
-      </ul>
-    </template>
-
-    <template #switch>
-
+        </template>
+      </ListElt>
     </template>
   </NavElt>
 
-  <main>
+  <main class="bg-silver-light">
     <router-view/>
   </main>
   
-
   <FootElt>
     <template #foot1>
-      <ul>
-        <li>
-          <a
-            href="https://asperger.philippebeck.net"
+      <ListElt :items="['Asperger', 'Astronomy']">
+        <template #items-1>
+          <a href="https://asperger.philippebeck.net"
             title="Tests for Asperger's Syndrome">
             Asperger
           </a>
-        </li>
-        <li>
-          <a
-            href="https://astronomy.philippebeck.net"
+        </template>
+        <template #items-2>
+          <a href="https://astronomy.philippebeck.net"
             title="NASA & CDS APIs">
             Astronomy
           </a>
-        </li>
-      </ul>
+        </template>
+      </ListElt>
     </template>
 
     <template #foot2>
-      <ul>
-        <li>
+      <ListElt :items="['Vue-Elt', 'Servidio', 'Animadio', 'NemJS', 'Vesan']">
+        <template #items-1>
           <a
-            href="https://www.npmjs.com/package/animadio"
-            title="Animadio CSS Library">
-            Animadio
+            href="https://www.npmjs.com/package/vue-elt"
+            title="Vue Single File Component Library">
+            Vue-Elt
           </a>
-        </li>
-        <li>
-          <a
-            href="https://www.npmjs.com/package/nemjs"
-            title="JavaScript Backend Services">
-            Nemjs
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://packagist.org/packages/devsagency/pam"
-            title="PHP Adaptive Microframework">
-            Pam
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.npmjs.com/package/servidio"
+        </template>
+        <template #items-2>
+          <a href="https://www.npmjs.com/package/servidio"
             title="JavaScript Frontend Services">
             Servidio
           </a>
-        </li>
-      </ul>
+        </template>
+        <template #items-3>
+          <a href="https://www.npmjs.com/package/animadio"
+            title="Animadio CSS Library">
+            Animadio
+          </a>
+        </template>
+        <template #items-4>
+          <a href="https://www.npmjs.com/package/nemjs"
+            title="JavaScript Backend Services">
+            Nemjs
+          </a>
+        </template>
+        <template #items-5>
+          <a href="https://www.npmjs.com/package/vesan"
+            title="CMS with Vue-Elt, Servidio, Animadio & NemJS">
+            Vesan
+          </a>
+        </template>
+      </ListElt>
     </template>
 
     <template #foot3>
-      <ul>
-        <li>
-          <a
-            href="https://links2code.philippebeck.net"
+      <ListElt :items="['Links2Code', 'Philippe Beck']">
+        <template #items-1>
+          <a href="https://links2code.philippebeck.net"
             title="Links For Coding">
             Links2Code
           </a>
-        </li>
-        <li>
-          <a
-            href="https://philippebeck.net"
+        </template>
+        <template #items-2>
+          <a href="https://philippebeck.net"
             title="Portal">
             Philippe Beck
           </a>
-        </li>
-      </ul>
+        </template>
+      </ListElt>
     </template>
 
     <template #foot>
-      <ul>
-        <li>
-          <a
-            href="https://github.com/philippebeck"
+      <ListElt :items="['GitHub', 'Twitter', 'LinkedIn', 'CodePen']">
+        <template #items-1>
+          <a href="https://github.com/philippebeck"
             title="Philippe Beck @GitHub">
             <i class="fa-brands fa-github fa-2x fa-fw black"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="https://twitter.com/ph_beck"
+        </template>
+        <template #items-2>
+          <a href="https://twitter.com/ph_beck"
             title="Philippe Beck @Twitter">
             <i class="fa-brands fa-twitter fa-2x fa-fw sky"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="https://www.linkedin.com/in/philippebeck"
+        </template>
+        <template #items-3>
+          <a href="https://www.linkedin.com/in/philippebeck"
             title="Philippe Beck @LinkedIn">
             <i class="fa-brands fa-linkedin-in fa-2x fa-fw blue"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="https://codepen.io/philippebeck"
+        </template>
+        <template #items-4>
+          <a href="https://codepen.io/philippebeck"
             title="Philippe Beck @CodePen">
             <i class="fa-brands fa-codepen fa-2x fa-fw black"></i>
           </a>
-        </li>
-      </ul>
+        </template>
+      </ListElt>
     </template>
   </FootElt>
 </template>
 
 <script>
-import NavElt from "@/components/main/NavElt"
-import FootElt from "@/components/main/FootElt"
-
 export default {
   name: 'App',
-  components: {
-    NavElt,
-    FootElt
-  },
 
   data() {
     return {

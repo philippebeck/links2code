@@ -1,61 +1,57 @@
 <template>
-  <form 
-    method="post"
+  <form method="post"
     enctype="multipart/form-data"
     class="form width-lg container-60lg-50wd">
-    <ul>
-      <li>
-        <FieldElt
-          id="name"
+    <ListElt :items="['name', 'email', 'image', 'pass']">
+
+      <template #items-1>
+        <FieldElt id="name"
           v-model:value="name"
-          info="Indicate the user name"
+          info="John Doe"
           @keyup.enter="validateNewUser()"
           :min="parseInt('2')">
           <template #legend>
             Name
           </template>
           <template #label>
-            Pseudo or first name
+            Indicate the user name
           </template>
         </FieldElt>
-      </li>
+      </template>
 
-      <li>
-        <FieldElt
-          id="email"
+      <template #items-2>
+        <FieldElt id="email"
           v-model:value="email"
-          info="Indicate the user email"
+          info="john@doe.com"
           @keyup.enter="validateNewUser()"
           type="email">
           <template #legend>
             Email
           </template>
           <template #label>
-            A valid email please
+            Indicate the user email
           </template>
         </FieldElt>
-      </li>
+      </template>
       
-      <li>
-        <FieldElt
-          id="image"
+      <template #items-3>
+        <FieldElt id="image"
           v-model:value="image"
-          info="Provide user image"
+          info="Only image file"
           type="file">
           <template #legend>
             Image
           </template>
           <template #label>
-            An image file please
+            Provide user image
           </template>
         </FieldElt>
-      </li>
+      </template>
 
-      <li>
-        <FieldElt
-          id="pass"
+      <template #items-4>
+        <FieldElt id="pass"
           v-model:value="pass"
-          info="Indicate the user password"
+          info="********"
           @keyup.enter="validateNewUser()"
           type="password">
           <template #legend>
@@ -65,11 +61,10 @@
             8 to 50 characters with upper & lower, 1 number mini & no space
           </template>
         </FieldElt>
-      </li>
-    </ul>
+      </template>
+    </ListElt>
 
-    <BtnElt
-      type="button"
+    <BtnElt type="button"
       content="Create"
       @click="validateNewUser()" 
       class="btn-green"/>

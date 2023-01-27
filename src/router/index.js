@@ -10,7 +10,7 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
-    alias: ["/links"]
+    alias: ["/links", "/home"]
   },
   {
     path: "/contact",
