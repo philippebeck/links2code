@@ -5,14 +5,14 @@
       <template #items-1>
         <FieldElt id="name"
           v-model:value="name"
-          info="Indicate the link name"
+          info="GitHub"
           @keyup.enter="validateNewLink()"
           :min="parseInt('2')">
           <template #legend>
             Name
           </template>
           <template #label>
-            The name should be descriptive
+            Indicate the link name
           </template>
         </FieldElt>
       </template>
@@ -21,7 +21,7 @@
         <FieldElt id="url"
           type="url"
           v-model:value="url"
-          info="Indicate the link URL"
+          info="https://"
           @keyup.enter="validateNewLink()"
           :min="parseInt('5')"
           :max="parseInt('100')">
@@ -29,7 +29,7 @@
             URL
           </template>
           <template #label>
-            A valid URL please
+            Indicate the link URL
           </template>
         </FieldElt>
       </template>
