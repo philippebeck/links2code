@@ -1,7 +1,8 @@
 <template>
   <form class="container-60lg-50wd">
-    <ul>
-      <li>
+    <ListElt :items="['name', 'url', 'cat']">
+
+      <template #items-1>
         <FieldElt
           id="name"
           v-model:value="name"
@@ -15,9 +16,9 @@
             The name should be descriptive
           </template>
         </FieldElt>
-      </li>
+      </template>
 
-      <li>
+      <template #items-2>
         <FieldElt
           id="url"
           type="url"
@@ -33,9 +34,9 @@
             A valid URL please
           </template>
         </FieldElt>
-      </li>
+      </template>
       
-      <li>
+      <template #items-3>
         <FieldElt
           id="cat"
           type="list"
@@ -50,9 +51,8 @@
             Choose Dev if others are not suitable
           </template>
         </FieldElt>
-
-      </li>
-    </ul>
+      </template>
+    </ListElt>
 
     <BtnElt
       type="button"
