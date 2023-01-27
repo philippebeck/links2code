@@ -63,7 +63,7 @@ exports.getUser = (name, email, image, pass) => {
  * @param {object} res 
  */
 exports.setMessage = (fields, res) => {
-  const mailer  = nem.createMailer();
+  const mailer = nem.createMailer();
 
   (async function(){
     try {
@@ -213,6 +213,7 @@ exports.updateUser = (req, res, next) => {
             })
           })
         )
+        .catch((error) => res.status(500).json({ error }));
     }
 
     bcrypt
@@ -223,6 +224,7 @@ exports.updateUser = (req, res, next) => {
         UserModel
           .updateOne({ _id: req.params.id }, { ...user, _id: req.params.id })
           .then(() => res.status(200).json({ message: process.env.USER_UPDATED }))
+          .catch((error) => res.status(500).json({ error }));
       })
       .catch((error) => res.status(400).json({ error }));
   });
@@ -241,7 +243,7 @@ exports.deleteUser = (req, res) => {
         UserModel
           .deleteOne({ _id: req.params.id })
           .then(() => res.status(200).json({ message: process.env.USER_DELETED }))
-          .catch((error) => res.status(400).json({ error }));
+          .catch((error) => res.status(500).json({ error }));
       });
     })
     .catch(error => res.status(500).json({ error }));
