@@ -16,7 +16,7 @@
   <CardElt id="top">
     <template #header>
 
-      <SliderElt :slides="cats">
+      <SliderElt :slides="['html5', 'css3', 'js', 'php', 'python', 'git', 'dev']">
         <template #slide="slotProps">
           <i :class="`fa-brands fa-${slotProps.slide.toLowerCase()} fa-10x blue`"></i>
         </template>
@@ -93,7 +93,7 @@ export default {
     },
   },
   
-  mounted () {
+  created () {
     this.$serve.getData("/api/links")
       .then(response => {
         this.links = response;
