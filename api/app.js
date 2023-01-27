@@ -41,7 +41,7 @@ const limiter = rateLimit({
 /**
  * ROUTES
  */
-app.use(process.env.ROUTE_LINK, linkRoute);
+app.use(process.env.ROUTE_LINK, linkRoute, limiter);
 app.use(process.env.ROUTE_USER, userRoute, limiter);
 
 module.exports = app;
