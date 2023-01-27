@@ -1,7 +1,9 @@
 "use strict";
 
 const formidable  = require("formidable");
-const LinkModel   = require("../model/LinkModel");
+const nem         = require("nemjs");
+
+const LinkModel = require("../model/LinkModel");
 
 require("dotenv").config();
 
@@ -35,6 +37,10 @@ exports.createLink = (req, res, next) => {
       return;
     }
 
+    if (!nem.checkUrl(fields.url)) {
+      return res.status(401).json({ message: process.env.LINK_URL });
+    }
+
     let link = new LinkModel(fields);
 
     link
@@ -56,6 +62,10 @@ exports.updateLink = (req, res, next) => {
     if (err) {
       next(err);
       return;
+    }
+
+    if (!nem.checkUrl(fields.url)) {
+      return res.status(401).json({ message: process.env.LINK_URL });
     }
 
     LinkModel

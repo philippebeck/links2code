@@ -2,7 +2,7 @@
   <form class="container-60lg-50wd">
     <ListElt :items="['name', 'url', 'cat']">
 
-      <template #items-1>
+      <template #item-1>
         <FieldElt id="name"
           v-model:value="name"
           info="GitHub"
@@ -17,7 +17,7 @@
         </FieldElt>
       </template>
 
-      <template #items-2>
+      <template #item-2>
         <FieldElt id="url"
           type="url"
           v-model:value="url"
@@ -34,7 +34,7 @@
         </FieldElt>
       </template>
       
-      <template #items-3>
+      <template #item-3>
         <FieldElt id="cat"
           type="list"
           v-model:value="cat"
