@@ -10,8 +10,7 @@
         <ListElt :items="['email', 'pass']">
 
           <template #items-1>
-            <FieldElt
-              id="email"
+            <FieldElt id="email"
               v-model:value="email"
               info="Indicate your Email"
               @keyup.enter="login()"
@@ -26,8 +25,7 @@
           </template>
 
           <template #items-2>
-            <FieldElt
-              id="pass"
+            <FieldElt id="pass"
               v-model:value="pass"
               info="Indicate your Password"
               @keyup.enter="login()"
@@ -42,20 +40,17 @@
           </template>
         </ListElt>
 
-        <div 
-          id="recaptcha"
+        <div id="recaptcha"
           class="g-recaptcha"
           data-sitekey="">
         </div>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           content="Forgot Password"
           @click="toggleFormType()"
           class="btn-orange"/>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           content="Login"
           @click="login()"
           class="btn-green"/>
@@ -71,8 +66,7 @@
 
     <template #body>
       <form>
-        <FieldElt
-          id="email"
+        <FieldElt id="email"
           v-model:value="email"
           info="Indicate your Email"
           @keyup.enter="forgotPass()"
@@ -86,20 +80,17 @@
           </template>
         </FieldElt>
 
-        <div 
-          id="recaptcha"
+        <div id="recaptcha"
           class="g-recaptcha"
           data-sitekey="">
         </div>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           content="Login"
           @click="toggleFormType()"
           class="btn-green"/>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           content="Send"
           @click="forgotPass()"
           class="btn-orange"/>

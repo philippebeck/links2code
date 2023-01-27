@@ -1,7 +1,6 @@
 <template>
   <form>
-    <TableElt 
-      :title="table[0].cat"
+    <TableElt :title="table[0].cat"
       :items="table"
       v-for="table in itemsByCat(links)"
       :key="table"
@@ -20,8 +19,7 @@
       </template>
 
       <template #cell-name="slotProps">
-        <FieldElt
-          :id="'name-' + table[slotProps.index]._id"
+        <FieldElt :id="'name-' + table[slotProps.index]._id"
           v-model:value="table[slotProps.index].name"
           info="Update the link name"
           @keyup.enter="validateUpdatedLink(table[slotProps.index]._id)">
@@ -29,8 +27,7 @@
       </template>
 
       <template #cell-url="slotProps">
-        <FieldElt
-          :id="'url-' + table[slotProps.index]._id"
+        <FieldElt :id="'url-' + table[slotProps.index]._id"
           type="url"
           v-model:value="table[slotProps.index].url"
           info="Update the link URL"
@@ -40,8 +37,7 @@
       </template>
 
       <template #cell-cat="slotProps">
-        <FieldElt
-          :id="'cat-' + table[slotProps.index]._id"
+        <FieldElt :id="'cat-' + table[slotProps.index]._id"
           type="list"
           v-model:value="table[slotProps.index].cat"
           info="Update the category"
@@ -52,8 +48,7 @@
       </template>
 
       <template #body="slotProps">
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           @click="validateUpdatedLink(table[slotProps.index]._id)" 
           class="btn-sky"
           :title="'Update ' + table[slotProps.index].name">
@@ -62,8 +57,7 @@
           </template>
         </BtnElt>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           @click="deleteLink(table[slotProps.index]._id)" 
           class="btn-red"
           :title="'Delete ' + table[slotProps.index].name">

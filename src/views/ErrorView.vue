@@ -5,8 +5,7 @@
     </template>
     
     <template #body>
-      <MediaElt
-        src="/img/errors/error-404.webp" 
+      <MediaElt src="/img/errors/error-404.webp" 
         alt="Error 404">
       </MediaElt>
 

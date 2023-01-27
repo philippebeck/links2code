@@ -3,8 +3,7 @@
     <ListElt :items="['name', 'url', 'cat']">
 
       <template #items-1>
-        <FieldElt
-          id="name"
+        <FieldElt id="name"
           v-model:value="name"
           info="Indicate the link name"
           @keyup.enter="validateNewLink()"
@@ -19,8 +18,7 @@
       </template>
 
       <template #items-2>
-        <FieldElt
-          id="url"
+        <FieldElt id="url"
           type="url"
           v-model:value="url"
           info="Indicate the link URL"
@@ -37,8 +35,7 @@
       </template>
       
       <template #items-3>
-        <FieldElt
-          id="cat"
+        <FieldElt id="cat"
           type="list"
           v-model:value="cat"
           info="Choose a category"
@@ -54,8 +51,7 @@
       </template>
     </ListElt>
 
-    <BtnElt
-      type="button"
+    <BtnElt type="button"
       content="Create"
       @click="validateNewLink()" 
       class="btn-green"/>

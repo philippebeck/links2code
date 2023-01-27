@@ -6,13 +6,11 @@
         Admin
       </h1>
 
-      <NavElt
-        :items="cats"
+      <NavElt :items="cats"
         class="sidebar">
 
         <template #first>
-          <a
-            href="#link"
+          <a href="#link"
             title="Create a link">
             <i class="fas fa-link fa-fw"></i>
           </a>
@@ -23,13 +21,11 @@
         </template>
 
         <template #last>
-          <a
-            href="#user"
+          <a href="#user"
             title="Create a user">
             <i class="fas fa-user fa-fw"></i>
           </a>
-          <a
-            href="#users"
+          <a href="#users"
             title="Set users">
             <i class="fas fa-users fa-fw"></i>
           </a>
@@ -53,8 +49,7 @@
         <template #body>
           <CreateLink />
 
-          <ListLinks
-            v-if="links.length > 0"
+          <ListLinks v-if="links.length > 0"
             :links="links"/>
         </template>
       </CardElt>
@@ -70,8 +65,7 @@
         <template #body>
           <CreateUser />
 
-          <ListUsers
-            v-if="users.length > 0"
+          <ListUsers v-if="users.length > 0"
             :users="users"/>
         </template>
       </CardElt>

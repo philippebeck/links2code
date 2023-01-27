@@ -12,8 +12,7 @@
         <ListElt :items="['email', 'subject', 'text']">
 
           <template #items-1>
-            <FieldElt
-              id="email"
+            <FieldElt id="email"
               v-model:value="email"
               info="An email to answer you ?"
               @keyup.enter="send()"
@@ -28,8 +27,7 @@
           </template>
 
           <template #items-2>
-            <FieldElt
-              id="subject"
+            <FieldElt id="subject"
               v-model:value="subject"
               info="The subject of your message ?"
               @keyup.enter="send()">
@@ -43,8 +41,7 @@
           </template>
 
           <template #items-3>
-            <FieldElt
-              id="text"
+            <FieldElt id="text"
               v-model:value="text"
               info="The text of your message ?"
               @keyup.enter="send()"
@@ -60,14 +57,12 @@
           </template>
         </ListElt>
 
-        <div 
-          id="recaptcha" 
+        <div id="recaptcha" 
           class="g-recaptcha" 
           data-sitekey="">
         </div>
 
-        <BtnElt
-          type="button"
+        <BtnElt type="button"
           content="Envoyer"
           @click="send()" 
           class="btn-green"/>

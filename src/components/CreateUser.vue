@@ -1,13 +1,11 @@
 <template>
-  <form 
-    method="post"
+  <form method="post"
     enctype="multipart/form-data"
     class="form width-lg container-60lg-50wd">
     <ListElt :items="['name', 'email', 'image', 'pass']">
 
       <template #items-1>
-        <FieldElt
-          id="name"
+        <FieldElt id="name"
           v-model:value="name"
           info="Indicate the user name"
           @keyup.enter="validateNewUser()"
@@ -22,8 +20,7 @@
       </template>
 
       <template #items-2>
-        <FieldElt
-          id="email"
+        <FieldElt id="email"
           v-model:value="email"
           info="Indicate the user email"
           @keyup.enter="validateNewUser()"
@@ -38,8 +35,7 @@
       </template>
       
       <template #items-3>
-        <FieldElt
-          id="image"
+        <FieldElt id="image"
           v-model:value="image"
           info="Provide user image"
           type="file">
@@ -53,8 +49,7 @@
       </template>
 
       <template #items-4>
-        <FieldElt
-          id="pass"
+        <FieldElt id="pass"
           v-model:value="pass"
           info="Indicate the user password"
           @keyup.enter="validateNewUser()"
@@ -69,8 +64,7 @@
       </template>
     </ListElt>
 
-    <BtnElt
-      type="button"
+    <BtnElt type="button"
       content="Create"
       @click="validateNewUser()" 
       class="btn-green"/>
