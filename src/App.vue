@@ -59,7 +59,7 @@
     </template>
   </NavElt>
 
-  <main>
+  <main class="bg-silver-light">
     <router-view/>
   </main>
   
