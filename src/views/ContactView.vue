@@ -9,8 +9,9 @@
 
     <template #body>
       <form class="anima-grow">
-        <ul>
-          <li>
+        <ListElt :items="['email', 'subject', 'text']">
+
+          <template #items-1>
             <FieldElt
               id="email"
               v-model:value="email"
@@ -21,11 +22,12 @@
                 Email
               </template>
               <template #label>
-                Un email fonctionnel svp !
+                A functional email please!
               </template>
             </FieldElt>
-          </li>
-          <li>
+          </template>
+
+          <template #items-2>
             <FieldElt
               id="subject"
               v-model:value="subject"
@@ -35,11 +37,12 @@
                 Subject
               </template>
               <template #label>
-                Soyez bref et précis !
+                Be brief and precise!
               </template>
             </FieldElt>
-          </li>
-          <li>
+          </template>
+
+          <template #items-3>
             <FieldElt
               id="text"
               v-model:value="text"
@@ -51,25 +54,23 @@
                 Text
               </template>
               <template #label>
-                Que puis-je faire pour vous ?
+                What can I do for you ?
               </template>
             </FieldElt>
-          </li>
-          <li>
-            <div 
-              id="recaptcha" 
-              class="g-recaptcha" 
-              data-sitekey="6LdTBtoZAAAAADITfTTXpjsctFXZqKXZc-seM9ZL">
-            </div>
-          </li>
-          <li>
-            <BtnElt
-              type="button"
-              content="Envoyer"
-              @click="send()" 
-              class="btn-green"/>
-          </li>
-        </ul>
+          </template>
+        </ListElt>
+
+        <div 
+          id="recaptcha" 
+          class="g-recaptcha" 
+          data-sitekey="">
+        </div>
+
+        <BtnElt
+          type="button"
+          content="Envoyer"
+          @click="send()" 
+          class="btn-green"/>
       </form>
     </template>
   </CardElt>
