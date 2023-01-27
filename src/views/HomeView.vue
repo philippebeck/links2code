@@ -34,7 +34,8 @@
     </template>
 
     <template #body>
-      <ListElt :items="itemsByCat(links)">
+      <ListElt :items="itemsByCat(links)"
+        :dynamic="true">
         <template #items="slotProps">
           <i 
             :class="`fa-brands fa-${slotProps.index.toLowerCase()} fa-5x sky shatex-blur-md anima-grow mar-lg`"
