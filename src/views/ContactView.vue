@@ -11,7 +11,7 @@
       <form class="anima-grow">
         <ListElt :items="['email', 'subject', 'text']">
 
-          <template #items-1>
+          <template #item-1>
             <FieldElt id="email"
               v-model:value="email"
               info="An email to answer you ?"
@@ -26,7 +26,7 @@
             </FieldElt>
           </template>
 
-          <template #items-2>
+          <template #item-2>
             <FieldElt id="subject"
               v-model:value="subject"
               info="The subject of your message ?"
@@ -40,7 +40,7 @@
             </FieldElt>
           </template>
 
-          <template #items-3>
+          <template #item-3>
             <FieldElt id="text"
               v-model:value="text"
               info="The text of your message ?"

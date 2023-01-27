@@ -9,7 +9,7 @@
       <form class="form">
         <ListElt :items="['email', 'pass']">
 
-          <template #items-1>
+          <template #item-1>
             <FieldElt id="email"
               v-model:value="email"
               info="Indicate your Email"
@@ -24,7 +24,7 @@
             </FieldElt>
           </template>
 
-          <template #items-2>
+          <template #item-2>
             <FieldElt id="pass"
               v-model:value="pass"
               info="Indicate your Password"
